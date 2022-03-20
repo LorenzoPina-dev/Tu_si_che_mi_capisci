@@ -8,7 +8,7 @@ router.get("/", function(req, res) {
     res.end("{seccess:true}");
 });
 var i = 0;
-router.post("/login", multipartMiddleware, function(req, res, next) {
+router.post("/add", multipartMiddleware, function(req, res, next) {
     console.log(req.files.img);
     fs.renameSync(
         req.files.img.path,
@@ -16,16 +16,14 @@ router.post("/login", multipartMiddleware, function(req, res, next) {
     );
     res.json({ message: "Successfully uploaded files" });
 });
-var key = "";
-router.get("/register", /* multipartMiddleware,*/ function(req, res, next) {
 
-    console.log("ciao");
-    res.json({ message: key });
-});
-
-router.get("/cambiaInfo/:key/login", function(req, res, next) {
-    console.log(req.params);
-    res.json({ success: true, message: "cambio avvenuto con successo" });
+router.post("/remove", multipartMiddleware, function(req, res, next) {
+    console.log(req.files.img);
+    fs.renameSync(
+        req.files.img.path,
+        "uploads\\" + i++ + "." + req.files.img.path.split(".")[1]
+    );
+    res.json({ message: "Successfully uploaded files" });
 });
 
 module.exports = router;
