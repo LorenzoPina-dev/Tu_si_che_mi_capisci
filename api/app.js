@@ -30,7 +30,7 @@ app.use("/:key/emozioni",controllaUtente, emotionsRouter);
 app.use("/:key/volto",controllaUtente, facesRouter);
 app.use("/:key/dispositivi",controllaUtente, devicesRouter);
 app.use("/:key/skill",controllaUtente, skillsRouter);
-app.use("/:key/utente",controllaUtente, usersRouter);
+app.use("/:key/utente", usersRouter);
 app.use("/", indexRouter);
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
@@ -47,12 +47,13 @@ app.use(function(err, req, res, next) {
     res.header("Content-type", "application/json");
     res.end("{'success':false, 'message':'richiesta non trovata'}");
 });
-function controllaUtente(req, res) {
+function controllaUtente(req, res,next) {
     db.query(
         "Select Id from utente where ApiKey=?", [req.params.key],
         (err, result) => {
             if (err) throw err;
             console.log(result[0].Id);
+            
         }
     );
 }

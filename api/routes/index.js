@@ -1,8 +1,6 @@
 var express = require("express");
 var router = express.Router();
 const fs = require("fs");
-var multipart = require("connect-multiparty");
-var multipartMiddleware = multipart({ uploadDir: "uploads/" });
 var sha256 = require("js-sha256").sha256;
 var db = require("./../util/db");
 var nodemailer = require("nodemailer");
@@ -25,23 +23,32 @@ router.post("/", multipartMiddleware, function(req, res, next) {
     res.json({ message: "Successfully uploaded files" });
 });*/
 router.post("/login", (req, res) => {
-    db.connect();
-    console.log(req.query);
+    query=req.body;
     db.query(
-        "SELECT * FROM utente WHERE Username = ? AND Password = ?", [req.query.username, req.query.password],
+        "SELECT * FROM utente WHERE Username = ? AND Password = ?", [query.username, query.password],
         (err, result) => {
             if (err) throw err;
-            res.json({
+            if(result.length>0)
+            { 
+                res.json({
                 success: true,
-                result: { Id: result[0].Id, ApiKey: result[0].ApiKey },
-            });
+                result: {  ApiKey: result[0].ApiKey },
+                });
+            }
+            else
+                res.json({
+                    success: false,
+                    testo:"username o password errati",
+                });
         }
     );
 });
 
 router.post("/register", (req, res) => {
+    let query = req.body;
+    if(query.password!= query.password2)
+        res.json({success:false,testo:"password non corrispondono"});
     console.log("inizio");
-    let query = req.query;
     let d = new Date().getTime();
     key = "xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx".replace(/[xy]/g, function(c) {
         var r = (d + Math.random() * 16) % 16 | 0;
@@ -53,10 +60,10 @@ router.post("/register", (req, res) => {
     criptata = sha256.hex(query.password);
     console.log(criptata);
     db.query(
-        "INSERT INTO utente (Username, Password, Email, Immagine, ApiKey) VALUES (?,?,?,?,?)", [query.username, criptata, query.email, query.immagine, key],
+        "INSERT INTO utente (Username, Password, Email, ApiKey) VALUES (?,?,?,?)", [query.username, criptata, query.mail, key],
         (err, result) => {
             if (err) throw err;
-            res.json({ success: true, result: "" });
+            res.json({ success: true, result:{testo:""}  });
         }
     );
 });
