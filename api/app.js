@@ -12,7 +12,9 @@ var devicesRouter = require("./routes/devices");
 var emotionsRouter = require("./routes/emotions");
 var facesRouter = require("./routes/faces");
 var skillsRouter = require("./routes/skills");
+const { runInNewContext } = require("vm");
 var app = express();
+
 
 // view engine setup
 /*app.set('views', path.join(__dirname, 'views'));
@@ -26,11 +28,11 @@ app.use(cookieParser());
 //app.use(express.static(path.join(__dirname, 'public')));
 
 
-app.use("/:key/emozioni",controllaUtente, emotionsRouter);
-app.use("/:key/volto",controllaUtente, facesRouter);
-app.use("/:key/dispositivi",controllaUtente, devicesRouter);
-app.use("/:key/skill",controllaUtente, skillsRouter);
-app.use("/:key/utente", usersRouter);
+app.use("/:key/emozioni", controllaUtente, emotionsRouter);
+app.use("/:key/volto", controllaUtente, facesRouter);
+app.use("/:key/dispositivi", controllaUtente, devicesRouter);
+app.use("/:key/skill", controllaUtente, skillsRouter);
+app.use("/:key/utente", controllaUtente, usersRouter);
 app.use("/", indexRouter);
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
@@ -47,13 +49,16 @@ app.use(function(err, req, res, next) {
     res.header("Content-type", "application/json");
     res.end("{'success':false, 'message':'richiesta non trovata'}");
 });
-function controllaUtente(req, res,next) {
+
+function controllaUtente(req, res, next) {
+    console.log(req.params)
     db.query(
-        "Select Id from utente where ApiKey=?", [req.params.key],
+        "Select Id,Username,Email,Immagine,Xp from utente where ApiKey=?", [req.params.key],
         (err, result) => {
             if (err) throw err;
-            console.log(result[0].Id);
-            
+            req.Utente = result[0];
+            console.log(result[0]);
+            next();
         }
     );
 }

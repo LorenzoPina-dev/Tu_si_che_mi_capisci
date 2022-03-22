@@ -4,7 +4,8 @@ const fs = require("fs");
 var sha256 = require("js-sha256").sha256;
 var db = require("./../util/db");
 var nodemailer = require("nodemailer");
-let file = `./codiciReset/codiciReset${formatDate(new Date())}.txt`;
+const file = `./codiciReset/codiciReset${formatDate(new Date())}.txt`;
+const emailRegexp = /^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/;
 var transporter = nodemailer.createTransport({
     service: "Gmail",
     auth: {
@@ -23,22 +24,21 @@ router.post("/", multipartMiddleware, function(req, res, next) {
     res.json({ message: "Successfully uploaded files" });
 });*/
 router.post("/login", (req, res) => {
-    query=req.body;
+    query = req.body;
+    console.log(query)
     db.query(
         "SELECT * FROM utente WHERE Username = ? AND Password = ?", [query.username, query.password],
         (err, result) => {
             if (err) throw err;
-            if(result.length>0)
-            { 
+            if (result.length > 0) {
                 res.json({
-                success: true,
-                result: {  ApiKey: result[0].ApiKey },
+                    success: true,
+                    result: { ApiKey: result[0].ApiKey },
                 });
-            }
-            else
+            } else
                 res.json({
                     success: false,
-                    testo:"username o password errati",
+                    testo: "username o password errati",
                 });
         }
     );
@@ -46,8 +46,15 @@ router.post("/login", (req, res) => {
 
 router.post("/register", (req, res) => {
     let query = req.body;
-    if(query.password!= query.password2)
-        res.json({success:false,testo:"password non corrispondono"});
+    console.log(query);
+    if (query.username == unsigned || query.password == unsigned || query.email == unsigned || query.password2 == unsigned || !emailRegexp.test(mail)) {
+        res.json({ success: false, testo: "mancano parametri o sono errati" });
+        return;
+    }
+    if (query.password != query.password2) {
+        res.json({ success: false, testo: "password non corrispondono" });
+        return;
+    }
     console.log("inizio");
     let d = new Date().getTime();
     key = "xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx".replace(/[xy]/g, function(c) {
@@ -62,16 +69,18 @@ router.post("/register", (req, res) => {
     db.query(
         "INSERT INTO utente (Username, Password, Email, ApiKey) VALUES (?,?,?,?)", [query.username, criptata, query.mail, key],
         (err, result) => {
-            if (err) throw err;
-            res.json({ success: true, result:{testo:""}  });
+            if (err) {
+                res.json({ success: false, testo: "errore nell'inserimento" });
+                return;
+            }
+            res.json({ success: true, result: { testo: "" } });
         }
     );
 });
 router.get("/resetPassword", (req, res) => {
     let codice = "";
     let mail = req.query.email;
-    const emailRegexp = /^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/;
-    if (!emailRegexp.test(mail)) {
+    if (mail == unsigned || !emailRegexp.test(mail)) {
         res.json({ success: false, error: "mail errata" });
         return;
     }
@@ -91,6 +100,10 @@ router.get("/resetPassword", (req, res) => {
 });
 router.get("/cambiaPassword", (req, res) => {
     let query = req.query;
+    if (query.nuovaPassword == undefined || query.confermanuovaPassword == undefined) {
+        res.json({ success: false, testo: "mancano parametri o sono errati" });
+        return;
+    }
     let codici = fs.readFileSync(file, "utf8").split("\r\n").map(val => JSON.parse(val));
     let mail = "";
     for (c of codici)
