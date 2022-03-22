@@ -4,6 +4,7 @@ var express = require("express");
 var path = require("path");
 var cookieParser = require("cookie-parser");
 var logger = require("morgan");
+var db = require("./util/db");
 
 var indexRouter = require("./routes/index");
 var usersRouter = require("./routes/users");
@@ -25,11 +26,11 @@ app.use(cookieParser());
 //app.use(express.static(path.join(__dirname, 'public')));
 
 
-app.use("/emozioni", emotionsRouter);
-app.use("/volto", facesRouter);
-app.use("/dispositivi", devicesRouter);
-app.use("/skill", skillsRouter);
-app.use("/utente", usersRouter);
+app.use("/:key/emozioni",controllaUtente, emotionsRouter);
+app.use("/:key/volto",controllaUtente, facesRouter);
+app.use("/:key/dispositivi",controllaUtente, devicesRouter);
+app.use("/:key/skill",controllaUtente, skillsRouter);
+app.use("/:key/utente",controllaUtente, usersRouter);
 app.use("/", indexRouter);
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
@@ -46,5 +47,13 @@ app.use(function(err, req, res, next) {
     res.header("Content-type", "application/json");
     res.end("{'success':false, 'message':'richiesta non trovata'}");
 });
-
+function controllaUtente(req, res) {
+    db.query(
+        "Select Id from utente where ApiKey=?", [req.params.key],
+        (err, result) => {
+            if (err) throw err;
+            console.log(result[0].Id);
+        }
+    );
+}
 module.exports = app;
