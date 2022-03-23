@@ -6,7 +6,7 @@ var multipart = require("connect-multiparty");
 var multipartMiddleware = multipart({ uploadDir: "uploads/" });
 router.get("/", function(req, res) {
     let query = req.query;
-    let sql = "SELECT * from emozionetrovata ";
+    let sql = "SELECT emozionetrovata.* from (emozionetrovata join dispositivo on emozionetrovata.IdUtente=dispositivo.Id) join utente on dispositivo.IdUtente=utente.Id ";
     let parametri = [];
 
     if (query.start || (query.data && new Date(query.data).getTime()) || query.tipo) {
