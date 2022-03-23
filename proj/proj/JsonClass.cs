@@ -22,39 +22,36 @@ namespace proj
             if (success == true)
                 ris = obj["result"]["ApiKey"].ToString();
             else
-                ris = obj["error"]["testo"].ToString();
+                ris = obj["result"]["testo"].ToString();
             return ris;
         }
 
         public string GetText(JObject obj)
         {
             string ris = "";
-            bool success = obj.SelectToken("success").Value<bool>();
-            if (success == true)
-                ris = obj["result"]["testo"].ToString();
-            else
-                ris = obj["error"]["testo"].ToString();
+            ris = obj["result"]["testo"].ToString();
             return ris;
         }
 
         public object GetInfo(JObject obj)
         {
-            string ris = "", user = "", password = "", mail = "", img = "";
-            string[] array = new string[4];
+            object ris = "";
+            string user = "", xp = "", mail = "", img = "";
             bool success = obj.SelectToken("success").Value<bool>();
             if (success == true)
             {
-                user = Convert.ToString(obj["result"]["username"]);
-                password = Convert.ToString(obj["result"]["password"]);
-                mail = Convert.ToString(obj["result"]["mail"]);
-                img = Convert.ToString(obj["result"]["img"]);
-                array[0] = user;
-                array[1] = password;
-                array[2] = mail;
-                array[3] = img;
+                ris = (string[])(object)obj;
+                user = Convert.ToString(obj["result"]["utente"]["Username"]);
+                mail = Convert.ToString(obj["result"]["utente"]["Email"]);
+                img = Convert.ToString(obj["result"]["utente"]["Immagine"]);
+                xp = Convert.ToString(obj["result"]["utente"]["Xp"]);
+                ris[0] = user;
+                ris[1] = mail;
+                ris[2] = img;
+                ris[3] = xp;
             }
             else
-                ris = obj["error"]["testo"].ToString();
+                ris = obj["result"]["testo"].ToString();
             return ris;
         }
 

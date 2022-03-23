@@ -48,9 +48,9 @@ namespace proj
 
         public string HttpGetRequestForgotPwd(string mail) //richiesta codice reset pwd
         {
-            string url = "http://172.16.102.51/resetPassword/?mail=" + mail; 
+            string url = "http://172.16.102.51:3000/resetPassword?mail=" + mail; 
             var response = wb.DownloadData(url);
-            string result = System.Text.Encoding.Unicode.GetString(response);
+            string result = System.Text.Encoding.UTF8.GetString(response);
             JObject obj = json.Parse(result);
             string ris = json.GetText(obj); //codice
             return ris;
@@ -59,12 +59,12 @@ namespace proj
         public string HttpGetRequestResetPwd(string cod, string pass, string pass2) //salvataggio nuova pwd
         {
             data = new NameValueCollection();
-            string url = "http://172.16.102.51/cambiaPassword/"; 
+            string url = "http://172.16.102.51:3000/cambiaPassword/"; 
             data["codice"] = cod;
             data["pass"] = pass;
             data["pass2"] = pass2;
             var response = wb.UploadValues(url, "PUT", data); //richiesta put
-            string result = System.Text.Encoding.Unicode.GetString(response);
+            string result = System.Text.Encoding.UTF8.GetString(response);
             JObject obj = json.Parse(result);
             string ris = json.GetText(obj); 
             return ris;
@@ -73,14 +73,13 @@ namespace proj
         public string HttpGetRequestChangeInfo(string key, string user, string pass, string mail, string img) //cambio info utente
         {
             data = new NameValueCollection();
-            string url = "http://172.16.102.51/" + key + "utente/cambiaInfo/?username=" + user + "&pass=" + pass + "&mail=" + mail + "&img=" + img;
-            data["key"] = key;
+            string url = "http://172.16.102.51:3000/" + key + "/utente/cambiaInfo/";
             data["user"] = user;
             data["pass"] = pass;
             data["mail"] = mail;
             data["img"] = img;
-            var response = wb.UploadValues(url, "PUT", data); //richiesta put
-            string result = System.Text.Encoding.Unicode.GetString(response);
+            var response = wb.UploadValues(url, "POST", data); //richiesta put
+            string result = System.Text.Encoding.UTF8.GetString(response);
             JObject obj = json.Parse(result);
             string ris = json.GetText(obj);
             return ris;
@@ -88,9 +87,9 @@ namespace proj
 
         public object HttpGetRequestInfo(string key) //ottieni info utente
         {
-            string url = "http://172.16.102.51/" + key + "/utente/"; 
+            string url = "http://172.16.102.51:3000/" + key + "/utente/"; 
             var response = wb.DownloadData(url);
-            string result = System.Text.Encoding.Unicode.GetString(response);
+            string result = System.Text.Encoding.UTF8.GetString(response);
             JObject obj = JObject.Parse(result);
             object ris = json.GetInfo(obj);
             return ris;
