@@ -57,7 +57,6 @@ function controllaUtente(req, res, next) {
         (err, result) => {
             if (err) throw err;
             req.Utente = result[0];
-            console.log(result[0]);
             next();
         }
     );

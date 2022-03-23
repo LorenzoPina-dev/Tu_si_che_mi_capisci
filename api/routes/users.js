@@ -7,7 +7,10 @@ var multipartMiddleware = multipart({ uploadDir: "uploads/" });
 var db = require("./../util/db");
 
 router.get("/", function(req, res) {
-    res.json({ seccess: true, utente: req.Utente });
+    if(!req.Utente)
+        res.json({ success: false, result:{testo:"utente non trovato"} });
+    else
+        res.json({ success: true, result:{utente: req.Utente} });
 });
 
 router.post("/cambiaInfo", multipartMiddleware, function(req, res) {
@@ -49,7 +52,7 @@ router.post("/cambiaInfo", multipartMiddleware, function(req, res) {
                 console.log(err)
             res.json({
                 success: true,
-                result: { message: "update avvenuto con successo" }
+                result: { testo: "update avvenuto con successo" }
             });
         });
 });
