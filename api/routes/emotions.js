@@ -6,27 +6,27 @@ var multipart = require("connect-multiparty");
 var multipartMiddleware = multipart({ uploadDir: "uploads/" });
 router.get("/", function(req, res) {
     let query = req.query;
-    let sql = "SELECT emozionetrovata.* from (emozionetrovata join dispositivo on emozionetrovata.IdUtente=dispositivo.Id) join utente on dispositivo.IdUtente=utente.Id ";
-    let parametri = [];
+    let sql =
+        "SELECT emozionetrovata.* from (emozionetrovata join dispositivo on emozionetrovata.IdDispositivo=dispositivo.Id) WHERE dispositivo.IdUtente=? AND";
+    let parametri = [req.Utente.Id];
 
     if (query.start || (query.data && new Date(query.data).getTime()) || query.tipo) {
-        sql += "Where ";
         if (query.start) {
-            sql += "Id>=? AND";
+            sql += " emozionetrovata.Id>=? AND";
             parametri.push(parseInt(query.start));
         }
         if (query.data) {
-            let date = (sql += "DataRilevazione>=? AND");
+            let date = (sql += " DataRilevazione>=? AND");
             parametri.push(query.data);
         }
         if (query.tipo) {
-            sql += "IdEmozione=? AND";
+            sql += " IdEmozione=? AND";
             parametri.push(parseInt(query.tipo));
         }
-        sql = sql.substring(0, sql.length - 3)
     }
+    sql = sql.substring(0, sql.length - 3)
     if (query.numero) {
-        sql += "Limit ?"
+        sql += " Limit ?"
         parametri.push(parseInt(query.numero));
     }
     console.log(sql, parametri);
@@ -41,15 +41,15 @@ router.get("/", function(req, res) {
 var i = 0;
 router.post("/add", function(req, res, next) {
     let query = req.body;
-    if (!query.tipo || !query.dataRilevazione || !query.IdDispositivo) {
+    if (!query.tipo || !query.dataRilevazione || !query.ora || !query.idDispositivo) {
         res.json({ success: false, testo: "mancano parametri o sono errati" });
         return;
     }
-    db.query("INSERT into emozionetrovata (IdEmozione,DataRilevazione,IdDisposivo) VALUES (?,?,?)", [query.tipo, query.dataRilevazione, query.IdDispositivo], (err, result) => {
+    db.query("INSERT into emozionetrovata (IdEmozione,DataRilevazione,Ora,IdDispositivo) VALUES (?,?,?)", [query.tipo, query.dataRilevazione, query.ora, query.idDispositivo], (err, result) => {
         if (err) console.log(err);
         res.json({
             success: true,
-            result: { emozioni: result },
+            result: { testo: "inserimento avvenuto con successo" },
         });
     });
 });

@@ -3,20 +3,20 @@ var router = express.Router();
 const fs = require("fs");
 const db = require("../util/db");
 var multipart = require("connect-multiparty");
-var multipartMiddleware = multipart({ uploadDir: "uploads/" });
+var multipartMiddleware = multipart({ uploadDir: "uploads/facceRegistrate/" });
 router.get("/", function(req, res) {
     let query = req.query;
-    let sql = "SELECT * from dispositivo where IdUtente=? AND";
+    let sql = "SELECT * from voltoregistrato where IdUtente=? AND";
     let parametri = [req.Utente.Id];
 
-    if (query.start || query.tipo) {
+    if (query.start || (query.data && new Date(query.data).getTime())) {
         if (query.start) {
             sql += " Id>=? AND";
             parametri.push(parseInt(query.start));
         }
-        if (query.tipo) {
-            let date = (sql += " Tipo>=? AND");
-            parametri.push(query.tipo);
+        if (query.data) {
+            let date = (sql += " DataRilevazione>=? AND");
+            parametri.push(query.data);
         }
     }
     sql = sql.substring(0, sql.length - 3);
@@ -29,19 +29,19 @@ router.get("/", function(req, res) {
         if (err) console.log(err);
         res.json({
             success: true,
-            result: { dispositivo: result },
+            result: { voltiRegistrati: result },
         });
     });
 });
 var i = 0;
-router.post("/add", function(req, res, next) {
+router.post("/add", multipartMiddleware, function(req, res, next) {
     let query = req.body;
-    if (!query.nome || !query.tipo || !query.ip || !query.acceso) {
+    if (!query.nome || !query.immagine) {
         res.json({ success: false, testo: "mancano parametri o sono errati" });
         return;
     }
     db.query(
-        "INSERT into dispositivo (Nome,Tipo,Ip,Acceso,IdUtente) VALUES (?,?,?,?,?)", [query.nome, query.tipo, query.ip, query.acceso, req.Utente.Id],
+        "INSERT into voltoregistrato (Nome,Immagine,IdUtente) VALUES (?,?,?)", [query.nome, query.immagine, req.Utente.Id],
         (err, result) => {
             if (err) console.log(err);
             res.json({
@@ -57,17 +57,17 @@ router.delete("/remove/:id", function(req, res, next) {
         return;
     }
     db.query(
-        "Select IdUtente FrOM dispositivo WHERE Id=?", [req.params.Id],
+        "Select IdUtente FrOM voltoregistrato WHERE Id=?", [req.params.Id],
         (err, result) => {
             if (err) console.log(err);
             if (result[0].IdUtente == req.Utente.Id) {
                 db.query(
-                    "DELETE FrOM dispositivo WHERE Id=?", [req.params.Id],
+                    "DELETE FrOM voltoregistrato WHERE Id=?", [req.params.Id],
                     (err, result) => {
                         if (err) console.log(err);
                         res.json({
                             success: true,
-                            result: { testo: "rimozione avvenuto con successo" },
+                            result: { testo: "rimozione avvenuta con successo" },
                         });
                     }
                 );

@@ -10,7 +10,8 @@ var indexRouter = require("./routes/index");
 var usersRouter = require("./routes/users");
 var devicesRouter = require("./routes/devices");
 var emotionsRouter = require("./routes/emotions");
-var facesRouter = require("./routes/faces");
+var facesTrovataRouter = require("./routes/facesTrovata");
+var facesRegistrataRouter = require("./routes/facesRegistrato");
 var skillsRouter = require("./routes/skills");
 const { runInNewContext } = require("vm");
 var app = express();
@@ -29,7 +30,8 @@ app.use(cookieParser());
 
 
 app.use("/:key/emozioni", controllaUtente, emotionsRouter);
-app.use("/:key/volto", controllaUtente, facesRouter);
+app.use("/:key/voltoTrovato", controllaUtente, facesTrovataRouter);
+app.use("/:key/voltoRegistrato", controllaUtente, facesRegistrataRouter);
 app.use("/:key/dispositivi", controllaUtente, devicesRouter);
 app.use("/:key/skill", controllaUtente, skillsRouter);
 app.use("/:key/utente", controllaUtente, usersRouter);
