@@ -40,10 +40,26 @@ router.post("/add", multipartMiddleware, function(req, res, next) {
         res.json({ success: false, testo: "mancano parametri o sono errati" });
         return;
     }
+        
     db.query(
         "INSERT into voltotrovato (DataRilevazione,Ora,Immagine,IdDispositivo) VALUES (?,?,?,?)", [query.dataRilevazione, query.ora, query.immagine, query.idDispositivo],
         (err, result) => {
             if (err) console.log(err);
+            console.log(result);
+            
+            if(query.idVolto)
+                db.query(
+                    "INSERT into permesso (IdVoltoTrovato,IdVoltoRegistrato) VALUES (?,?)", [result.insertId, query.idVolto],
+                    (err, result) => {
+                        if (err) console.log(err);
+                        console.log(result);
+                        res.json({
+                            success: true,
+                            result: { testo: "inserimento avvenuto con successo" },
+                        });
+                    }
+                );
+            else
             res.json({
                 success: true,
                 result: { testo: "inserimento avvenuto con successo" },

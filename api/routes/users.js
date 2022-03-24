@@ -3,7 +3,7 @@ var router = express.Router();
 const fs = require("fs");
 var sha256 = require("js-sha256").sha256;
 var multipart = require("connect-multiparty");
-var multipartMiddleware = multipart({ uploadDir: "uploads/" });
+var multipartMiddleware = multipart({ uploadDir: "uploads/utenti" });
 var db = require("./../util/db");
 
 router.get("/", function(req, res) {
@@ -13,33 +13,34 @@ router.get("/", function(req, res) {
         res.json({ success: true, result:{utente: req.Utente} });
 });
 
-router.post("/cambiaInfo", multipartMiddleware, function(req, res) {
+router.put("/cambiaInfo", multipartMiddleware, function(req, res) {
     let query = req.body;
-    if (query.length == 0) {
+    if (!query.username && !query.password && !query.mail && !query.password && !query.immagine) {
         res.json({ success: false, testo: "inserisci dei parametri" });
         return;
     }
     let sql = "UPDATE utente SET ",
         parametri = [];
-    if (query.username != undefined) {
+    if (query.username ) {
         sql += "Username=?, "
         parametri.push(query.username);
     }
-    if (query.password != undefined) {
+    if (query.password) {
         sql += "Password=?, "
         parametri.push(sha256.hex(query.password));
     }
 
-    if (query.mail != undefined) {
+    if (query.mail ) {
         sql += "EMail=?, "
         parametri.push(query.mail.split('.')[0] + ".png");
     }
-    if (query.immagine != undefined) {
+    if (query.immagine) {
         sql += "Immagine=?, "
-        fs.unlinkSync("uploads\\" + req.Utente.Id + ".png")
+        if(fs.existsSync("uploads\\utenti\\" + req.Utente.Id + ".png"))
+            fs.unlinkSync("uploads\\utenti\\" + req.Utente.Id + ".png")
         fs.renameSync(
             req.files.Immagine.path,
-            "uploads\\" + req.Utente.Id + ".png"
+            "uploads\\utenti\\" + req.Utente.Id + ".png"
         );
         parametri.push(query.immagine);
     }

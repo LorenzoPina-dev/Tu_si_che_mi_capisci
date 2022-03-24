@@ -83,7 +83,7 @@ router.post("/register", (req, res) => {
                 console.log(err)
                 return;
             }
-            res.json({ success: true, result: { testo: "" } });
+            res.json({ success: true, result: { testo: "registrazione avvenuta con successo" } });
         }
     );
 });
