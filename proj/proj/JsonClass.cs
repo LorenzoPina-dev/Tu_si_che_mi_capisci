@@ -35,25 +35,30 @@ namespace proj
 
         public object GetInfo(JObject obj)
         {
-            object ris = "";
-            string user = "", xp = "", mail = "", img = "";
             bool success = obj.SelectToken("success").Value<bool>();
+            object ris;
             if (success == true)
             {
-                ris = (string[])(object)obj;
-                user = Convert.ToString(obj["result"]["utente"]["Username"]);
-                mail = Convert.ToString(obj["result"]["utente"]["Email"]);
-                img = Convert.ToString(obj["result"]["utente"]["Immagine"]);
-                xp = Convert.ToString(obj["result"]["utente"]["Xp"]);
-                ris[0] = user;
-                ris[1] = mail;
-                ris[2] = img;
-                ris[3] = xp;
+                string[] array = new string[4];
+
+                string user = Convert.ToString(obj["result"]["utente"]["Username"]);
+                string mail = Convert.ToString(obj["result"]["utente"]["Email"]);
+                string img = Convert.ToString(obj["result"]["utente"]["Immagine"]);
+                string xp = Convert.ToString(obj["result"]["utente"]["Xp"]);
+                array[0] = user;
+                array[1] = mail;
+                array[2] = img;
+                array[3] = xp;
+                return array;
             }
             else
                 ris = obj["result"]["testo"].ToString();
             return ris;
         }
 
+        public void GetEmozioni(JObject obj)
+        {
+            
+        }
     }
 }
