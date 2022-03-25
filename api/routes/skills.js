@@ -2,8 +2,6 @@ var express = require("express");
 var router = express.Router();
 const fs = require("fs");
 const db = require("../util/db")
-var multipart = require("connect-multiparty");
-var multipartMiddleware = multipart({ uploadDir: "uploads/" });
 router.get("/", function(req, res) {
     let query = req.query;
     let sql = "SELECT * from skill where IdUtente=? AND";

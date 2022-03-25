@@ -4,18 +4,13 @@ const fs = require("fs");
 const db = require("../util/db");
 router.get("/", function(req, res) {
     let query = req.query;
-    let sql = "SELECT * from dispositivo where IdUtente=? AND";
+    let sql =
+        "SELECT obiettivo.*,quest.Concluso from (obiettivo join quest on quest.IdObiettivo=obiettivo.Id) WHERE quest.IdUtente=? AND";
     let parametri = [req.Utente.Id];
 
-    if (query.start || query.tipo) {
-        if (query.start) {
-            sql += " Id>=? AND";
-            parametri.push(parseInt(query.start));
-        }
-        if (query.tipo) {
-            let date = (sql += " Tipo>=? AND");
-            parametri.push(query.tipo);
-        }
+    if (query.start) {
+        sql += " emozionetrovata.Id>=? AND";
+        parametri.push(parseInt(query.start));
     }
     sql = sql.substring(0, sql.length - 3);
     if (query.numero) {
@@ -27,19 +22,23 @@ router.get("/", function(req, res) {
         if (err) console.log(err);
         res.json({
             success: true,
-            result: { dispositivo: result },
+            result: { emozioni: result },
         });
     });
 });
 var i = 0;
 router.post("/add", function(req, res, next) {
     let query = req.body;
-    if (!query.nome || !query.tipo || !query.ip || !query.acceso) {
-        res.json({ success: false, testo: "mancano parametri o sono errati" });
+    console.log(query);
+    if (!query.concluso || !query.idObiettivo) {
+        res.json({
+            success: false,
+            result: { testo: "mancano parametri o sono errati" },
+        });
         return;
     }
     db.query(
-        "INSERT into dispositivo (Nome,Tipo,Ip,Acceso,IdUtente) VALUES (?,?,?,?,?)", [query.nome, query.tipo, query.ip, query.acceso, req.Utente.Id],
+        "INSERT into quest (Concluso,IdObiettivo,IdUtente) VALUES (?,?,?)", [query.concluso, query.idObiettivo, req.Utente.Id],
         (err, result) => {
             if (err) console.log(err);
             res.json({
@@ -49,23 +48,29 @@ router.post("/add", function(req, res, next) {
         }
     );
 });
-router.delete("/remove/:id", function(req, res, next) {
-    if (!req.params.id) {
-        res.json({ success: false, testo: "mancano parametri o sono errati" });
+
+router.post("/change/:id", function(req, res, next) {
+    let query = req.body;
+    console.log(query);
+    if (!req.params.id || !query.concluso) {
+        res.json({
+            success: false,
+            result: { testo: "mancano parametri o sono errati" },
+        });
         return;
     }
     db.query(
-        "Select IdUtente FrOM dispositivo WHERE Id=?", [req.params.Id],
+        "Select IdUtente FrOM query WHERE Id=?", [req.params.Id],
         (err, result) => {
             if (err) console.log(err);
             if (result[0].IdUtente == req.Utente.Id) {
                 db.query(
-                    "DELETE FrOM dispositivo WHERE Id=?", [req.params.Id],
+                    "update query set Concluso=? Where Id=?", [req.params.id, query.concluso],
                     (err, result) => {
                         if (err) console.log(err);
                         res.json({
                             success: true,
-                            result: { testo: "rimozione avvenuto con successo" },
+                            result: { testo: "inserimento avvenuto con successo" },
                         });
                     }
                 );

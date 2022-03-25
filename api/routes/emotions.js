@@ -2,8 +2,6 @@ var express = require("express");
 var router = express.Router();
 const fs = require("fs");
 const db = require("../util/db")
-var multipart = require("connect-multiparty");
-var multipartMiddleware = multipart({ uploadDir: "uploads/" });
 router.get("/", function(req, res) {
     let query = req.query;
     let sql =
@@ -43,7 +41,7 @@ router.post("/add", function(req, res, next) {
     let query = req.body;
     console.log(query)
     if (!query.tipo || !query.dataRilevazione || !query.ora || !query.idDispositivo) {
-        res.json({ success: false, result:{ testo: "mancano parametri o sono errati" }});
+        res.json({ success: false, result: { testo: "mancano parametri o sono errati" } });
         return;
     }
     db.query("INSERT into emozionetrovata (IdEmozione,DataRilevazione,Ora,IdDispositivo) VALUES (?,?,?,?)", [query.tipo, query.dataRilevazione, query.ora, query.idDispositivo], (err, result) => {
