@@ -34,12 +34,22 @@ router.get("/", function(req, res) {
 var i = 0;
 router.post("/add", function(req, res, next) {
     let query = req.body;
-    if (!query.nome || !query.tipo || !query.ip || !query.acceso) {
+    if (!query.nome || !query.tipo || !query.ip) {
         res.json({ success: false, testo: "mancano parametri o sono errati" });
         return;
     }
-    db.query(
-        "INSERT into dispositivo (Nome,Tipo,Ip,Acceso,IdUtente) VALUES (?,?,?,?,?)", [query.nome, query.tipo, query.ip, query.acceso, req.Utente.Id],
+    let sql = "";
+    let parametri = [];
+    if (query.acceso) {
+        sql =
+            "INSERT into dispositivo (Nome,Tipo,Ip,Acceso,IdUtente) VALUES (?,?,?,?,?)";
+        parametri = [query.nome, query.tipo, query.ip, query.acceso, req.Utente.Id];
+    } else {
+        sql =
+            "INSERT into dispositivo (Nome,Tipo,Ip,IdUtente) VALUES (?,?,?,?,?)";
+        parametri = [query.nome, query.tipo, query.ip, req.Utente.Id];
+    }
+    db.query(sql, parametri,
         (err, result) => {
             if (err) console.log(err);
             res.json({

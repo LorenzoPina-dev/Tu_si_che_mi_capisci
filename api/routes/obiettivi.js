@@ -49,7 +49,7 @@ router.post("/add", function(req, res, next) {
     );
 });
 
-router.post("/change/:id", function(req, res, next) {
+router.put("/change/:id", function(req, res, next) {
     let query = req.body;
     console.log(query);
     if (!req.params.id || !query.concluso) {

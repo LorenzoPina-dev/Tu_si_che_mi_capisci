@@ -7,15 +7,9 @@ router.get("/", function(req, res) {
     let sql = "SELECT * from skill where IdUtente=? AND";
     let parametri = [req.Utente.Id];
 
-    if (query.start || (query.data && new Date(query.data).getTime())) {
-        if (query.start) {
-            sql += " Id>=? AND";
-            parametri.push(parseInt(query.start));
-        }
-        if (query.data) {
-            let date = (sql += " DataRilevazione>=? AND");
-            parametri.push(query.data);
-        }
+    if (query.start) {
+        sql += " Id>=? AND";
+        parametri.push(parseInt(query.start));
     }
     sql = sql.substring(0, sql.length - 3)
     if (query.numero) {

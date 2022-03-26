@@ -40,11 +40,21 @@ var i = 0;
 router.post("/add", function(req, res, next) {
     let query = req.body;
     console.log(query)
-    if (!query.tipo || !query.dataRilevazione || !query.ora || !query.idDispositivo) {
+    if (!query.tipo || !query.idDispositivo) {
         res.json({ success: false, result: { testo: "mancano parametri o sono errati" } });
         return;
     }
-    db.query("INSERT into emozionetrovata (IdEmozione,DataRilevazione,Ora,IdDispositivo) VALUES (?,?,?,?)", [query.tipo, query.dataRilevazione, query.ora, query.idDispositivo], (err, result) => {
+    let sql = "";
+    let parametri = [];
+    if (query.dataRilevazione) {
+        sql = "INSERT into emozionetrovata (IdEmozione,DataRilevazione,IdDispositivo) VALUES (?,?,?)";
+        parametri = [query.tipo, query.dataRilevazione, query.idDispositivo];
+    } else {
+        sql = "INSERT into emozionetrovata (IdEmozione,IdDispositivo) VALUES (?,?)";
+        parametri = [query.tipo, query.dataRilevazione, query.idDispositivo];
+    }
+
+    db.query(sql, parametri, (err, result) => {
         if (err) console.log(err);
         res.json({
             success: true,

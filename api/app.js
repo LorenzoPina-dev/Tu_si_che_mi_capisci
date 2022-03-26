@@ -13,6 +13,7 @@ var emotionsRouter = require("./routes/emotions");
 var facesTrovataRouter = require("./routes/facesTrovata");
 var facesRegistrataRouter = require("./routes/facesRegistrato");
 var skillsRouter = require("./routes/skills");
+var obiettiviRouter = require("./routes/obiettivi");
 const { runInNewContext } = require("vm");
 var app = express();
 
@@ -35,6 +36,7 @@ app.use("/:key/voltoRegistrato", controllaUtente, facesRegistrataRouter);
 app.use("/:key/dispositivi", controllaUtente, devicesRouter);
 app.use("/:key/skill", controllaUtente, skillsRouter);
 app.use("/:key/utente", controllaUtente, usersRouter);
+app.use("/:key/obiettivi", controllaUtente, obiettiviRouter);
 app.use("/", indexRouter);
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

@@ -36,18 +36,26 @@ router.get("/", function(req, res) {
 var i = 0;
 router.post("/add", multipartMiddleware, function(req, res, next) {
     let query = req.body;
-    if (!query.dataRilevazione || !query.dataRilevazione || !query.immagine || !query.idDispositivo) {
+    if (!query.immagine || !query.idDispositivo) {
         res.json({ success: false, testo: "mancano parametri o sono errati" });
         return;
     }
-        
-    db.query(
-        "INSERT into voltotrovato (DataRilevazione,Ora,Immagine,IdDispositivo) VALUES (?,?,?,?)", [query.dataRilevazione, query.ora, query.immagine, query.idDispositivo],
+    let sql = "";
+    let parametri = [];
+    if (query.dataRilevazione) {
+        sql = "INSERT into voltotrovato (DataRilevazione,Immagine,IdDispositivo) VALUES (?,?,?)";
+        parametri = [query.dataRilevazione, query.immagine, query.idDispositivo];
+    } else {
+        sql = "INSERT into voltotrovato (Immagine,IdDispositivo) VALUES (?,?)";
+        parametri = [query.immagine, query.idDispositivo];
+    }
+
+    db.query(sql, parametri,
         (err, result) => {
             if (err) console.log(err);
             console.log(result);
-            
-            if(query.idVolto)
+
+            if (query.idVolto)
                 db.query(
                     "INSERT into permesso (IdVoltoTrovato,IdVoltoRegistrato) VALUES (?,?)", [result.insertId, query.idVolto],
                     (err, result) => {
@@ -60,10 +68,10 @@ router.post("/add", multipartMiddleware, function(req, res, next) {
                     }
                 );
             else
-            res.json({
-                success: true,
-                result: { testo: "inserimento avvenuto con successo" },
-            });
+                res.json({
+                    success: true,
+                    result: { testo: "inserimento avvenuto con successo" },
+                });
         }
     );
 });
