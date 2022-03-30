@@ -29,7 +29,13 @@ router.get("/", function(req, res) {
     }
     console.log(sql, parametri);
     db.query(sql, parametri, (err, result) => {
-        if (err) console.log(err);
+        if (err) {
+            res.json({
+                success: false,
+                result: { testo: "Errore" },
+            });
+            return;
+        }
         res.json({
             success: true,
             result: { emozioni: result },
@@ -55,7 +61,13 @@ router.post("/add", function(req, res, next) {
     }
 
     db.query(sql, parametri, (err, result) => {
-        if (err) console.log(err);
+        if (err) {
+            res.json({
+                success: false,
+                result: { testo: "Errore" },
+            });
+            return;
+        }
         res.json({
             success: true,
             result: { testo: "inserimento avvenuto con successo" },

@@ -3,7 +3,7 @@ var router = express.Router();
 const fs = require("fs");
 const db = require("../util/db");
 var multipart = require("connect-multiparty");
-var multipartMiddleware = multipart({ uploadDir: "uploads/facesTrovate/" });
+var multipartMiddleware = multipart({ uploadDir: "uploads/voltotrovato/" });
 router.get("/", function(req, res) {
     let query = req.query;
     let sql = "SELECT * from voltotrovato where IdUtente=? AND";
@@ -26,7 +26,13 @@ router.get("/", function(req, res) {
     }
     console.log(sql, parametri);
     db.query(sql, parametri, (err, result) => {
-        if (err) console.log(err);
+        if (err) {
+            res.json({
+                success: false,
+                result: { testo: "Errore" }
+            });
+            return;
+        }
         res.json({
             success: true,
             result: { voltiTrovati: result },
@@ -52,14 +58,30 @@ router.post("/add", multipartMiddleware, function(req, res, next) {
 
     db.query(sql, parametri,
         (err, result) => {
-            if (err) console.log(err);
+            if (err) {
+                res.json({
+                    success: false,
+                    result: { testo: "Errore" }
+                });
+                return;
+            }
             console.log(result);
+            fs.renameSync(
+                req.files.Immagine.path,
+                "uploads\\voltotrovato\\" + result.insertId + ".png"
+            );
 
             if (query.idVolto)
                 db.query(
                     "INSERT into permesso (IdVoltoTrovato,IdVoltoRegistrato) VALUES (?,?)", [result.insertId, query.idVolto],
                     (err, result) => {
-                        if (err) console.log(err);
+                        if (err) {
+                            res.json({
+                                success: false,
+                                result: { testo: "Errore" }
+                            });
+                            return;
+                        }
                         console.log(result);
                         res.json({
                             success: true,

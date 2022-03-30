@@ -1,6 +1,14 @@
 # Tu_si_che_mi_capisci
 codice sorgente Server remoto
 
+Formato pacchetto udp:
+{
+	Tipo:"audio/video",
+	KeyUtente:” e8de33ae-0964-48b2-affc-307c74c2d481”(esempio formato key),
+	Dati:"dati presi dal dispositivo (vettore dello spettrogramma per audio e punti del viso per le cam)"
+}
+
+
 Url gestiti dall'api:
 -=opzionale
 

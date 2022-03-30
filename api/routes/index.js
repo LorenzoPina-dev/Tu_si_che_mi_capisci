@@ -35,7 +35,13 @@ router.post("/login", (req, res) => {
     db.query(
         "SELECT * FROM utente WHERE Username = ? AND Password = ?", [query.username, sha256.hex(query.password)],
         (err, result) => {
-            if (err) throw err;
+            if (err) {
+                res.json({
+                    success: false,
+                    result: { testo: "Errore" }
+                });
+                return;
+            }
             console.log(result);
             if (result.length > 0) {
                 res.json({
@@ -80,7 +86,7 @@ router.post("/register", (req, res) => {
         (err, result) => {
             if (err) {
                 res.json({ success: false, result: { testo: "errore nell'inserimento" } });
-                console.log(err)
+                throw err
                 return;
             }
             res.json({ success: true, result: { testo: "registrazione avvenuta con successo" } });
@@ -131,7 +137,13 @@ router.put("/cambiaPassword", (req, res) => {
     db.query(
         "UPDATE utente SET Password=? where Email=?", [sha256.hex(query.password), mail],
         (err, result) => {
-            if (err) throw err;
+            if (err) {
+                res.json({
+                    success: false,
+                    result: { testo: "Errore" }
+                });
+                return;
+            }
             res.json({
                 success: true,
                 result: { testo: "update avvenuto con successo" }

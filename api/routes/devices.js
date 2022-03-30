@@ -7,15 +7,13 @@ router.get("/", function(req, res) {
     let sql = "SELECT * from dispositivo where IdUtente=? AND";
     let parametri = [req.Utente.Id];
 
-    if (query.start || query.tipo) {
-        if (query.start) {
-            sql += " Id>=? AND";
-            parametri.push(parseInt(query.start));
-        }
-        if (query.tipo) {
-            let date = (sql += " Tipo>=? AND");
-            parametri.push(query.tipo);
-        }
+    if (query.start) {
+        sql += " Id>=? AND";
+        parametri.push(parseInt(query.start));
+    }
+    if (query.tipo) {
+        let date = (sql += " Tipo>=? AND");
+        parametri.push(query.tipo);
     }
     sql = sql.substring(0, sql.length - 3);
     if (query.numero) {
@@ -24,7 +22,13 @@ router.get("/", function(req, res) {
     }
     console.log(sql, parametri);
     db.query(sql, parametri, (err, result) => {
-        if (err) console.log(err);
+        if (err) {
+            res.json({
+                success: false,
+                result: { testo: "Errore" },
+            });
+            return;
+        }
         res.json({
             success: true,
             result: { dispositivo: result },
@@ -51,10 +55,16 @@ router.post("/add", function(req, res, next) {
     }
     db.query(sql, parametri,
         (err, result) => {
-            if (err) console.log(err);
+            if (err) {
+                res.json({
+                    success: false,
+                    result: { testo: "Errore" }
+                });
+                return;
+            }
             res.json({
                 success: true,
-                result: { testo: "inserimento avvenuto con successo" },
+                result: { testo: "inserimento avvenuto con successo" }
             });
         }
     );
@@ -67,12 +77,24 @@ router.delete("/remove/:id", function(req, res, next) {
     db.query(
         "Select IdUtente FrOM dispositivo WHERE Id=?", [req.params.Id],
         (err, result) => {
-            if (err) console.log(err);
+            if (err) {
+                res.json({
+                    success: false,
+                    result: { testo: "Errore" },
+                });
+                return;
+            }
             if (result[0].IdUtente == req.Utente.Id) {
                 db.query(
                     "DELETE FrOM dispositivo WHERE Id=?", [req.params.Id],
                     (err, result) => {
-                        if (err) console.log(err);
+                        if (err) {
+                            res.json({
+                                success: false,
+                                result: { testo: "Errore" },
+                            });
+                            return;
+                        }
                         res.json({
                             success: true,
                             result: { testo: "rimozione avvenuto con successo" },

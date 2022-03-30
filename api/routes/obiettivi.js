@@ -12,6 +12,10 @@ router.get("/", function(req, res) {
         sql += " emozionetrovata.Id>=? AND";
         parametri.push(parseInt(query.start));
     }
+    if (query.data) {
+        sql += " quest.DataAssegnazione>=? AND";
+        parametri.push(parseInt(query.data));
+    }
     sql = sql.substring(0, sql.length - 3);
     if (query.numero) {
         sql += " Limit ?";
@@ -19,7 +23,13 @@ router.get("/", function(req, res) {
     }
     console.log(sql, parametri);
     db.query(sql, parametri, (err, result) => {
-        if (err) console.log(err);
+        if (err) {
+            res.json({
+                success: false,
+                result: { testo: "Errore" }
+            });
+            return;
+        }
         res.json({
             success: true,
             result: { emozioni: result },
@@ -40,7 +50,13 @@ router.post("/add", function(req, res, next) {
     db.query(
         "INSERT into quest (Concluso,IdObiettivo,IdUtente) VALUES (?,?,?)", [query.concluso, query.idObiettivo, req.Utente.Id],
         (err, result) => {
-            if (err) console.log(err);
+            if (err) {
+                res.json({
+                    success: false,
+                    result: { testo: "Errore" }
+                });
+                return;
+            }
             res.json({
                 success: true,
                 result: { testo: "inserimento avvenuto con successo" },
@@ -62,12 +78,24 @@ router.put("/change/:id", function(req, res, next) {
     db.query(
         "Select IdUtente FrOM query WHERE Id=?", [req.params.Id],
         (err, result) => {
-            if (err) console.log(err);
+            if (err) {
+                res.json({
+                    success: false,
+                    result: { testo: "Errore" }
+                });
+                return;
+            }
             if (result[0].IdUtente == req.Utente.Id) {
                 db.query(
                     "update query set Concluso=? Where Id=?", [req.params.id, query.concluso],
                     (err, result) => {
-                        if (err) console.log(err);
+                        if (err) {
+                            res.json({
+                                success: false,
+                                result: { testo: "Errore" }
+                            });
+                            return;
+                        }
                         res.json({
                             success: true,
                             result: { testo: "inserimento avvenuto con successo" },

@@ -26,7 +26,13 @@ router.get("/", function(req, res) {
     }
     console.log(sql, parametri);
     db.query(sql, parametri, (err, result) => {
-        if (err) console.log(err);
+        if (err) {
+            res.json({
+                success: false,
+                result: { testo: "Errore" }
+            });
+            return;
+        }
         res.json({
             success: true,
             result: { voltiRegistrati: result },
@@ -43,7 +49,17 @@ router.post("/add", multipartMiddleware, function(req, res, next) {
     db.query(
         "INSERT into voltoregistrato (Nome,Immagine,IdUtente) VALUES (?,?,?)", [query.nome, query.immagine, req.Utente.Id],
         (err, result) => {
-            if (err) console.log(err);
+            if (err) {
+                res.json({
+                    success: false,
+                    result: { testo: "Errore" }
+                });
+                return;
+            }
+            fs.renameSync(
+                req.files.Immagine.path,
+                "uploads\\voltoregistrato\\" + result.insertId + ".png"
+            );
             res.json({
                 success: true,
                 result: { testo: "inserimento avvenuto con successo" },
@@ -59,12 +75,24 @@ router.delete("/remove/:id", function(req, res, next) {
     db.query(
         "Select IdUtente FrOM voltoregistrato WHERE Id=?", [req.params.Id],
         (err, result) => {
-            if (err) console.log(err);
+            if (err) {
+                res.json({
+                    success: false,
+                    result: { testo: "Errore" }
+                });
+                return;
+            }
             if (result[0].IdUtente == req.Utente.Id) {
                 db.query(
                     "DELETE FrOM voltoregistrato WHERE Id=?", [req.params.Id],
                     (err, result) => {
-                        if (err) console.log(err);
+                        if (err) {
+                            res.json({
+                                success: false,
+                                result: { testo: "Errore" }
+                            });
+                            return;
+                        }
                         res.json({
                             success: true,
                             result: { testo: "rimozione avvenuta con successo" },

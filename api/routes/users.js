@@ -7,10 +7,10 @@ var multipartMiddleware = multipart({ uploadDir: "uploads/utenti" });
 var db = require("./../util/db");
 
 router.get("/", function(req, res) {
-    if(!req.Utente)
-        res.json({ success: false, result:{testo:"utente non trovato"} });
+    if (!req.Utente)
+        res.json({ success: false, result: { testo: "utente non trovato" } });
     else
-        res.json({ success: true, result:{utente: req.Utente} });
+        res.json({ success: true, result: { utente: req.Utente } });
 });
 
 router.put("/cambiaInfo", multipartMiddleware, function(req, res) {
@@ -21,7 +21,7 @@ router.put("/cambiaInfo", multipartMiddleware, function(req, res) {
     }
     let sql = "UPDATE utente SET ",
         parametri = [];
-    if (query.username ) {
+    if (query.username) {
         sql += "Username=?, "
         parametri.push(query.username);
     }
@@ -30,13 +30,13 @@ router.put("/cambiaInfo", multipartMiddleware, function(req, res) {
         parametri.push(sha256.hex(query.password));
     }
 
-    if (query.mail ) {
+    if (query.mail) {
         sql += "EMail=?, "
         parametri.push(query.mail.split('.')[0] + ".png");
     }
     if (query.immagine) {
         sql += "Immagine=?, "
-        if(fs.existsSync("uploads\\utenti\\" + req.Utente.Id + ".png"))
+        if (fs.existsSync("uploads\\utenti\\" + req.Utente.Id + ".png"))
             fs.unlinkSync("uploads\\utenti\\" + req.Utente.Id + ".png")
         fs.renameSync(
             req.files.Immagine.path,
@@ -50,7 +50,7 @@ router.put("/cambiaInfo", multipartMiddleware, function(req, res) {
     db.query(sql + " WHERE Id = ? ", parametri,
         (err, result) => {
             if (err)
-                console.log(err)
+                throw err
             res.json({
                 success: true,
                 result: { testo: "update avvenuto con successo" }

@@ -18,7 +18,13 @@ router.get("/", function(req, res) {
     }
     console.log(sql, parametri);
     db.query(sql, parametri, (err, result) => {
-        if (err) console.log(err);
+        if (err) {
+            res.json({
+                success: false,
+                result: { testo: "Errore" }
+            });
+            return;
+        }
         res.json({
             success: true,
             result: { skill: result },
@@ -35,7 +41,13 @@ router.post("/add", function(req, res, next) {
     db.query(
         "INSERT into skill (Nome,Descrizione,Azione,IdEmozione,IdUtente) VALUES (?,?,?,?,?)", [query.nome, query.descrizione, query.azione, query.idEmozione, req.Utente.Id],
         (err, result) => {
-            if (err) console.log(err);
+            if (err) {
+                res.json({
+                    success: false,
+                    result: { testo: "Errore" }
+                });
+                return;
+            }
             res.json({
                 success: true,
                 result: { testo: "inserimento avvenuto con successo" },
@@ -49,12 +61,24 @@ router.delete("/remove/:id", function(req, res, next) {
         return;
     }
     db.query("Select IdUtente FrOM skill WHERE Id=?", [req.params.Id], (err, result) => {
-        if (err) console.log(err);
+        if (err) {
+            res.json({
+                success: false,
+                result: { testo: "Errore" }
+            });
+            return;
+        }
         if (result[0].IdUtente == req.Utente.Id) {
             db.query(
                 "DELETE FrOM skill WHERE Id=?", [req.params.Id],
                 (err, result) => {
-                    if (err) console.log(err);
+                    if (err) {
+                        res.json({
+                            success: false,
+                            result: { testo: "Errore" }
+                        });
+                        return;
+                    }
                     res.json({
                         success: true,
                         result: { testo: "rimozione avvenuto con successo" },

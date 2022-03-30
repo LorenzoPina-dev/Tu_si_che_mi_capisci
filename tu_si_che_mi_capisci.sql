@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Creato il: Mar 25, 2022 alle 19:51
+-- Creato il: Mar 27, 2022 alle 17:57
 -- Versione del server: 10.4.17-MariaDB
 -- Versione PHP: 8.0.0
 
@@ -31,8 +31,8 @@ CREATE TABLE `dispositivo` (
   `Id` int(11) NOT NULL,
   `Nome` varchar(64) NOT NULL,
   `Tipo` int(1) NOT NULL,
-  `Ip` varchar(16) NOT NULL,
-  `Acceso` tinyint(1) NOT NULL,
+  `Ip` varchar(15) NOT NULL,
+  `Acceso` tinyint(1) NOT NULL DEFAULT 1,
   `IdUtente` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
@@ -62,9 +62,12 @@ CREATE TABLE `emozione` (
 
 INSERT INTO `emozione` (`Id`, `Tipo`) VALUES
 (1, 'Arrabbiato'),
+(4, 'Disgustato'),
 (2, 'Felice'),
-(3, 'Triste'),
-(4, 'Felice');
+(7, 'Neutro'),
+(6, 'Sorpreso'),
+(5, 'Spaventato'),
+(3, 'Triste');
 
 -- --------------------------------------------------------
 
@@ -75,8 +78,7 @@ INSERT INTO `emozione` (`Id`, `Tipo`) VALUES
 CREATE TABLE `emozionetrovata` (
   `Id` int(11) NOT NULL,
   `IdEmozione` int(11) NOT NULL,
-  `DataRilevazione` date NOT NULL,
-  `Ora` time NOT NULL,
+  `DataRilevazione` datetime NOT NULL DEFAULT current_timestamp(),
   `IdDispositivo` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
@@ -84,10 +86,9 @@ CREATE TABLE `emozionetrovata` (
 -- Dump dei dati per la tabella `emozionetrovata`
 --
 
-INSERT INTO `emozionetrovata` (`Id`, `IdEmozione`, `DataRilevazione`, `Ora`, `IdDispositivo`) VALUES
-(1, 1, '2022-03-16', '00:00:00', 1),
-(2, 4, '2022-03-16', '07:17:44', 3),
-(3, 1, '2022-05-02', '00:00:00', 1);
+INSERT INTO `emozionetrovata` (`Id`, `IdEmozione`, `DataRilevazione`, `IdDispositivo`) VALUES
+(1, 1, '2022-03-16 00:00:00', 1),
+(3, 1, '2022-05-02 00:00:00', 1);
 
 -- --------------------------------------------------------
 
@@ -99,8 +100,10 @@ CREATE TABLE `obiettivo` (
   `Id` int(11) NOT NULL,
   `Immagine` varchar(64) NOT NULL,
   `Nome` varchar(64) NOT NULL,
-  `Descrizione` varchar(128) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+  `Descrizione` varchar(128) NOT NULL,
+  `IdEmozione` int(11) NOT NULL,
+  `NRilevazioni` int(11) NOT NULL
+) ;
 
 -- --------------------------------------------------------
 
@@ -155,7 +158,7 @@ CREATE TABLE `utente` (
   `Immagine` varchar(64) NOT NULL,
   `Xp` int(8) NOT NULL,
   `ApiKey` char(36) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ;
 
 --
 -- Dump dei dati per la tabella `utente`
@@ -175,7 +178,7 @@ CREATE TABLE `voltoregistrato` (
   `Id` int(11) NOT NULL,
   `Nome` varchar(64) NOT NULL,
   `Immagine` varchar(64) NOT NULL,
-  `VettoreVolto` varchar(256) NOT NULL,
+  `VettoreVolto` varchar(256) DEFAULT NULL,
   `IdUtente` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
@@ -187,10 +190,9 @@ CREATE TABLE `voltoregistrato` (
 
 CREATE TABLE `voltotrovato` (
   `Id` int(11) NOT NULL,
-  `DataRilevazione` date NOT NULL,
-  `Ora` time NOT NULL,
+  `DataRilevazione` datetime NOT NULL DEFAULT current_timestamp(),
   `Immagine` varchar(64) NOT NULL,
-  `VettoreImmagini` varchar(256) NOT NULL,
+  `VettoreImmagini` varchar(256) DEFAULT NULL,
   `IdDispositivo` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
@@ -209,7 +211,8 @@ ALTER TABLE `dispositivo`
 -- Indici per le tabelle `emozione`
 --
 ALTER TABLE `emozione`
-  ADD PRIMARY KEY (`Id`);
+  ADD PRIMARY KEY (`Id`),
+  ADD UNIQUE KEY `Tipo` (`Tipo`);
 
 --
 -- Indici per le tabelle `emozionetrovata`
@@ -223,7 +226,8 @@ ALTER TABLE `emozionetrovata`
 -- Indici per le tabelle `obiettivo`
 --
 ALTER TABLE `obiettivo`
-  ADD PRIMARY KEY (`Id`);
+  ADD PRIMARY KEY (`Id`),
+  ADD UNIQUE KEY `Nome` (`Nome`);
 
 --
 -- Indici per le tabelle `permesso`
@@ -284,7 +288,7 @@ ALTER TABLE `dispositivo`
 -- AUTO_INCREMENT per la tabella `emozione`
 --
 ALTER TABLE `emozione`
-  MODIFY `Id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `Id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 
 --
 -- AUTO_INCREMENT per la tabella `emozionetrovata`
@@ -314,7 +318,7 @@ ALTER TABLE `skill`
 -- AUTO_INCREMENT per la tabella `utente`
 --
 ALTER TABLE `utente`
-  MODIFY `Id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=35;
+  MODIFY `Id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT per la tabella `voltoregistrato`
