@@ -17,7 +17,7 @@ namespace proj
         WebClient wb = new WebClient();
         NameValueCollection data;
         JsonClass json = new JsonClass();
-        string host = "172.16.102.51:3000";
+        string host = "80.22.36.186";
         public httpRequests() { }
         public string HttpRequestLogin(string username, string password) //login
         {
@@ -103,8 +103,24 @@ namespace proj
             var response = wb.DownloadData(url);
             string result = System.Text.Encoding.UTF8.GetString(response);
             JObject obj = JObject.Parse(result);
-            object ris = json.GetInfo(obj);
-            return ris;
+            object objRis = json.GetInfo(obj); //chiedo info
+            string ris = "";
+            if (objRis.GetType() == typeof(string)) //l'utente non c'è quindi mi ritorna una stringa
+            {
+                ris = json.GetText(obj);
+                return ris; //ritorno la stringa
+            }
+            else //l'utente è presente
+            {
+                string[] array = (string[])objRis; //vettore con info
+                object obj3 = GetImage(key, "utente", array[2]);
+                if(obj3.GetType() == typeof(string)) //errore
+                {
+                    JObject obj4 = JObject.Parse(result);
+                    array[4] = json.GetText(obj4);
+                }
+                return array;
+            }
         }
 
         public string HttpRequestAddEmozione(string key, string tipo, string dataRil, string oraRil, string idDisp) //aggiungi emozione
@@ -268,6 +284,24 @@ namespace proj
             JObject obj = json.Parse(result);
             string ris = json.GetText(obj);
             return ris;
+        }
+
+        private object GetImage(string key, string tabella, string nome)
+        {
+            WebClient wb = new WebClient();
+            string url = "http://" + host + "/" + key + "/img/ciao/" + tabella + "?nomefile=" + nome;
+            var response = wb.DownloadData(url);
+            string result = System.Text.Encoding.UTF8.GetString(response); //ottengo una risposta
+            try
+            {
+                JObject obj = json.Parse(result);
+                string ris = json.GetText(obj);
+                return ris;
+            }
+            catch (Exception ){
+                File.WriteAllBytes("./img.png", response);
+                return 0;
+            }
         }
     }
 }
