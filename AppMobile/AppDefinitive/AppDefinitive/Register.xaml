@@ -1,0 +1,23 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="AppDefinitive.Register">
+    <ContentPage.Content>
+        <StackLayout>
+            <Frame BackgroundColor="#2196F3" Padding="24" CornerRadius="0">
+                <Label Text="REGISTRAZIONE" HorizontalTextAlignment="Center" TextColor="White" FontSize="36"/>
+            </Frame>
+
+            <Label Text="email"/>
+            <Entry/>
+            <Label Text="Password:"/>
+            <Entry/>
+            <Label Text="Ripeti password:"/>
+            <Entry/>
+            
+            <Button Text="Registrati"/>
+            <Button Text="Torna alla login" Clicked="tornaLogin"/>
+
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>

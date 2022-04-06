@@ -1,0 +1,22 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="AppDefinitive.MainPage">
+
+    <StackLayout>
+        <Frame BackgroundColor="#2196F3" Padding="24" CornerRadius="0">
+            <Label Text="LOGIN" HorizontalTextAlignment="Center" TextColor="White" FontSize="36"/>
+        </Frame>
+
+        <Label Text=" " x:Name="error"/> <!-- Quetsa è l'etichetta che verrà usata per indicare eventuali errori-->
+        <Label Text="email"/>
+        <Entry  x:Name="mail"/>
+        <Label Text="password" />
+        <Entry IsPassword="True" x:Name="pass"/>
+        <Button Text="ENTRA" Clicked="LoginEntra"/>
+        <Button Text="REGISTARTI" Clicked="registerPage"/>
+        <!-- x:Name -> Dare nomi da variabile alle cose-->
+
+    </StackLayout>
+
+</ContentPage>
