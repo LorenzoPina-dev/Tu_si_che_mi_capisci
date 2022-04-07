@@ -1,11 +1,12 @@
 {
   "version": 2,
-  "dgSpecHash": "QfnzkIZC5y2tU2EDBd4YnbYkIm2eN75pnqWDYYeNbqBQSjUnhy1jDV5GBzjDXe5hfEPq96hotBHkjTTh0IrYwA==",
+  "dgSpecHash": "XMbWrJqVpcuvNA/kU9YyS6Oks6cJEXXojh7+Xl2oCEisGRucJUY3TVYUws0WMbXy8RAErPvtwikKwZiwKCEiqQ==",
   "success": true,
   "projectFilePath": "C:\\Users\\giuli\\source\\repos\\AppDefinitive\\AppDefinitive\\AppDefinitive.Android\\AppDefinitive.Android.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\giuli\\.nuget\\packages\\microcharts\\0.9.5.9\\microcharts.0.9.5.9.nupkg.sha512",
     "C:\\Users\\giuli\\.nuget\\packages\\microcharts.forms\\0.9.5.9\\microcharts.forms.0.9.5.9.nupkg.sha512",
+    "C:\\Users\\giuli\\.nuget\\packages\\newtonsoft.json\\13.0.1\\newtonsoft.json.13.0.1.nupkg.sha512",
     "C:\\Users\\giuli\\.nuget\\packages\\skiasharp\\2.80.2\\skiasharp.2.80.2.nupkg.sha512",
     "C:\\Users\\giuli\\.nuget\\packages\\skiasharp.views\\2.80.2\\skiasharp.views.2.80.2.nupkg.sha512",
     "C:\\Users\\giuli\\.nuget\\packages\\skiasharp.views.forms\\2.80.2\\skiasharp.views.forms.2.80.2.nupkg.sha512",

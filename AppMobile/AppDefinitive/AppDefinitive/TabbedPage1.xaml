@@ -8,11 +8,16 @@
     <!--Pages can be added as references or inline-->
 
      <!-- Impostazioni --> 
-    <ContentPage Title="Setting">
+    <ContentPage Title="Utente">
 
         <StackLayout>
  
             <StackLayout>
+                <Image Source=""></Image>
+                <Label Text=""/>
+                
+                <Button Text="Modifica utente" Clicked="modUtente"/>
+                <Button Text="Torna alla login" Clicked="tornaLogin"/>
             </StackLayout>
 
         </StackLayout>
@@ -37,10 +42,9 @@
     </ContentPage>
 
      <!-- Utente -->
-    <ContentPage Title="Utente" >
+    <ContentPage Title="Setting" >
         <StackLayout>
-            <Button Text="Modifica utente"/>
-            <Button Text="Torna alla login" Clicked="tornaLogin"/>
+            
         </StackLayout>  
     </ContentPage>
 

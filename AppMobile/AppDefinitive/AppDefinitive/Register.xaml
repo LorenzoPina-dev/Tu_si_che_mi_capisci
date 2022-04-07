@@ -8,14 +8,17 @@
                 <Label Text="REGISTRAZIONE" HorizontalTextAlignment="Center" TextColor="White" FontSize="36"/>
             </Frame>
 
+            <Label Text="" x:Name="error"/>
+            <Label Text="Username"/>
+            <Entry x:Name="user"/>
             <Label Text="email"/>
-            <Entry/>
+            <Entry x:Name="email"/>
             <Label Text="Password:"/>
-            <Entry/>
+            <Entry x:Name="pass"/>
             <Label Text="Ripeti password:"/>
             <Entry/>
-            
-            <Button Text="Registrati"/>
+
+            <Button Text="Registrati" Clicked="registratiButton"/>
             <Button Text="Torna alla login" Clicked="tornaLogin"/>
 
         </StackLayout>

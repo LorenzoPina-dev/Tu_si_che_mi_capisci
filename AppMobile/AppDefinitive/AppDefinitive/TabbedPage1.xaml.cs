@@ -42,7 +42,6 @@ namespace AppDefinitive
             this.ut = ut;
             chartView.Chart = new BarChart() { Entries = entries };
 
-            visualizzaSkill.Text = restituisciSkills(); 
         }
 
         public void tornaLogin(object sender, EventArgs args)
@@ -50,16 +49,14 @@ namespace AppDefinitive
             App.Current.MainPage = new MainPage();
         }
 
-        public string restituisciSkills() {
-
-            string descrizione = ut.sLista[0].descrizione; 
-            
-            return descrizione; 
-        }
-
         private void Button_Clicked(object sender, EventArgs e)
         {
 
+        }
+
+        public void modUtente(object sender, EventArgs e)
+        {
+            App.Current.MainPage = new modificaUtente(ut); 
         }
     }
 }

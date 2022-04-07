@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "gNfkccyb+WWpEiLrDlcDYKgcmVsYYjvTlXL4VTpXYXDan1Kez51O+dgcidTVrJQktYy6tUjlqx7O1kvO2+bwwA==",
+  "dgSpecHash": "HguZl6+Js7fBHgdZgKFfHmTTKzn5TTd6Y1C5w7xJz59+SEBASTK25j5RRF4zLOM7lh9XfT7FTP2a7YnfanBFMQ==",
   "success": true,
   "projectFilePath": "C:\\Users\\giuli\\source\\repos\\AppDefinitive\\AppDefinitive\\AppDefinitive\\AppDefinitive.csproj",
   "expectedPackageFiles": [
@@ -8,6 +8,7 @@
     "C:\\Users\\giuli\\.nuget\\packages\\microcharts.forms\\0.9.5.9\\microcharts.forms.0.9.5.9.nupkg.sha512",
     "C:\\Users\\giuli\\.nuget\\packages\\microsoft.netcore.platforms\\1.1.0\\microsoft.netcore.platforms.1.1.0.nupkg.sha512",
     "C:\\Users\\giuli\\.nuget\\packages\\netstandard.library\\2.0.3\\netstandard.library.2.0.3.nupkg.sha512",
+    "C:\\Users\\giuli\\.nuget\\packages\\newtonsoft.json\\13.0.1\\newtonsoft.json.13.0.1.nupkg.sha512",
     "C:\\Users\\giuli\\.nuget\\packages\\skiasharp\\2.80.2\\skiasharp.2.80.2.nupkg.sha512",
     "C:\\Users\\giuli\\.nuget\\packages\\skiasharp.views.forms\\2.80.2\\skiasharp.views.forms.2.80.2.nupkg.sha512",
     "C:\\Users\\giuli\\.nuget\\packages\\system.buffers\\4.4.0\\system.buffers.4.4.0.nupkg.sha512",
