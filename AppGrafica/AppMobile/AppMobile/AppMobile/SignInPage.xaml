@@ -1,0 +1,69 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="AppMobile.SignInPage"
+             BackgroundColor="#505050">
+
+
+    <Frame BackgroundColor="#1C1C1C" Padding="10,20" HorizontalOptions="Center" WidthRequest="530" HeightRequest="20" CornerRadius="30" Margin="50">
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="80" />
+                <RowDefinition Height="40" />
+                <RowDefinition Height="50" />
+                <RowDefinition Height="40" />
+                <RowDefinition Height="50" />
+                <RowDefinition Height="40" />
+                <RowDefinition Height="50" />
+                <RowDefinition Height="40" />
+                <RowDefinition Height="50" />
+                <RowDefinition Height="70" />
+                <RowDefinition Height="50" />
+                <RowDefinition Height="70" />
+
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="200"/>
+            </Grid.ColumnDefinitions>
+            <Label Grid.Row="0" Grid.Column="0"
+               HorizontalOptions="Start"
+               VerticalOptions="Center" 
+               FontSize="28" TextColor="White" Text="Registrazione" HorizontalTextAlignment="Start" FontAttributes="Bold"></Label>
+            <Image Margin="200,0,0,0" Aspect="Fill" Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2" Source="Logo.png" />
+            <Label Grid.Row="1" Grid.Column="0" FontSize="20" TextColor="White" WidthRequest="150" HeightRequest="100" Text="Email:" HorizontalTextAlignment="Start"></Label>
+            <Frame Padding="3" CornerRadius="20" Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="2" BackgroundColor="#3B3B3B">
+                <Entry x:Name="Email" TextColor="White"></Entry>
+            </Frame>
+            <Label Grid.Row="3" Grid.Column="0" FontSize="20" TextColor="White" WidthRequest="150" HeightRequest="100" Text="Username:" HorizontalTextAlignment="Start"></Label>
+            <Frame Padding="3" CornerRadius="20" Grid.Row="4" Grid.Column="0" Grid.ColumnSpan="2" BackgroundColor="#3B3B3B">
+                <Entry x:Name="Username" TextColor="White"></Entry>
+            </Frame>
+            <Label Grid.Row="5" Grid.Column="0" FontSize="20" TextColor="White" WidthRequest="150" HeightRequest="100" Text="Password:" HorizontalTextAlignment="Start"></Label>
+            <Frame Padding="3" CornerRadius="20" Grid.Row="6" Grid.Column="0" Grid.ColumnSpan="2" BackgroundColor="#3B3B3B">
+                <Entry x:Name="Password" IsPassword="true" TextColor="White"></Entry>
+            </Frame>
+            <Label Grid.Row="7" Grid.Column="0" FontSize="20" TextColor="White" WidthRequest="150" HeightRequest="100" Text="Ripeti password:" HorizontalTextAlignment="Start"></Label>
+            <Frame Padding="3" CornerRadius="20" Grid.Row="8" Grid.Column="0" Grid.ColumnSpan="2" BackgroundColor="#3B3B3B">
+                <Entry x:Name="Password2" IsPassword="true" TextColor="White"></Entry>
+            </Frame>
+            <Button BackgroundColor="#8489FF" CornerRadius="20" HeightRequest="50" WidthRequest="200" FontSize="20" Grid.Row="9"  Grid.ColumnSpan="2" Text="Registrati"
+                VerticalOptions="CenterAndExpand"
+                HorizontalOptions="Center"
+                Clicked="BtnSignIn" />
+            <Label Margin="30,0,40,0"  Grid.Row="10" Grid.Column="0" Grid.ColumnSpan="2" FontSize="15" TextColor="White" Text="Hai già un account?" HorizontalTextAlignment="Start"></Label>
+            <Label Margin="0, 0, 60, 0" Grid.Row="10" Grid.ColumnSpan="2" Grid.Column="0" HorizontalTextAlignment="End"
+                Text="Accedi" 
+                TextColor="#97A1FF"
+                TextDecorations="Underline">
+
+                <Label.GestureRecognizers>
+                    <TapGestureRecognizer
+                        Tapped="BtnLogin"/>
+                </Label.GestureRecognizers>
+            </Label>
+            <Label HorizontalTextAlignment="Center" TextColor="Red" Grid.Row="11" Grid.Column="0" Grid.ColumnSpan="2" x:Name="error"></Label>
+
+        </Grid>
+
+    </Frame>
+</ContentPage>

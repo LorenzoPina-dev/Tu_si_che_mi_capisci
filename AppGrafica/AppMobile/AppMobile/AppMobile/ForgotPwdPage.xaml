@@ -1,0 +1,45 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="AppMobile.ForgotPwdPage"
+             BackgroundColor="#505050">
+
+
+    <Frame BackgroundColor="#1C1C1C" Padding="10,20" HorizontalOptions="Center" WidthRequest="530" HeightRequest="20" CornerRadius="30" Margin="50">
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="160" />
+                <RowDefinition Height="80" />
+                <RowDefinition Height="70" />
+                <RowDefinition Height="50" />
+                <RowDefinition Height="80" />
+                <RowDefinition Height="80" />
+                <RowDefinition Height="60" />
+
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="150"/>
+            </Grid.ColumnDefinitions>
+            <Image Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2" Source="Logo.png" Margin="0,0,10,0"></Image>
+
+            <Label HorizontalTextAlignment="Center" Grid.Row="1" Grid.ColumnSpan="2" FontSize="20" TextColor="White" WidthRequest="150" HeightRequest="100"
+                   Text="Inserisci la tua mail per richiedere il codice di recupero della password"></Label>
+            <Label Margin="20" Grid.Row="2" Grid.ColumnSpan="2" FontSize="25" TextColor="White" WidthRequest="150" HeightRequest="100" Text="E-mail:" HorizontalTextAlignment="Start"></Label>
+            <Frame Padding ="3" CornerRadius="20" Grid.Row="3" Grid.ColumnSpan="2" BackgroundColor="#3B3B3B">
+                <Entry x:Name="Email" TextColor="White"></Entry>
+            </Frame>
+            <Button BackgroundColor="#8489FF" CornerRadius="20" HeightRequest="50" WidthRequest="100" FontSize="20" Grid.Row="4" Grid.ColumnSpan="2" Text="Invia"
+                VerticalOptions="CenterAndExpand"
+                HorizontalOptions="Center"
+                Clicked="BtnInvia"
+            />
+            <Button BackgroundColor="#8489FF" CornerRadius="20" HeightRequest="50" WidthRequest="250" FontSize="20" Grid.Row="5" Grid.ColumnSpan="2" Text="Torna alla login"
+                VerticalOptions="CenterAndExpand"
+                HorizontalOptions="Center"
+                Clicked="BackLogin"
+            />
+            <Label HorizontalTextAlignment="Center" TextColor="Red" Grid.Row="6" Grid.Column="0" Grid.ColumnSpan="2" x:Name="error"></Label>
+        </Grid>
+
+    </Frame>
+</ContentPage>

@@ -1,0 +1,16 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<TabbedPage xmlns="http://xamarin.com/schemas/2014/forms"
+            xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+            x:Class="AppMobile.TabbedPage1"
+            xmlns:local="clr-namespace:AppMobile" 
+            xmlns:android="clr-namespace:Xamarin.Forms.PlatformConfiguration.AndroidSpecific;assembly=Xamarin.Forms.Core"
+            android:TabbedPage.ToolbarPlacement="Bottom"
+            BackgroundColor="#1C1C1C">
+    <!--Pages can be added as references or inline-->
+    <local:LoginPage IconImageSource="IcoSettings" />
+    <local:LoginPage IconImageSource="IcoSkills" />
+    <local:LoginPage IconImageSource="IcoGrafici" />
+    <local:LoginPage IconImageSource="IcoGrafici" />
+    <local:InfoUtentePage IconImageSource="IcoUtente"/>
+
+</TabbedPage>

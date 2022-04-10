@@ -1,0 +1,8 @@
+C:\Users\Miky\source\repos\AppMobile\AppMobile\AppMobile.iOS\obj\iPhone\Debug\ibtool\_BundleResourceWithLogicalName.items
+C:\Users\Miky\source\repos\AppMobile\AppMobile\AppMobile.iOS\obj\iPhone\Debug\actool\_PartialAppManifest.items
+C:\Users\Miky\source\repos\AppMobile\AppMobile\AppMobile.iOS\obj\iPhone\Debug\actool\_BundleResourceWithLogicalName.items
+C:\Users\Miky\source\repos\AppMobile\AppMobile\AppMobile.iOS\obj\iPhone\Debug\coremlc\_PartialAppManifest.items
+C:\Users\Miky\source\repos\AppMobile\AppMobile\AppMobile.iOS\obj\iPhone\Debug\coremlc\_BundleResourceWithLogicalName.items
+C:\Users\Miky\source\repos\AppMobile\AppMobile\AppMobile.iOS\obj\iPhone\Debug\optimized\
+C:\Users\Miky\source\repos\AppMobile\AppMobile\AppMobile.iOS\obj\iPhone\Debug\AppMobile.iOS.csprojAssemblyReference.cache
+C:\Users\Miky\source\repos\AppMobile\AppMobile\AppMobile.iOS\obj\iPhone\Debug\AppMobile.iOS.csproj.CoreCompileInputs.cache

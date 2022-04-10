@@ -1,0 +1,54 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="AppMobile.InfoUtentePage"
+             BackgroundColor="#505050">
+
+    <Frame Grid.Row="0" BackgroundColor="#505050" HorizontalOptions="Center" WidthRequest="530" HeightRequest="20" CornerRadius="30">
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="80" />
+                <RowDefinition Height="630" />
+            </Grid.RowDefinitions>
+
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="370"/>
+            </Grid.ColumnDefinitions>
+
+            <Frame Margin="0, 0,0,0" CornerRadius="30" Grid.Row="0" Grid.Column="0" BackgroundColor="#1C1C1C">
+                <Label Margin="0, 0, 0, 0" Text="Cambia informazioni" TextColor="White" FontSize="25"></Label>
+            </Frame>
+            <Image Source="Logo.png" Margin="290, 0, 0, 0" Grid.Row="0"></Image>
+            
+            <Frame Grid.Row="1" Grid.Column="0" BackgroundColor="#1C1C1C" Padding="10,20" HorizontalOptions="Center" WidthRequest="530" HeightRequest="20" CornerRadius="30">
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="50" />
+                        <RowDefinition Height="50" />
+                        <RowDefinition Height="50" />
+                        <RowDefinition Height="50" />
+                        <RowDefinition Height="170" />
+                        <RowDefinition Height="170" />
+                    </Grid.RowDefinitions>
+
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="350"/>
+                    </Grid.ColumnDefinitions>
+                    
+                    <Label Grid.Row="0" FontSize="25" TextColor="White" WidthRequest="150" HeightRequest="100" Text="Username:" HorizontalTextAlignment="Start"></Label>
+                    <Frame Padding="10" CornerRadius="20" Grid.Row="1" BackgroundColor="#3B3B3B">
+                        <Entry x:Name="Username" TextColor="White"></Entry>
+                    </Frame>
+                    <Label Grid.Row="2" FontSize="25" TextColor="White" WidthRequest="150" HeightRequest="100" Text="Password:" HorizontalTextAlignment="Start"></Label>
+                    <Frame Padding="10" CornerRadius="20" Grid.Row="3" BackgroundColor="#3B3B3B">
+                        <Entry x:Name="Password" TextColor="White"></Entry>
+                    </Frame>
+                    <Label Margin="0, 20, 0,0" Grid.Row="4" FontSize="25" TextColor="White" WidthRequest="150" HeightRequest="100" Text="Foto profilo:" HorizontalTextAlignment="Start"></Label>
+                    <Image Aspect="Fill" Margin="150, 0, 0, 0" Grid.Row="4" Source="Logo.png"></Image>
+                    <Button Grid.Row="5" Text="Scegli file" Margin="150, 0, 0, 0" Clicked="BtnPhoto" />
+                </Grid>
+            </Frame>
+        </Grid>
+    </Frame>
+
+</ContentPage>
