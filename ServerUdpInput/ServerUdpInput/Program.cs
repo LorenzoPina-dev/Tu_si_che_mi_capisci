@@ -14,15 +14,16 @@ namespace ServerUdpInput
         public static bool termina = false;
         static void Main(string[] args)
         {
-            new Thread(Ricevi).Start();
+            DatiCondivisi.Instance().AddMessaggioDaInviare(new Messaggio() { Ip = "80.22.36.186",porta= 12345, Testo= "{'Tipo':audio,'KeyUtente':'cnasjkcnskjl','Dati':'vndsjkvnl'}" });
+           new Thread(Ricevi).Start();
             new Thread(Invia).Start();
             new Thread(Elabora).Start();
             new Thread(Elabora).Start();
-            while (!termina)
+            /* while (!termina)
             {
                 Console.WriteLine("Inserisci exit per terminare il programma");
                 termina = Console.ReadLine().ToUpper() == "exit".ToUpper();
-            }
+            }*/
         }
         public static void Ricevi()
         {
@@ -30,7 +31,9 @@ namespace ServerUdpInput
             {
                 try
                 {
-                    DatiCondivisi.Instance().AddMessaggioRicevuti(GestioneUdp.Instance().Ricevi());
+                    Messaggio m = GestioneUdp.Instance().Ricevi();
+                    DatiCondivisi.Instance().AddMessaggioRicevuti(m);
+                    Console.WriteLine(m.Testo);
                 }
                 catch (Exception) { }
             }
@@ -42,8 +45,11 @@ namespace ServerUdpInput
                 try
                 {
                     Messaggio daInviare = DatiCondivisi.Instance().GetMessaggioDaInviare();
-                    if(daInviare!=null)
-                    GestioneUdp.Instance().Invia(daInviare);
+                    if (daInviare != null)
+                    {
+                        GestioneUdp.Instance().Invia(daInviare);
+                        Console.WriteLine(daInviare.Testo);
+                    }
                 }
                 catch (Exception) { }
             }
@@ -55,8 +61,10 @@ namespace ServerUdpInput
                 try
                 {
                     Messaggio daElaborare = DatiCondivisi.Instance().GetMessaggioRicevuti();
-                    if(daElaborare!=null)
+                    if (daElaborare != null) { 
                         DatiCondivisi.Instance().AddMessaggioDaInviare(DatiCondivisi.Instance().Elabora(daElaborare));
+                        Console.WriteLine(daElaborare.Testo);
+                    }
                 }
                 catch (Exception) { }
             }

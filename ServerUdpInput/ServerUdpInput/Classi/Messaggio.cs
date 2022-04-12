@@ -13,7 +13,10 @@ namespace ServerUdpInput.Classi
             
             public string Testo { get; set; }
 
-            public Messaggio(string riga)
+        public Messaggio()
+        {
+        }
+        public Messaggio(string riga)
             {
             }
 

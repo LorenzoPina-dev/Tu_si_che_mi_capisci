@@ -15,7 +15,7 @@ namespace ServerUdpInput.Classi
 
         private GestioneUdp()
         {
-            client = new UdpClient(12345);
+            client = new UdpClient(65432);
             client.Client.ReceiveTimeout = 5000;
         }
         public static GestioneUdp Instance()
