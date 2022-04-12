@@ -43,3 +43,4 @@ C:\Users\giuli\Documents\Nuova cartella (2)\AppGrafica\AppMobile\AppMobile\AppMo
 C:\Users\giuli\Documents\Nuova cartella (2)\AppGrafica\AppMobile\AppMobile\AppMobile\obj\Debug\netstandard2.0\XamlC.stamp
 C:\Users\giuli\Documents\Nuova cartella (2)\AppGrafica\AppMobile\AppMobile\AppMobile\obj\Debug\netstandard2.0\addDispositivo.xaml.g.cs
 C:\Users\giuli\Documents\Nuova cartella (2)\AppGrafica\AppMobile\AppMobile\AppMobile\obj\Debug\netstandard2.0\addPersona.xaml.g.cs
+C:\Users\giuli\Documents\Nuova cartella (2)\AppGrafica\AppMobile\AppMobile\AppMobile\obj\Debug\netstandard2.0\addSkill.xaml.g.cs

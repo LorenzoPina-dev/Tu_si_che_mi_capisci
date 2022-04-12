@@ -32,5 +32,9 @@ namespace AppMobile
         {
             //// TODO ////
         }
+        public void addSkill(object sender, EventArgs args)
+        {
+            App.Current.MainPage = new addSkill();
+        }
     }
 }

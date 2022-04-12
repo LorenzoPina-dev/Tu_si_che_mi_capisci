@@ -33,7 +33,7 @@
             <!-- LISTA SKILLS-->
             <Frame Padding="10" CornerRadius="20" Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="2" BackgroundColor="#3B3B3B">
                 <StackLayout Orientation="Horizontal" Grid.Row="5">
-                    <Button Text="Aggiungi Skill"  Padding="0,0,0,0" CornerRadius="20" HeightRequest="50" Clicked="addPers" BackgroundColor="#8489FF"/>
+                    <Button Text="Aggiungi Skill"  Padding="0,0,0,0" CornerRadius="20" HeightRequest="50" Clicked="addSkill" BackgroundColor="#8489FF"/>
                     <Button Text="Rimuovi Skill" Padding="0,0,0,0" CornerRadius="20" HeightRequest="50" BackgroundColor="#8489FF"/>
                 </StackLayout>
             </Frame>
