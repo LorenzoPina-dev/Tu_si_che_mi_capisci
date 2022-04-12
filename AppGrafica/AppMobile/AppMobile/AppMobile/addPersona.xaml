@@ -38,14 +38,19 @@
                     <Frame Padding="10" CornerRadius="20" Grid.Row="1" BackgroundColor="#3B3B3B">
                         <Entry x:Name="Nome" TextColor="White"></Entry>
                     </Frame>
-                    <Label Grid.Row="2" FontSize="25" TextColor="White" WidthRequest="150" HeightRequest="100" Text="IP:" HorizontalTextAlignment="Start"></Label>
-                    <Frame Padding="10" CornerRadius="20" Grid.Row="3" BackgroundColor="#3B3B3B">
-                        <Entry x:Name="IP" TextColor="White"></Entry>
+                    <Label Grid.Row="2" FontSize="25" TextColor="White" WidthRequest="150" HeightRequest="100" Text="Descrizione:" HorizontalTextAlignment="Start" x:Name="prova"></Label>
+                    <Frame Padding="10" HeightRequest="750" CornerRadius="20" Grid.Row="3" BackgroundColor="#3B3B3B">
+                        <StackLayout Orientation="Horizontal" Grid.Row="5">
+                            <Button Grid.Row="5" Text="Scegli file" Margin="150, 0, 0, 0" Clicked="BtnPhoto" />
+                        </StackLayout>
                     </Frame>
-
+                    
+                    <Image x:Name="immagine" Source="Logo.png" Grid.Row="4"></Image>
+                    
+                    
                     <StackLayout Orientation="Horizontal" Grid.Row="5">
                         <Button Text="Annulla" Padding="0,0,0,0" CornerRadius="20" HeightRequest="50" Clicked="indietro" BackgroundColor="#8489FF"/>
-                        <Button Text="Aggiungi" Padding="0,0,0,0" CornerRadius="20" HeightRequest="50"  BackgroundColor="#8489FF"/>
+                        <Button Text="Aggiungi" Padding="0,0,0,0" CornerRadius="20" HeightRequest="50" Clicked="aggiungi" BackgroundColor="#8489FF"/>
                     </StackLayout>
 
                 </Grid>
