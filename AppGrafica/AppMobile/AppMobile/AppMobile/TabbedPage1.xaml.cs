@@ -16,5 +16,14 @@ namespace AppMobile
         { 
             InitializeComponent();
         }
+        public void addDisp(object sender, EventArgs args)
+        {
+            //App.Current.MainPage = new addDispositivo();
+        }
+
+        public void addPers(object sender, EventArgs args)
+        {
+            //App.Current.MainPage = new addPersona();
+        }
     }
 }

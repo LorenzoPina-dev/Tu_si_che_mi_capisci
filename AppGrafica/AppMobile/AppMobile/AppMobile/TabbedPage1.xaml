@@ -7,10 +7,25 @@
             android:TabbedPage.ToolbarPlacement="Bottom"
             BackgroundColor="#1C1C1C">
     <!--Pages can be added as references or inline-->
-    <local:LoginPage IconImageSource="IcoSettings" />
-    <local:LoginPage IconImageSource="IcoSkills" />
+    <ContentPage IconImageSource="IcoSettings">
+        <StackLayout>
+
+            <Frame>
+                <StackLayout Orientation="Horizontal" Grid.Row="5">
+                    <Button Text="Aggiungi dispositivo"  Padding="0,0,0,0" CornerRadius="20" HeightRequest="50" Clicked="addDisp" BackgroundColor="#8489FF"/>
+                    <Button Text="Rimuovi Dispositivo" Padding="0,0,0,0" CornerRadius="20" HeightRequest="50"  BackgroundColor="#8489FF"/>
+                </StackLayout>
+            </Frame>
+
+            <StackLayout Orientation="Horizontal" Grid.Row="5">
+                <Button Text="Aggiungi Persona"  Padding="0,0,0,0" CornerRadius="20" HeightRequest="50" Clicked="addDisp" BackgroundColor="#8489FF"/>
+                <Button Text="Rimuovi Persona" Padding="0,0,0,0" CornerRadius="20" HeightRequest="50"  BackgroundColor="#8489FF"/>
+            </StackLayout>
+
+
+        </StackLayout>
+    </ContentPage>
     <local:LoginPage IconImageSource="IcoGrafici" />
     <local:LoginPage IconImageSource="IcoGrafici" />
     <local:InfoUtentePage IconImageSource="IcoUtente"/>
-
 </TabbedPage>

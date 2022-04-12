@@ -2165,24 +2165,24 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\Miky\\.nuget\\packages\\": {},
-    "C:\\Microsoft\\Xamarin\\NuGet\\": {}
+    "C:\\Users\\giuli\\.nuget\\packages\\": {},
+    "C:\\Program Files (x86)\\Microsoft\\Xamarin\\NuGet\\": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\Miky\\source\\repos\\AppMobile\\AppMobile\\AppMobile.Android\\AppMobile.Android.csproj",
+      "projectUniqueName": "C:\\Users\\giuli\\Documents\\Nuova cartella (2)\\AppGrafica\\AppMobile\\AppMobile\\AppMobile.Android\\AppMobile.Android.csproj",
       "projectName": "AppMobile.Android",
-      "projectPath": "C:\\Users\\Miky\\source\\repos\\AppMobile\\AppMobile\\AppMobile.Android\\AppMobile.Android.csproj",
-      "packagesPath": "C:\\Users\\Miky\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\Miky\\source\\repos\\AppMobile\\AppMobile\\AppMobile.Android\\obj\\",
+      "projectPath": "C:\\Users\\giuli\\Documents\\Nuova cartella (2)\\AppGrafica\\AppMobile\\AppMobile\\AppMobile.Android\\AppMobile.Android.csproj",
+      "packagesPath": "C:\\Users\\giuli\\.nuget\\packages\\",
+      "outputPath": "C:\\Users\\giuli\\Documents\\Nuova cartella (2)\\AppGrafica\\AppMobile\\AppMobile\\AppMobile.Android\\obj\\",
       "projectStyle": "PackageReference",
       "skipContentFileWrite": true,
       "fallbackFolders": [
-        "C:\\Microsoft\\Xamarin\\NuGet\\"
+        "C:\\Program Files (x86)\\Microsoft\\Xamarin\\NuGet\\"
       ],
       "configFilePaths": [
-        "C:\\Users\\Miky\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Users\\giuli\\AppData\\Roaming\\NuGet\\NuGet.Config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Xamarin.Offline.config"
       ],
@@ -2196,8 +2196,8 @@
       "frameworks": {
         "monoandroid90": {
           "projectReferences": {
-            "C:\\Users\\Miky\\source\\repos\\AppMobile\\AppMobile\\AppMobile\\AppMobile.csproj": {
-              "projectPath": "C:\\Users\\Miky\\source\\repos\\AppMobile\\AppMobile\\AppMobile\\AppMobile.csproj"
+            "C:\\Users\\giuli\\Documents\\Nuova cartella (2)\\AppGrafica\\AppMobile\\AppMobile\\AppMobile\\AppMobile.csproj": {
+              "projectPath": "C:\\Users\\giuli\\Documents\\Nuova cartella (2)\\AppGrafica\\AppMobile\\AppMobile\\AppMobile\\AppMobile.csproj"
             }
           }
         }

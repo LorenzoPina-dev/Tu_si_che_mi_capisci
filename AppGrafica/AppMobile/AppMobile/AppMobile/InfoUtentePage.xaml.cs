@@ -1,5 +1,4 @@
-﻿using Android.Graphics;
-using Android.Widget;
+﻿
 using Plugin.Media;
 using System;
 using System.Collections.Generic;
@@ -14,7 +13,7 @@ namespace AppMobile
 {
     public partial class InfoUtentePage : ContentPage
     {
-        ImageView thisImageView;
+        //ImageView thisImageView;
         public InfoUtentePage()
         {
             InitializeComponent();
@@ -38,9 +37,10 @@ namespace AppMobile
 
             // Convert file to byre array, to bitmap and set it to our ImageView
 
+            /*
             byte[] imageArray = System.IO.File.ReadAllBytes(file.Path);
             Bitmap bitmap = BitmapFactory.DecodeByteArray(imageArray, 0, imageArray.Length);
-            thisImageView.SetImageBitmap(bitmap);
+            thisImageView.SetImageBitmap(bitmap);*/
         }
     }
 }
