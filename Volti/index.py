@@ -5,8 +5,9 @@ import socket
 import requests
 import json
 from threading import Thread
+import time
 
-serverAddressPort= ("127.0.0.1", 12345)
+serverAddressPort= ("80.22.36.186", 12345)
 bufferSize= 4064
 UDPClientSocket = socket.socket(family=socket.AF_INET, type=socket.SOCK_DGRAM)
 frame_width = 680
@@ -27,7 +28,7 @@ def GestisciCam(nome):
         if video_capture.isOpened():
             ret, img = video_capture.read()
             gray = cv.cvtColor(img, cv.COLOR_BGR2GRAY)
-            faces = face_cascade.detectMultiScale(gray,scaleFactor=1.4,minNeighbors=12,minSize=(30, 30))
+            faces = face_cascade.detectMultiScale(gray,scaleFactor=1.2,minNeighbors=5,minSize=(30, 30))
             for (x, y, w, h) in faces:
                 cv.rectangle(img, (x, y), (x+w, y+h), (255, 0, 0), 2)
             if i%10==1:
@@ -57,6 +58,7 @@ def GestisciDisp():
                 termina[video]=False
                 t[video]=Thread(target=GestisciCam, args=(video,))
                 t[video].start()
+        time.sleep(60)
             
 while TerminaMain==False:
     tGest=Thread(target=GestisciDisp, args=())
