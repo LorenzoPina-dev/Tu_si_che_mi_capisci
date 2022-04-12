@@ -61,40 +61,25 @@ namespace proj
             return obj;
         }
 
-        public string AddEmozione(string key, string tipo, string dataRil, string oraRil, string idDisp)
-        {
-            string ris = "";
-            httpRequests addEmozione = new httpRequests();
-            ris = addEmozione.HttpRequestAddEmozione(key, tipo, dataRil, oraRil, idDisp);
-            return ris;
-        }
-
-        public object GetEmozioni(string key, string start, string numero, string tipo, string data)
+        public object GetEmozioni(string key, string max)
         {
             object ris = "";
             httpRequests getEmozioni = new httpRequests();
-            ris = getEmozioni.HttpRequestGetEmozioni(key, start, numero, tipo, data);
+            ris = getEmozioni.HttpRequestGetEmozioni(key, max);
             return ris;
         }
 
-        public string AddVoltoTrovato(string key, string img, string dataRil, string oraRil, string idDisp, string idVolto)
-        {
-            string ris = "";
-            httpRequests addVoltoTrovato = new httpRequests();
-            ris = addVoltoTrovato.HttpRequestAddVoltoTrovato(key, img, dataRil, oraRil, idDisp, idVolto);
-            return ris;
-        }
-        public object GetVoltiTrovati(string key, string start, string numero, string data)
+        public object GetVoltiTrovati(string key, string max)
         {
             object obj = "";
             httpRequests getVoltiTrovati = new httpRequests();
-            obj = getVoltiTrovati.HttpRequestGetVoltiTrovati(key, start, numero, data);
+            obj = getVoltiTrovati.HttpRequestGetVoltiTrovati(key, max);
             return obj;
         }
 
-        public string AddVoltoRegistrato(string key, string img, string nome)
+        public object AddVoltoRegistrato(string key, string img, string nome)
         {
-            string ris = "";
+            object ris = "";
             httpRequests addVoltoRegistrato = new httpRequests();
             ris = addVoltoRegistrato.HttpRequestAddVoltoRegistrato(key, img, nome);
             return ris;
@@ -123,11 +108,11 @@ namespace proj
             return ris;
         }
 
-        public object GetDispositivi(string key, string start, string numero, string data, string tipo)
+        public object GetDispositivi(string key, string max)
         {
             object obj = "";
             httpRequests getDispositivi = new httpRequests();
-            obj = getDispositivi.HttpRequestGetDispositivi(key, start, numero, data, tipo);
+            obj = getDispositivi.HttpRequestGetDispositivi(key, max);
             return obj;
         }
 
@@ -162,14 +147,6 @@ namespace proj
             ris = delSkill.HttpRequestDeleteSkill(key, id);
             return ris;
         }
-
-
-
-
-
-
-
-
 
     }
 }

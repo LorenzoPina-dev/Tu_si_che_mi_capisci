@@ -15,6 +15,12 @@ namespace proj
             return objects;
         }
 
+        public JArray ParseArray(string obj)
+        {
+            JArray objects = JArray.Parse(obj);
+            return objects;
+        }
+
         public string GetDataLogin(JObject obj)
         {
             string ris = "";
@@ -25,6 +31,7 @@ namespace proj
                 ris = obj["result"]["testo"].ToString();
             return ris;
         }
+
 
         public string GetText(JObject obj)
         {
@@ -56,9 +63,24 @@ namespace proj
             return ris;
         }
 
-        public void GetEmozioni(JObject obj)
+        public object GetObjArray(JObject obj, string parametro)
         {
-            
+            object ris;
+            bool success = obj.SelectToken("success").Value<bool>();
+            if(success == true)
+            {
+                JArray jArray = (JArray)obj["result"][parametro];
+                List<JObject> list = new List<JObject>();
+                for (int i = 0; i < jArray.Count; i++)
+                {
+                    JObject obj2 = (JObject)jArray[i];
+                    list.Add(obj2);
+                }
+                return list;
+            }
+            else
+                ris = obj["result"]["testo"].ToString();
+            return ris;
         }
     }
 }

@@ -30,6 +30,9 @@ F:\proj\proj\obj\Debug\netcoreapp3.1\proj.csproj.CopyComplete
 F:\proj\proj\obj\Debug\netcoreapp3.1\proj.dll
 F:\proj\proj\obj\Debug\netcoreapp3.1\proj.pdb
 F:\proj\proj\obj\Debug\netcoreapp3.1\proj.genruntimeconfig.cache
+D:\proj\proj\obj\Debug\netcoreapp3.1\proj.AssemblyInfoInputs.cache
+D:\proj\proj\obj\Debug\netcoreapp3.1\proj.AssemblyInfo.cs
+D:\proj\proj\obj\Debug\netcoreapp3.1\proj.csproj.CoreCompileInputs.cache
 D:\proj\proj\bin\Debug\netcoreapp3.1\proj.exe
 D:\proj\proj\bin\Debug\netcoreapp3.1\proj.deps.json
 D:\proj\proj\bin\Debug\netcoreapp3.1\proj.runtimeconfig.json
@@ -37,10 +40,6 @@ D:\proj\proj\bin\Debug\netcoreapp3.1\proj.runtimeconfig.dev.json
 D:\proj\proj\bin\Debug\netcoreapp3.1\proj.dll
 D:\proj\proj\bin\Debug\netcoreapp3.1\proj.pdb
 D:\proj\proj\bin\Debug\netcoreapp3.1\Newtonsoft.Json.dll
-D:\proj\proj\obj\Debug\netcoreapp3.1\proj.csprojAssemblyReference.cache
-D:\proj\proj\obj\Debug\netcoreapp3.1\proj.AssemblyInfoInputs.cache
-D:\proj\proj\obj\Debug\netcoreapp3.1\proj.AssemblyInfo.cs
-D:\proj\proj\obj\Debug\netcoreapp3.1\proj.csproj.CoreCompileInputs.cache
 D:\proj\proj\obj\Debug\netcoreapp3.1\proj.csproj.CopyComplete
 D:\proj\proj\obj\Debug\netcoreapp3.1\proj.dll
 D:\proj\proj\obj\Debug\netcoreapp3.1\proj.pdb
