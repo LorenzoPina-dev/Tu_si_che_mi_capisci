@@ -13,17 +13,17 @@ namespace AppMobile
     public partial class TabbedPage1 : TabbedPage
     {
         public TabbedPage1()
-        { 
+        {
             InitializeComponent();
         }
         public void addDisp(object sender, EventArgs args)
         {
-            //App.Current.MainPage = new addDispositivo();
+            App.Current.MainPage = new addDispositivo();
         }
 
         public void addPers(object sender, EventArgs args)
         {
-            //App.Current.MainPage = new addPersona();
+            App.Current.MainPage = new addPersona();
         }
     }
 }

@@ -1,0 +1,58 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="AppMobile.addDispositivo">
+    <Frame Grid.Row="0" BackgroundColor="#505050" HorizontalOptions="Center" WidthRequest="530" HeightRequest="20" CornerRadius="30">
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="80" />
+                <RowDefinition Height="630" />
+            </Grid.RowDefinitions>
+
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="370"/>
+            </Grid.ColumnDefinitions>
+
+            <Frame Margin="0, 0,0,0" CornerRadius="30" Grid.Row="0" Grid.Column="0" BackgroundColor="#1C1C1C">
+                <Label Margin="0, 0, 0, 0" Text="Aggiungi Dispositivo" TextColor="White" FontSize="25"></Label>
+            </Frame>
+            <Image Source="Logo.png" Margin="290, 0, 0, 0" Grid.Row="0"></Image>
+
+            <Frame Grid.Row="1" Grid.Column="0" BackgroundColor="#1C1C1C" Padding="10,20" HorizontalOptions="Center" WidthRequest="530" HeightRequest="20" CornerRadius="30">
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="50" />
+                        <RowDefinition Height="50" />
+                        <RowDefinition Height="50" />
+                        <RowDefinition Height="50" />
+                        <RowDefinition Height="170" />
+                        <RowDefinition Height="170" />
+                    </Grid.RowDefinitions>
+
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="350"/>
+                        <ColumnDefinition Width="750"/>
+                    </Grid.ColumnDefinitions>
+
+                    <Label Grid.Row="0" FontSize="25" TextColor="White" WidthRequest="150" HeightRequest="100" Text="Nome:" HorizontalTextAlignment="Start"></Label>
+                    <Frame Padding="10" CornerRadius="20" Grid.Row="1" BackgroundColor="#3B3B3B">
+                        <Entry x:Name="Nome" TextColor="White"></Entry>
+                    </Frame>
+                    <Label Grid.Row="2" FontSize="25" TextColor="White" WidthRequest="150" HeightRequest="100" Text="IP:" HorizontalTextAlignment="Start"></Label>
+                    <Frame Padding="10" CornerRadius="20" Grid.Row="3" BackgroundColor="#3B3B3B">
+                        <Entry x:Name="IP" TextColor="White"></Entry>
+                    </Frame>
+                    <Label Margin="0, 20, 0,0" Grid.Row="4" FontSize="25" TextColor="White" WidthRequest="150" HeightRequest="100" Text="Tipo: " HorizontalTextAlignment="Start"></Label>
+
+                    <StackLayout Orientation="Horizontal" Grid.Row="5">
+                        <Button Text="Annulla" Padding="0,0,0,0" CornerRadius="20" HeightRequest="50" Clicked="indietro" BackgroundColor="#8489FF"/>
+                        <Button Text="Aggiungi" Padding="0,0,0,0" CornerRadius="20" HeightRequest="50" Clicked="aggiungi" BackgroundColor="#8489FF"/>
+                    </StackLayout>
+
+                </Grid>
+
+            </Frame>
+        </Grid>
+    </Frame>
+
+</ContentPage>
