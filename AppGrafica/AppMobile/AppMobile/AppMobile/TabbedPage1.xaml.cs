@@ -20,10 +20,17 @@ namespace AppMobile
         {
             App.Current.MainPage = new addDispositivo();
         }
-
+        public void removeDisp(object sender, EventArgs args)
+        {
+            //// TODO ////
+        }
         public void addPers(object sender, EventArgs args)
         {
             App.Current.MainPage = new addPersona();
+        }
+        public void removePers(object sender, EventArgs args)
+        {
+            //// TODO ////
         }
     }
 }
