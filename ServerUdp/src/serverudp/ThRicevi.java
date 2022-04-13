@@ -20,7 +20,7 @@ public class ThRicevi extends Thread{
             try
             {
                 Messaggio m=GestioneUdp.Instance().Ricevi();
-                System.out.println("ricevuto");
+                //System.out.println("ricevuto");
                 DatiCondivisi.Instance().AddMessaggioRicevuti(m);
             } catch (IOException ex) {
             }

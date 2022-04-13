@@ -8,6 +8,7 @@ package serverudp;
 import java.io.IOException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import static serverudp.DatiCondivisi.sElabora;
 
 /**
  *
@@ -19,6 +20,9 @@ public class ThElabora extends Thread{
         {
             try
             {
+                
+            sElabora.acquire();
+            System.out.println("elabora");
                 Messaggio daElaborare = DatiCondivisi.Instance().GetMessaggioRicevuti();
                 if(daElaborare!=null)
                     DatiCondivisi.Instance().AddMessaggioDaInviare(DatiCondivisi.Instance().Elabora(daElaborare));

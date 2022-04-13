@@ -8,6 +8,7 @@ package serverudp;
 import java.io.IOException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import static serverudp.DatiCondivisi.sInvia;
 
 /**
  *
@@ -19,6 +20,8 @@ public class ThInvia extends Thread{
         {
             try
             {
+                
+                sInvia.acquire();
                 Messaggio daInviare = DatiCondivisi.Instance().GetMessaggioDaInviare();
                 
                 if(daInviare!=null)
@@ -26,6 +29,8 @@ public class ThInvia extends Thread{
                 }
             } catch (IOException ex) {
             Logger.getLogger(ThRicevi.class.getName()).log(Level.SEVERE, null, ex);
+            } catch (InterruptedException ex) {
+                Logger.getLogger(ThInvia.class.getName()).log(Level.SEVERE, null, ex);
             }
         }
     }

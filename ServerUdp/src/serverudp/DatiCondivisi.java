@@ -14,6 +14,7 @@ import java.util.AbstractQueue;
 import java.util.ArrayDeque;
 import java.util.Queue;
 import java.util.concurrent.ArrayBlockingQueue;
+import java.util.concurrent.Semaphore;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import org.json.JSONArray;
@@ -29,10 +30,13 @@ public class DatiCondivisi {
         private Queue<Messaggio> MRicevuti, MDaInviare;
         private static int idFile = 1;
         public  boolean termina=false;
+    static Semaphore sInvia,sElabora;
         private DatiCondivisi()
         {
             MRicevuti = new ArrayDeque<>();
             MDaInviare = new ArrayDeque<Messaggio>();
+            sInvia=new Semaphore(0);
+            sElabora=new Semaphore(0);
         }
         public static DatiCondivisi Instance()
         {
@@ -40,15 +44,16 @@ public class DatiCondivisi {
                 instance = new DatiCondivisi();
             return instance;
         }
-        public Messaggio GetMessaggioRicevuti()
+        public Messaggio GetMessaggioRicevuti() throws InterruptedException
         {
             synchronized(this)
             {
                 return MRicevuti.poll();
             }
         }
-        public Messaggio GetMessaggioDaInviare()
+        public Messaggio GetMessaggioDaInviare() throws InterruptedException
         {
+            
             synchronized (this)
             {
                 return MDaInviare.poll();
@@ -56,6 +61,7 @@ public class DatiCondivisi {
         }
         public void AddMessaggioRicevuti(Messaggio m)
         {
+            sElabora.release();
             synchronized (this)
             {
                 MRicevuti.add(m);
@@ -63,6 +69,7 @@ public class DatiCondivisi {
         }
         public void AddMessaggioDaInviare(Messaggio m)
         {
+            sInvia.release();
             synchronized (this)
             {
                 MDaInviare.add(m);
