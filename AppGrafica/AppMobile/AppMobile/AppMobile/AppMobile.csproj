@@ -27,40 +27,46 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Compile Update="addDispositivo.xaml.cs">
+      <DependentUpon>%(Filename)</DependentUpon>
+    </Compile>
+    <Compile Update="addPersona.xaml.cs">
+      <DependentUpon>%(Filename)</DependentUpon>
+    </Compile>
+    <Compile Update="addSkill.xaml.cs">
+      <DependentUpon>%(Filename)</DependentUpon>
+    </Compile>
+    <Compile Update="App.xaml.cs">
+      <DependentUpon>%(Filename)</DependentUpon>
+    </Compile>
     <Compile Update="ForgotPwdPage.xaml.cs">
-      <DependentUpon>ForgotPwdPage.xaml</DependentUpon>
+      <DependentUpon>%(Filename)</DependentUpon>
+    </Compile>
+    <Compile Update="GraficiPage.xaml.cs">
+      <DependentUpon>%(Filename)</DependentUpon>
     </Compile>
     <Compile Update="InfoUtentePage.xaml.cs">
-      <DependentUpon>InfoUtentePage.xaml</DependentUpon>
-    </Compile>
-    <Compile Update="ResetPwdPage.xaml.cs">
-      <DependentUpon>ResetPwdPage.xaml</DependentUpon>
-    </Compile>
-    <Compile Update="TabbedPage1.xaml.cs">
-      <DependentUpon>TabbedPage1.xaml</DependentUpon>
-    </Compile>
-    <Compile Update="SignInPage.xaml.cs">
-      <DependentUpon>SignInPage.xaml</DependentUpon>
+      <DependentUpon>%(Filename)</DependentUpon>
     </Compile>
     <Compile Update="LoginPage.xaml.cs">
-      <DependentUpon>LoginPage.xaml</DependentUpon>
+      <DependentUpon>%(Filename)</DependentUpon>
+    </Compile>
+    <Compile Update="ResetPwdPage.xaml.cs">
+      <DependentUpon>%(Filename)</DependentUpon>
+    </Compile>
+    <Compile Update="SignInPage.xaml.cs">
+      <DependentUpon>%(Filename)</DependentUpon>
+    </Compile>
+    <Compile Update="TabbedPage1.xaml.cs">
+      <DependentUpon>%(Filename)</DependentUpon>
     </Compile>
   </ItemGroup>
 
   <ItemGroup>
-    <EmbeddedResource Update="addDispositivo.xaml">
-      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
-    </EmbeddedResource>
     <EmbeddedResource Update="addPersona.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
-    <EmbeddedResource Update="addSkill.xaml">
-      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
-    </EmbeddedResource>
-    <EmbeddedResource Update="InfoUtentePage.xaml">
-      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
-    </EmbeddedResource>
-    <EmbeddedResource Update="TabbedPage1.xaml">
+    <EmbeddedResource Update="prova.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
   </ItemGroup>

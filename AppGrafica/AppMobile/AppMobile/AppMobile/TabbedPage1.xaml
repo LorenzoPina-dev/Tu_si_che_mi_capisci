@@ -6,40 +6,11 @@
             xmlns:android="clr-namespace:Xamarin.Forms.PlatformConfiguration.AndroidSpecific;assembly=Xamarin.Forms.Core"
             android:TabbedPage.ToolbarPlacement="Bottom"
             BackgroundColor="#1C1C1C">
-    <!--Pages can be added as references or inline-->
-    <ContentPage IconImageSource="IcoSettings">
-        <StackLayout>
 
-            <Frame Padding="10" CornerRadius="20" Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="2" BackgroundColor="#3B3B3B">
-                <!-- METTERE QUI LISTA DISPOSITIVI-->
-                <StackLayout Orientation="Horizontal" Grid.Row="5">
-                    <Button Text="Aggiungi dispositivo"  Padding="0,0,0,0" CornerRadius="20" HeightRequest="50" Clicked="addDisp" BackgroundColor="#8489FF"/>
-                    <Button Text="Rimuovi Dispositivo" Padding="0,0,0,0" CornerRadius="20" HeightRequest="50" Clicked="removeDisp" BackgroundColor="#8489FF"/>
-                </StackLayout>
-            </Frame>
-
-            <Frame Padding="10" CornerRadius="20" Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="2" BackgroundColor="#3B3B3B">
-                <!-- METTERE QUI LISTA PERSONE-->
-                <StackLayout Orientation="Horizontal" Grid.Row="5">
-                    <Button Text="Aggiungi Persona"  Padding="0,0,0,0" CornerRadius="20" HeightRequest="50" Clicked="addPers" BackgroundColor="#8489FF"/>
-                    <Button Text="Rimuovi Persona" Padding="0,0,0,0" CornerRadius="20" HeightRequest="50" Clicked="removePers" BackgroundColor="#8489FF"/>
-                </StackLayout>
-            </Frame>
-
-        </StackLayout>
-    </ContentPage>
-    <ContentPage IconImageSource="IcoGrafici">
-        <StackLayout>
-            <!-- LISTA SKILLS-->
-            <Frame Padding="10" CornerRadius="20" Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="2" BackgroundColor="#3B3B3B">
-                <StackLayout Orientation="Horizontal" Grid.Row="5">
-                    <Button Text="Aggiungi Skill"  Padding="0,0,0,0" CornerRadius="20" HeightRequest="50" Clicked="addSkill" BackgroundColor="#8489FF"/>
-                    <Button Text="Rimuovi Skill" Padding="0,0,0,0" CornerRadius="20" HeightRequest="50" BackgroundColor="#8489FF"/>
-                </StackLayout>
-            </Frame>
-        </StackLayout>
-    </ContentPage>
-    
-    <local:LoginPage IconImageSource="IcoGrafici" />
-    <local:InfoUtentePage IconImageSource="IcoUtente"/>
+    <TabbedPage.Children>
+        <local:prova IconImageSource="IcoUtente"/>
+        <local:InfoUtentePage IconImageSource="IcoSkills"/>
+        <local:GraficiPage IconImageSource="IcoGrafici"/>
+        <local:InfoUtentePage IconImageSource="IcoUtente"/>
+    </TabbedPage.Children>
 </TabbedPage>

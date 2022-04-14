@@ -1,0 +1,27 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:local="clr-namespace:AppMobile"
+             x:Class="AppMobile.prova"
+             xmlns:chart="clr-namespace:Syncfusion.SfChart.XForms;assembly=Syncfusion.SfChart.XForms">
+
+    <ContentPage.BindingContext>
+        <local:ViewModel></local:ViewModel>
+    </ContentPage.BindingContext>
+
+    <ContentPage.Content>
+        <chart:SfChart Grid.Row="2" Grid.Column="0" Margin="0, 0, 0, 0" >
+
+            <chart:SfChart.PrimaryAxis>
+                <chart:CategoryAxis AutoScrollingDelta="7" AutoScrollingMode="Start"/>
+            </chart:SfChart.PrimaryAxis>
+
+            <chart:SfChart.SecondaryAxis>
+                <chart:NumericalAxis Interval="1"/>
+            </chart:SfChart.SecondaryAxis>
+
+            <chart:LineSeries ItemsSource="{Binding DataLine}"  XBindingPath="xValue" YBindingPath="yValue"/>
+
+        </chart:SfChart>
+    </ContentPage.Content>
+</ContentPage>

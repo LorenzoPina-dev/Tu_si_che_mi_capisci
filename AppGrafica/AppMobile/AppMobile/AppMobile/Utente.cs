@@ -6,11 +6,12 @@ namespace proj
 {
     class Utente
     {
-        string username, mail, immagine, xp, key;
+       string username, mail, immagine, xp;
+       public static string key;
 
         public Utente() { }
 
-        public Utente(string username, string mail, string immagine, string xp, string key)
+        public Utente(string username, string mail, string immagine, string xp)
         {
             this.username = username;
             this.mail = mail;
@@ -20,27 +21,22 @@ namespace proj
 
         public string Login(string username, string password)
         {
-            string result = "ok";
             httpRequests requestLog = new httpRequests();
-            string ris = requestLog.HttpRequestLogin(username, password);
-            if (!ris.Contains(" "))
-                key = ris;
-            else
-                result = ris;
-            return result;
+            key = requestLog.HttpRequestLogin(username, password);
+            return key;
         }
 
-        public string Signin(string mail, string username, string password, string password2) 
+        public string Signin(string username, string password, string mail, string img) 
         {
             httpRequests requestSignin = new httpRequests();
-            string result = requestSignin.HttpRequestSignin(mail, username, password, password2);
+            string result = requestSignin.HttpRequestSignin(username, password, mail, img);
             return result;
         }
 
-        public string ForgotPwd(string mail)
+        public string ForgotPwd(string cookie)
         {
             httpRequests forgotPsw = new httpRequests();
-            string result = forgotPsw.HttpRequestForgotPwd(mail);
+            string result = forgotPsw.HttpRequestForgotPwd(cookie);
             return result;
         }
 
@@ -66,40 +62,33 @@ namespace proj
             return obj;
         }
 
-        public string AddEmozione(string key, string tipo, string dataRil, string oraRil, string idDisp)
-        {
-            string ris = "";
-            httpRequests addEmozione = new httpRequests();
-            ris = addEmozione.HttpRequestAddEmozione(key, tipo, dataRil, oraRil, idDisp);
-            return ris;
-        }
-
-        public object GetEmozioni(string key, string start, string numero, string tipo, string data)
+        public static object GetEmozioni()
         {
             object ris = "";
             httpRequests getEmozioni = new httpRequests();
-            ris = getEmozioni.HttpRequestGetEmozioni(key, start, numero, tipo, data);
+            ris = getEmozioni.HttpRequestGetEmozioni(key);
             return ris;
         }
 
-        public string AddVoltoTrovato(string key, string img, string dataRil, string oraRil, string idDisp, string idVolto)
+        public static object GetEmozioni(string data, int tipo)
         {
-            string ris = "";
-            httpRequests addVoltoTrovato = new httpRequests();
-            ris = addVoltoTrovato.HttpRequestAddVoltoTrovato(key, img, dataRil, oraRil, idDisp, idVolto);
+            object ris = "";
+            httpRequests getEmozioni = new httpRequests();
+            ris = getEmozioni.HttpRequestGetEmozioni(key, data, tipo);
             return ris;
         }
-        public object GetVoltiTrovati(string key, string start, string numero, string data)
+
+        public object GetVoltiTrovati(string key, string max)
         {
             object obj = "";
             httpRequests getVoltiTrovati = new httpRequests();
-            obj = getVoltiTrovati.HttpRequestGetVoltiTrovati(key, start, numero, data);
+            obj = getVoltiTrovati.HttpRequestGetVoltiTrovati(key, max);
             return obj;
         }
 
-        public string AddVoltoRegistrato(string key, string img, string nome)
+        public object AddVoltoRegistrato(string key, string img, string nome)
         {
-            string ris = "";
+            object ris = "";
             httpRequests addVoltoRegistrato = new httpRequests();
             ris = addVoltoRegistrato.HttpRequestAddVoltoRegistrato(key, img, nome);
             return ris;
@@ -128,11 +117,11 @@ namespace proj
             return ris;
         }
 
-        public object GetDispositivi(string key, string start, string numero, string data, string tipo)
+        public object GetDispositivi(string key, string max)
         {
             object obj = "";
             httpRequests getDispositivi = new httpRequests();
-            obj = getDispositivi.HttpRequestGetDispositivi(key, start, numero, data, tipo);
+            obj = getDispositivi.HttpRequestGetDispositivi(key, max);
             return obj;
         }
 
@@ -167,13 +156,13 @@ namespace proj
             ris = delSkill.HttpRequestDeleteSkill(key, id);
             return ris;
         }
-
-
-
-
-
-
-
+        public string AddEmozione(string key, string tipo, string dataRil, string idDisp)
+        {
+            string ris = "";
+            httpRequests addEmozione = new httpRequests();
+            ris = addEmozione.HttpRequestAddEmozione(key, tipo, dataRil, idDisp);
+            return ris;
+        }
 
 
     }

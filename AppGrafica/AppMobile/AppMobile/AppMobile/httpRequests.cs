@@ -32,14 +32,14 @@ namespace proj
             return key;
         }
 
-        public string HttpRequestSignin(string mail, string username, string password, string password2) //registrazione
+        public string HttpRequestSignin(string username, string password, string password2, string mail) //registrazione
         {
             data = new NameValueCollection();
             string url = "http://" + host + "/register";
-            data["mail"] = mail;
             data["username"] = username;
             data["password"] = password;
             data["password2"] = password2;
+            data["mail"] = mail;
             var response = wb.UploadValues(url, "POST", data);
             string result = System.Text.Encoding.UTF8.GetString(response); //ottengo una risposta
             JObject obj = json.Parse(result);
@@ -82,7 +82,7 @@ namespace proj
             ByteArrayContent fileContent = new ByteArrayContent(await streamContent.ReadAsByteArrayAsync());
             fileContent.Headers.ContentType = MediaTypeHeaderValue.Parse("multipart/form-data");
             // "file" parameter name should be the same as the server side input parameter name
-            form.Add(fileContent, "img", Path.GetFileName(img));
+            form.Add(fileContent, "immagine", Path.GetFileName(img));
             form.Add(new StringContent(user), "username");
             form.Add(new StringContent(pass), "password");
             form.Add(new StringContent(mail), "mail");
@@ -120,13 +120,12 @@ namespace proj
             }
         }
 
-        public string HttpRequestAddEmozione(string key, string tipo, string dataRil, string oraRil, string idDisp) //aggiungi emozione
+        public string HttpRequestAddEmozione(string key, string tipo, string dataRil, string idDisp) //aggiungi volto registrato
         {
             data = new NameValueCollection();
-            string url = "http://" + host + "/" + key + "/emozioni/add"; 
+            string url = "http://" + host + "/" + key + "/emozioni/add";
             data["tipo"] = tipo;
             data["dataRilevazione"] = dataRil;
-            data["ora"] = oraRil;
             data["idDispositivo"] = idDisp;
             var response = wb.UploadValues(url, "POST", data);
             string result = System.Text.Encoding.UTF8.GetString(response); //ottengo una risposta
@@ -135,42 +134,33 @@ namespace proj
             return ris;
         }
 
-        //da rivedere
-        public object HttpRequestGetEmozioni(string key, string start, string numero, string tipo, string data) //prendi emozioni
+        public object HttpRequestGetEmozioni(string key, string data, int tipo) //prendi emozioni
         {
-            string url = "http://" + host + "/" + key + "/emozioni/?start=" + start + "&numero=" + numero + "&tipo=" + tipo + "&data=" + data;
+            string url = "http://" + host + "/" + key + "/emozioni?data=" + data + "&tipo=" + tipo;
             var response = wb.DownloadData(url);
             string result = System.Text.Encoding.UTF8.GetString(response);
-            JObject obj = JObject.Parse(result);
-            string ris = "";
-            json.GetEmozioni(obj);
-            return ris;
-        }
-
-        public string HttpRequestAddVoltoTrovato(string key, string img, string dataRil, string oraRil, string idDisp, string idVolto) //add volto trovato
-        {
-            data = new NameValueCollection();
-            string url = "http://" + host + "/" + key + "/voltoTrovato/add";
-            data["immagine"] = img;
-            data["dataRilevazione"] = dataRil;
-            data["ora"] = oraRil;
-            data["idDispositivo"] = idDisp;
-            data["idVolto"] = idVolto;
-            var response = wb.UploadValues(url, "POST", data);
-            string result = System.Text.Encoding.UTF8.GetString(response); //ottengo una risposta
             JObject obj = json.Parse(result);
-            string ris = json.GetText(obj);
+            object ris = json.GetObjArray(obj, "emozioni");
             return ris;
         }
 
-        //da rivedere
-        public object HttpRequestGetVoltiTrovati(string key, string start, string numero, string data) //prendo i volti trovati
+        public object HttpRequestGetEmozioni(string key) //prendi emozioni
         {
-            string url = "http://" + host + "/" + key + "/voltoTrovato/?start=" + start + "&numero=" + numero + "&data=" + data;
+            string url = "http://" + host + "/" + key + "/emozioni";
+            var response = wb.DownloadData(url);
+            string result = System.Text.Encoding.UTF8.GetString(response);
+            JObject obj = json.Parse(result);
+            object ris = json.GetObjArray(obj, "emozioni");
+            return ris;
+        }
+
+        public object HttpRequestGetVoltiTrovati(string key, string max) //prendo i volti trovati
+        {
+            string url = "http://" + host + "/" + key + "/voltoTrovato/?max=" + max;
             var response = wb.DownloadData(url);
             string result = System.Text.Encoding.Unicode.GetString(response);
-            JObject obj = JObject.Parse(result);
-            object ris = json.GetInfo(obj);
+            JObject obj = json.Parse(result);
+            object ris = json.GetObjArray(obj, "voltiTrovati");
             return ris;
         }
         public string HttpRequestAddVoltoRegistrato(string key, string img, string nome) //aggiungi volto registrato
@@ -192,8 +182,8 @@ namespace proj
             string url = "http://" + host + "/" + key + "/voltoRegistrato/?start=" + start + "&numero=" + numero + "&data=" + data;
             var response = wb.DownloadData(url);
             string result = System.Text.Encoding.UTF8.GetString(response);
-            JObject obj = JObject.Parse(result);
-            object ris = json.GetInfo(obj);
+            JObject obj = json.Parse(result);
+            object ris = json.GetObjArray(obj, "voltiRegistrati");
             return ris;
         }
 
@@ -224,15 +214,15 @@ namespace proj
             return ris;
         }
 
-        //da rivedere
-        public object HttpRequestGetDispositivi(string key, string start, string numero, string dataInizio, string tipo) //prendi dispositivi
+        
+        public object HttpRequestGetDispositivi(string key, string max) //prendi dispositivi
         {
             data = new NameValueCollection();
-            string url = "http://" + host + "/" + key + "/dispositivi/?start=" + start + "&numero=" + numero + "&data=" + dataInizio + "&tipo=" + tipo;
+            string url = "http://" + host + "/" + key + "/dispositivi/?max=" + max;
             var response = wb.DownloadData(url);
             string result = System.Text.Encoding.UTF8.GetString(response);
-            JObject obj = JObject.Parse(result);
-            object ris = json.GetInfo(obj);
+            JObject obj = json.Parse(result);
+            object ris = json.GetObjArray(obj, "dispositivi");
             return ris;
         }
 
@@ -266,8 +256,8 @@ namespace proj
             string url = "http://" + host + "/" + key + "/skill/?start=" + start + "&numero=" + numero + "&data=" + dataInizio;
             var response = wb.DownloadData(url);
             string result = System.Text.Encoding.UTF8.GetString(response);
-            JObject obj = JObject.Parse(result);
-            object ris = json.GetInfo(obj);
+            JObject obj = json.Parse(result);
+            object ris = json.GetObjArray(obj, "skill");
             return ris;
         }
 
@@ -286,7 +276,7 @@ namespace proj
         private object GetImage(string key, string tabella, string nome)
         {
             WebClient wb = new WebClient();
-            string url = "http://" + host + "/" + key + "/img/ciao/" + tabella + "?nomefile=" + nome;
+            string url = "http://" + host + "/" + key + "/immagine/" + tabella + "?nomefile=" + nome;
             var response = wb.DownloadData(url);
             string result = System.Text.Encoding.UTF8.GetString(response); //ottengo una risposta
             try

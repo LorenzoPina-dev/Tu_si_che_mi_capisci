@@ -25,37 +25,37 @@ namespace proj
             string ris = utente.ResetPwd(codice, pass, pass2);
             Console.WriteLine(ris);*/
 
-            string user2 = "gianni";
-            string pass = "1234";
-            string mail2 = "pluto@gmail.com";
-            string img2 = "R:/Documents/Immagini/Screenshots/4k.jpg";
-            string ris6 = utente.ChangeInfo(key, user2, pass, mail2, img2);
-            Console.WriteLine(ris6);
+            //string user2 = "gianni";
+            //string pass = "1234";
+            //string mail2 = "pluto@gmail.com";
+            //string img2 = "R:/Documents/Immagini/Screenshots/4k.jpg";
+            //string ris6 = utente.ChangeInfo(key, user2, pass, mail2, img2);
+            //Console.WriteLine(ris6);
 
-            object obj = utente.GetInfo(key);
-            if (obj.GetType() == typeof(string))
-            {
-                string ris = obj.ToString();
-                Console.WriteLine(ris);
-            }
-            else
-            {
-                string[] array = (string[])obj;
-                string username = array[0];
-                string email = array[1];
-                string image = array[2];
-                string xp = array[3];
-                Console.WriteLine(username);
-                Console.WriteLine(email);
-                Console.WriteLine(image);
-                Console.WriteLine(xp);
-                string risImage = "";
-                if (array.Length == 5)
-                {
-                    risImage = array[4];
-                    Console.WriteLine(risImage);
-                }
-            }
+            //object obj = utente.GetInfo(key);
+            //if (obj.GetType() == typeof(string))
+            //{
+            //    string ris = obj.ToString();
+            //    Console.WriteLine(ris);
+            //}
+            //else
+            //{
+            //    string[] array = (string[])obj;
+            //    string username = array[0];
+            //    string email = array[1];
+            //    string image = array[2];
+            //    string xp = array[3];
+            //    Console.WriteLine(username);
+            //    Console.WriteLine(email);
+            //    Console.WriteLine(image);
+            //    Console.WriteLine(xp);
+            //    string risImage = "";
+            //    if (array.Length == 5)
+            //    {
+            //        risImage = array[4];
+            //        Console.WriteLine(risImage);
+            //    }
+            //}
 
             //string r = utente.AddDispositivo(key, "disp2", "1", "172.165.1.1", "1");
             //Console.WriteLine(r);

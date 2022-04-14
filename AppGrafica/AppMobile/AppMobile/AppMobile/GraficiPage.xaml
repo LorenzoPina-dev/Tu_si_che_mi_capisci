@@ -1,0 +1,79 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:local="clr-namespace:AppMobile"
+             x:Class="AppMobile.GraficiPage"
+             xmlns:chart="clr-namespace:Syncfusion.SfChart.XForms;assembly=Syncfusion.SfChart.XForms">
+
+    <ContentPage.BindingContext>
+        <local:ViewModel></local:ViewModel>
+    </ContentPage.BindingContext>
+        
+        
+    <Frame BackgroundColor="#505050">
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="70" />
+                <RowDefinition Height="900" />
+            </Grid.RowDefinitions>
+
+            <Frame Margin="0, 0,0,0" CornerRadius="30" Grid.Row="0" BackgroundColor="#1C1C1C">
+                <Label Margin="30, -5, 0, 0" Text="Grafici emozioni" TextColor="White" FontSize="25"></Label>
+            </Frame>
+            <Image Source="Logo.png" Margin="220, 0, 0, 0" Grid.Row="0"></Image>
+
+            <Frame Grid.Row="1" BackgroundColor="#1C1C1C" HorizontalOptions="Center">
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="280" />
+                        <RowDefinition Height="50" />
+                        <RowDefinition Height="270" />
+                    </Grid.RowDefinitions>
+
+                    <!-- pie chart -->
+                    <chart:SfChart Grid.Row="0" Margin="-20, 0, 0, 0" ChartPadding="20" x:Name="pieChart">
+                        <chart:SfChart.Legend>
+                            <chart:ChartLegend OverflowMode="Wrap" DockPosition="Top" Margin="0, 0, 0, 0">
+                                <chart:ChartLegend.LabelStyle>
+                                    <chart:ChartLegendLabelStyle Font="13"/>
+                                </chart:ChartLegend.LabelStyle>
+                            </chart:ChartLegend>
+                        </chart:SfChart.Legend>
+
+                        <chart:SfChart.Series>
+                            <chart:PieSeries ItemsSource="{Binding DataPie}" XBindingPath="xValue" YBindingPath="yValue" EnableSmartLabels="true" DataMarkerPosition = "OutsideExtended">
+                                <chart:PieSeries.DataMarker>
+                                    <chart:ChartDataMarker LabelContent="YValue">
+                                        <chart:ChartDataMarker.LabelStyle>
+                                            <chart:DataMarkerLabelStyle Font="Bold, 13">
+
+                                            </chart:DataMarkerLabelStyle>
+                                        </chart:ChartDataMarker.LabelStyle>
+
+                                    </chart:ChartDataMarker>
+                                </chart:PieSeries.DataMarker>
+                            </chart:PieSeries>
+                        </chart:SfChart.Series>
+
+                    </chart:SfChart>
+
+                    <Picker SelectedIndexChanged="EmChange" HorizontalTextAlignment="Center" BackgroundColor="#3B3B3B" TitleColor="White" Grid.Row="1" Margin="40, 0, 60,0" Title="Emozioni" ItemsSource="{Binding Emozioni}"></Picker>
+                    <!-- line chart -->
+                    <chart:SfChart Grid.Row="2"  Margin="-20, 0, 0, 0" ChartPadding="70" WidthRequest="4" x:Name="lineChart">
+
+                        <chart:SfChart.PrimaryAxis>
+                            <chart:CategoryAxis AutoScrollingDelta="7" AutoScrollingMode="Start"/>
+                        </chart:SfChart.PrimaryAxis>
+
+                        <chart:SfChart.SecondaryAxis>
+                            <chart:NumericalAxis Interval="1"/>
+                        </chart:SfChart.SecondaryAxis>
+
+                        <chart:LineSeries ItemsSource="{Binding DataLine}"  XBindingPath="xValue" YBindingPath="yValue" ListenPropertyChange="True" />
+
+                    </chart:SfChart>
+                </Grid>
+            </Frame>
+        </Grid>
+    </Frame>
+</ContentPage>
