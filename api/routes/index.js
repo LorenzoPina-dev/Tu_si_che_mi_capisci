@@ -1,17 +1,22 @@
+
 var express = require("express");
 var router = express.Router();
 const fs = require("fs");
 var sha256 = require("js-sha256").sha256;
 var db = require("./../util/db");
 var nodemailer = require("nodemailer");
-const file = `./codiciReset/codiciReset${formatDate(new Date())}.txt`;
+var smtpTransport = require('nodemailer-smtp-transport');
 let emailRegexp = /^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/;
-var transporter = nodemailer.createTransport({
-    service: "Gmail",
+var transporter = nodemailer.createTransport(
+{
+        host: "smtp.gmail.com",
+        secureConnection: true,
+        port: 587,
+        requiresAuth: true,
     auth: {
         user: process.env.MAILUSER,
         pass: process.env.MAILPASS,
-    },
+    }
 });
 /*router.get('/', function(req, res) {
     res.header('Content-type', 'application/json');
@@ -25,13 +30,11 @@ router.post("/", multipartMiddleware, function(req, res, next) {
 });*/
 router.post("/login", (req, res) => {
     query = req.body;
-    console.log(query)
-
+console.log(query);
     if (!query.username || !query.password) {
         res.json({ success: false, result: { testo: "mancano parametri o sono errati" } });
         return;
     }
-    console.log(sha256.hex(query.password));
     db.query(
         "SELECT * FROM utente WHERE Username = ? AND Password = ?", [query.username, sha256.hex(query.password)],
         (err, result) => {
@@ -42,7 +45,6 @@ router.post("/login", (req, res) => {
                 });
                 return;
             }
-            console.log(result);
             if (result.length > 0) {
                 res.json({
                     success: true,
@@ -59,34 +61,29 @@ router.post("/login", (req, res) => {
 
 router.post("/register", (req, res) => {
     let query = req.body;
-    console.log(query);
     if (!query.username || !query.password || !query.mail || !query.password2 || !emailRegexp.test(query.mail)) {
         res.json({ success: false, result: { testo: "mancano parametri o sono errati" } });
         return;
     }
-    console.log("dopo")
     if (query.password != query.password2) {
         res.json({ success: false, result: { testo: "password non corrispondono" } });
         console.log("pass");
         return;
     }
-    console.log("inizio");
+
     let d = new Date().getTime();
     key = "xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx".replace(/[xy]/g, function(c) {
         var r = (d + Math.random() * 16) % 16 | 0;
         d = Math.floor(d / 16);
         return (c == "x" ? r : (r & 0x3) | 0x8).toString(16);
     });
-    console.log("primaCript");
     let criptata;
     criptata = sha256.hex(query.password);
-    console.log(criptata);
     db.query(
         "INSERT INTO utente (Username, Password, Email, ApiKey) VALUES (?,?,?,?)", [query.username, criptata, query.mail, key],
         (err, result) => {
             if (err) {
                 res.json({ success: false, result: { testo: "errore nell'inserimento" } });
-                throw err
                 return;
             }
             res.json({ success: true, result: { testo: "registrazione avvenuta con successo" } });
@@ -100,56 +97,75 @@ router.get("/resetPassword", (req, res) => {
         res.json({ success: false, result: { testo: "mail errata" } });
         return;
     }
-    let codici = [];
-    if (fs.existsSync(file))
-        codici = fs.readFileSync(file, "utf8").split("\r\n");
-    do {
-        for (let i = 0; i < 7; i++) codice += getRndInteger(0, 10).toString();
-    } while (codici.includes(JSON.stringify({ mail: mail, codice: codice })));
-    if (!fs.existsSync(file))
-        fs.appendFileSync(file, JSON.stringify({ mail: mail, codice: codice }));
-    else
-        fs.appendFileSync(file, "\r\n" + JSON.stringify({ mail: mail, codice: codice }));
+    for (let i = 0; i < 9; i++) codice += getRndInteger(0, 10).toString();
 
-    console.log(mail)
-        //sendMail(res, mail, mail, "codice reset password", "il codice per il reset è: " + codice);
-    res.json({ success: true, result: { testo: "invio codice" } });
+    db.query(
+        "Insert into reset(CodiceReset,Mail) values(?,?)", [codice, mail],
+        (err, result) => {
+            if (err) {
+
+                res.json({
+                    success: false,
+                    result: { testo: "Errore" },
+                });
+                return;
+            }
+    	sendMail(res, mail, mail, "codice reset password", "il codice per il reset è: " + codice);
+    	res.json({ success: true, result: { testo: "invio codice" } });
+
+        }
+    );
+
+
 });
 router.put("/cambiaPassword", (req, res) => {
     let query = req.body;
-    console.log(query)
-    if (!query.password || !query.password2) {
+console.log(query);
+   if (!query.password || !query.password2 || !query.codice) {
         res.json({
             success: false,
             result: { testo: "mancano parametri o sono errati" },
         });
         return;
     }
-    let codici = fs.readFileSync(file, "utf8").split("\r\n").map(val => JSON.parse(val));
-    let mail = "";
-    for (c of codici)
-        if (c.codice == query.codice)
-            mail = c.mail;
     if (query.password != query.password2) {
         res.json({ success: false, result: { testo: "le password non coincidono" } });
         return;
     }
     db.query(
-        "UPDATE utente SET Password=? where Email=?", [sha256.hex(query.password), mail],
+        "Select Mail from reset WHERE CodiceReset=? and now()-Data<'70000'", [query.codice],
         (err, result) => {
             if (err) {
+		console.log(err);
                 res.json({
                     success: false,
-                    result: { testo: "Errore" }
+                    result: { testo: "Errore" },
                 });
                 return;
             }
-            res.json({
-                success: true,
-                result: { testo: "update avvenuto con successo" }
-            });
+
+            if (result) {
+                db.query(
+                    "UPDATE utente SET Password=? where Email=?", [sha256.hex(query.password), result],
+                    (err, result) => {
+                        if (err) {
+                            res.json({
+                                success: false,
+                                result: { testo: "Errore" },
+                            });
+                            return;
+                        }
+                        res.json({
+                            success: true,
+                            result: { testo: "update avvenuto con successo" },
+                        });
+                    }
+                );
+
+            }
         }
     );
+
 });
 
 function getRndInteger(min, max) {
@@ -157,17 +173,15 @@ function getRndInteger(min, max) {
 }
 const sendMail = (res, username, mailTo, subject, body) => {
     var mailOptions = {
-        from: "'Pina Lorenzo' MailPerTest.01@gmail.com",
+        from: process.env.MAILUSER,
         to: `${username} ${mailTo}`,
         subject: subject,
-        html: body,
+       	text:body
     };
     try {
         transporter.sendMail(mailOptions, function(error, info) {
             if (error) {
                 console.log(error);
-            } else {
-                console.log("Messaggio inviato: " + info.response);
             }
         });
     } catch (e) {

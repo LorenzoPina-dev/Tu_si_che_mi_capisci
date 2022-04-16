@@ -12,7 +12,7 @@ router.get("/", function(req, res) {
         parametri.push(parseInt(query.start));
     }
     if (query.tipo) {
-        let date = (sql += " Tipo>=? AND");
+        let date = (sql += " Tipo=? AND");
         parametri.push(query.tipo);
     }
     sql = sql.substring(0, sql.length - 3);
@@ -20,7 +20,6 @@ router.get("/", function(req, res) {
         sql += " Limit ?";
         parametri.push(parseInt(query.numero));
     }
-    console.log(sql, parametri);
     db.query(sql, parametri, (err, result) => {
         if (err) {
             res.json({

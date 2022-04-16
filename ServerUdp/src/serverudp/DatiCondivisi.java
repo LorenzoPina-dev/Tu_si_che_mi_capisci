@@ -61,19 +61,19 @@ public class DatiCondivisi {
         }
         public void AddMessaggioRicevuti(Messaggio m)
         {
-            sElabora.release();
             synchronized (this)
             {
                 MRicevuti.add(m);
             }
+            sElabora.release();
         }
         public void AddMessaggioDaInviare(Messaggio m)
         {
-            sInvia.release();
             synchronized (this)
             {
                 MDaInviare.add(m);
             }
+            sInvia.release();
         }
         public Messaggio Elabora(Messaggio m) throws InterruptedException, IOException
         {
@@ -84,16 +84,20 @@ public class DatiCondivisi {
                 if (tipo.toUpperCase().equals( "audio".toUpperCase())||tipo.toUpperCase().equals("video".toUpperCase()))
                 {
                     String tipoFile=tipo.toUpperCase().equals( "audio".toUpperCase())? "Emozione" : "Volto";
+                    
                     String file = "./" + tipoFile+"/"+tipoFile+ (idFile++)%100 + ".json";
                     while (new File(file).exists()) {file = "./" + tipoFile+"/"+tipoFile+ (idFile++)%100 + ".json";}
-                    JSONArray list=mess.getJSONArray("Dati");
+                    System.out.println(file);
+                    String list=mess.getString("Dati");
                     BufferedWriter sw = new BufferedWriter(new FileWriter(file));
                     JSONObject ris=new JSONObject();
                     ris.append("KeyUtente", mess.getString("KeyUtente"));
-                    ris.append("Dati", mess.getJSONArray("Dati"));
+                    ris.append("Dati", mess.getString("Dati"));
+                    ris.append("IdDispositivo", mess.getInt("IdDispositivo"));
                     sw.write(ris.toString());
                     sw.flush();
                     sw.close();
+                    
                     m.Testo = "{'success':true}";
                 }
                 else

@@ -3,7 +3,12 @@ var router = express.Router();
 const fs = require("fs");
 const db = require("../util/db");
 var multipart = require("connect-multiparty");
-var multipartMiddleware = multipart({ uploadDir: "uploads/facceRegistrate/" });
+const path = require("path");
+let filePath = path.join(
+    __dirname,
+    "../uploads/voltoregistrato"
+);
+var multipartMiddleware = multipart({ uploadDir: filePath });
 router.get("/", function(req, res) {
     let query = req.query;
     let sql = "SELECT * from voltoregistrato where IdUtente=? AND";
@@ -46,8 +51,10 @@ router.post("/add", multipartMiddleware, function(req, res, next) {
         res.json({ success: false, testo: "mancano parametri o sono errati" });
         return;
     }
+    let p = req.files.immagine.path;
+    let immagine = p.substring(p.lastIndexOf("/") + 1, p.length);
     db.query(
-        "INSERT into voltoregistrato (Nome,Immagine,IdUtente) VALUES (?,?,?)", [query.nome, query.immagine, req.Utente.Id],
+        "INSERT into voltoregistrato (Nome,Immagine,IdUtente) VALUES (?,?,?)", [query.nome, immagine, req.Utente.Id],
         (err, result) => {
             if (err) {
                 res.json({
@@ -56,10 +63,6 @@ router.post("/add", multipartMiddleware, function(req, res, next) {
                 });
                 return;
             }
-            fs.renameSync(
-                req.files.Immagine.path,
-                "uploads\\voltoregistrato\\" + result.insertId + ".png"
-            );
             res.json({
                 success: true,
                 result: { testo: "inserimento avvenuto con successo" },
@@ -73,7 +76,7 @@ router.delete("/remove/:id", function(req, res, next) {
         return;
     }
     db.query(
-        "Select IdUtente FrOM voltoregistrato WHERE Id=?", [req.params.Id],
+        "Select IdUtente,Immagine FrOM voltoregistrato WHERE Id=?", [req.params.Id],
         (err, result) => {
             if (err) {
                 res.json({
@@ -82,6 +85,7 @@ router.delete("/remove/:id", function(req, res, next) {
                 });
                 return;
             }
+            fs.unlinkSync(filePath + "/" + result.Immagine);
             if (result[0].IdUtente == req.Utente.Id) {
                 db.query(
                     "DELETE FrOM voltoregistrato WHERE Id=?", [req.params.Id],
@@ -104,4 +108,18 @@ router.delete("/remove/:id", function(req, res, next) {
     );
 });
 
+router.put("/addPunti", function(req, res, next) {
+    let query = req.body;
+    if (!query.id || !query.punti) {
+        res.json({ success: false, testo: "inserisci dei parametri" });
+        return;
+    }
+    db.query("UPDATE voltoregistrato SET VettoreVolto=? where Id=?", [query.punti, query.id], (err, result) => {
+        if (err) console.log(err);
+        res.json({
+            success: true,
+            result: { testo: "update avvenuto con successo" },
+        });
+    });
+});
 module.exports = router;
