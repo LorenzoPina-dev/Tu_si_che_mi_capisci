@@ -6,8 +6,9 @@ import requests
 import json
 from threading import Thread
 import time
-
-serverAddressPort= ("80.22.36.186", 12345)
+import base64
+#"80.22.36.186"
+serverAddressPort= ("localhost", 12345)
 bufferSize= 4064
 UDPClientSocket = socket.socket(family=socket.AF_INET, type=socket.SOCK_DGRAM)
 frame_width = 680
@@ -18,13 +19,13 @@ face_cascade = cv.CascadeClassifier('haarcascade_frontalface_default.xml')
 termina={}
 def GestisciCam(nome):
     print("partito")
-    video_capture = cv.VideoCapture(nome)
+    video_capture = cv.VideoCapture(nome["ip"])
     print(video_capture.getBackendName())
     video_capture.set(cv.CAP_PROP_FRAME_WIDTH, frame_width)
     video_capture.set(cv.CAP_PROP_FRAME_HEIGHT, frame_height)
     size = (int(video_capture.get(cv.CAP_PROP_FRAME_WIDTH)), int(video_capture.get(cv.CAP_PROP_FRAME_HEIGHT)))
     i=0
-    while termina[nome]==False:
+    while termina[nome["Id"]]==False:
         if video_capture.isOpened():
             ret, img = video_capture.read()
             gray = cv.cvtColor(img, cv.COLOR_BGR2GRAY)
@@ -33,14 +34,15 @@ def GestisciCam(nome):
                 cv.rectangle(img, (x, y), (x+w, y+h), (255, 0, 0), 2)
             if i%10==1:
                 for (x, y, w, h) in faces:
-                    ROI = gray[y:y+h, x:x+w]
-                    reduced = cv.resize(ROI, dsize=(50, 50), interpolation=cv.INTER_CUBIC)
+                    ROI = gray[y-25:y+h+25, x-25:x+w+25]
+                    reduced = cv.resize(ROI, dsize=(100, 100), interpolation=cv.INTER_CUBIC)
                     cv.imshow("Reduced", reduced);
                     _, bts = cv.imencode('.jpeg', reduced)
-                    arr =[];
-                    for b in bts:
-                        arr.append(int(b))
-                    j=json.dumps({"Tipo":"video","KeyUtente":keyk,"Dati":arr})
+                    print(len(bts))
+                    b64_bytes = base64.b64encode(bts)
+                    b64_string = b64_bytes.decode()
+                    print(nome)
+                    j=json.dumps({"Tipo":"video","KeyUtente":keyk,"Dati":b64_string,"IdDispositivo":nome["Id"]})
                     bytesToSend= str.encode(j)
                     UDPClientSocket.sendto(bytesToSend, serverAddressPort)
             i+=1
@@ -53,15 +55,15 @@ def GestisciDisp():
         x = requests.get('http://80.22.36.186/'+keyk+'/dispositivi?tipo=0');
         y = json.loads(x.text)
         arr= len(y['result']['dispositivo'])
-        for video in range(arr):
+        for video in arr:
             if (video in t)==False:
-                termina[video]=False
-                t[video]=Thread(target=GestisciCam, args=(video,))
-                t[video].start()
+                termina[video["Id"]]=False
+                t[video["Id"]]=Thread(target=GestisciCam, args=(video,))
+                t[video["Id"]].start()
         time.sleep(60)
             
 while TerminaMain==False:
-    tGest=Thread(target=GestisciDisp, args=())
+    tGest=Thread(target=GestisciDisp)
     tGest.start()
     key = input("exit per uscire")
     if key == "exit":
