@@ -8,19 +8,19 @@ import requests
 import json
 
 keyk="a2444840-cb9a-479d-bd3f-a4fa4a2f23f8"
-
+host="80.22.36.186"
 
 def GetVoltiRegistrati():
-    x = requests.get('http://80.22.36.186/'+keyk+'/voltoRegistrato');
+    x = requests.get('http://'+host+'/'+keyk+'/voltoRegistrato');
     y = json.loads(x.text)
     arr= y['result']['voltiRegistrati']
     return arr
 
 def SetEncodingVolto(record,punti):
-    x=requests.put('http://80.22.36.186/'+keyk+'/voltoRegistrato/addPunti', data={'id': record["Id"], 'punti': str(punti.tolist())})
+    x=requests.put('http://'+host+'/'+keyk+'/voltoRegistrato/addPunti', data={'id': record["Id"], 'punti': str(punti.tolist())})
 
 def GetImmagine(basename):
-    req = urlopen('http://80.22.36.186/'+keyk+'/immagine/voltoregistrato?nomefile='+basename)
+    req = urlopen('http://'+host+'/'+keyk+'/immagine/voltoregistrato?nomefile='+basename)
     arr = np.asarray(bytearray(req.read()), dtype=np.uint8)
     img = cv2.imdecode(arr, -1) # 'Load it as it is'
     return img
@@ -38,21 +38,22 @@ class SimpleFacerec:
         i=0
         for volto in VoltiRegistrati:
             try:
+                #if(volto["VettoreVolto"]!=None):
+                    #img_encoding=np.asarray(volto["VettoreVolto"])
+                #else:
                 img=GetImmagine(volto["Immagine"])
-                if(volto["VettoreVolto"]!=null):
-                    img_encoding=volto["VettoreVolto"]
-                else:
-                    img_encoding = face_recognition.face_encodings(img)[0]
-                    SetEncodingVolto(volto,img_encoding)
+                img_encoding = face_recognition.face_encodings(img)[0]
+                SetEncodingVolto(volto,img_encoding)
                 self.known_face_encodings.append(img_encoding)
-                self.known_face_names.append(volto["Nome"])
-            except:
-                print("errore")
+                self.known_face_names.append(volto["Id"])
+            except Exception as e:
+                print("errore"+ format(e))
         print("Encoding images loaded")
 
     def detect_known_faces(self, face_encoding):
+        print(self.known_face_encodings)
         matches = face_recognition.compare_faces(self.known_face_encodings, face_encoding)
-        face_names = "Unknown"
+        face_names = None
         face_distances = face_recognition.face_distance(self.known_face_encodings, face_encoding)
         best_match_index = np.argmin(face_distances)
         if matches[best_match_index]:
