@@ -61,7 +61,7 @@ router.get("/", function(req, res) {
 var i = 0;
 router.post("/add", multipartMiddleware, function(req, res, next) {
     let query = req.body;
-    if (!req.files.immagine || !query.idDispositivo || !query.vettVolto) {
+    if (!req.files.immagine || !query.idDispositivo) {
         res.json({ success: false, testo: "mancano parametri o sono errati" });
         return;
     }
@@ -70,12 +70,11 @@ router.post("/add", multipartMiddleware, function(req, res, next) {
     let sql = "";
     let parametri = [];
     if (query.dataRilevazione) {
-        sql = "INSERT into voltotrovato (DataRilevazione,Immagine,IdDispositivo,VettoreVolto) VALUES (?,?,?,?)";
-        parametri = [query.dataRilevazione, immagine, query.idDispositivo, query.vettVolto];
+        sql = "INSERT into voltotrovato (DataRilevazione,Immagine,IdDispositivo) VALUES (?,?,?)";
+        parametri = [query.dataRilevazione, immagine, query.idDispositivo];
     } else {
-        sql =
-            "INSERT into voltotrovato (Immagine,IdDispositiv,VettoreVolto) VALUES (?,?,?)";
-        parametri = [immagine, query.idDispositivo, query.vettVolto];
+        sql = "INSERT into voltotrovato (Immagine,IdDispositivo) VALUES (?,?)";
+        parametri = [immagine, query.idDispositivo];
     }
 
     db.query(sql, parametri,
@@ -108,7 +107,8 @@ router.post("/add", multipartMiddleware, function(req, res, next) {
                     }
                 );
             else {
-                sendMail(req.Utente.Username, req.Utente.Mail, "SCONOSCIUTO ENTRATO IN CASA", "<img src='http://80.22.36.186/" + req.Utente.Key + "/immagine/" + immagine + "'/>");
+                console.log(req.Utente)
+                sendMail(req.Utente.Username, req.Utente.Email, "SCONOSCIUTO ENTRATO IN CASA", "<p><p>un intruso è entrato in casa tua</p><img src='http://80.22.36.186/" + req.ApiKey + "/immagine/voltotrovato?nomefile=" + immagine.substring(immagine.lastIndexOf('/') + 1, immagine.length) + "'/></p>");
                 res.json({
                     success: true,
                     result: { testo: "inserimento avvenuto con successo" },
@@ -125,6 +125,7 @@ const sendMail = (username, mailTo, subject, body) => {
         subject: subject,
         html: body,
     };
+    console.log(mailOptions);
     try {
         transporter.sendMail(mailOptions, function(error, info) {
             if (error) {

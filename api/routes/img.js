@@ -9,17 +9,21 @@ router.get("/", (req, res) => {
 router.get("/:tabella", (req, res) => {
     let tabella = req.params.tabella;
     let file = req.query.nomefile;
-console.log(tabella+";"+file);    
-if (!(tabella == "obiettivo" || tabella == "utente" || tabella == "voltoregistrato" || tabella == "voltotrovato")) {
+    console.log(tabella + ";" + file);
+    if (!(tabella == "obiettivo" || tabella == "utente" || tabella == "voltoregistrato" || tabella == "voltotrovato")) {
         res.json({
             success: false,
             result: { testo: "patametri errati" }
         });
         return;
     }
-	console.log(tabella+";"+file);
-    db.query(
-        `SELECT * from ${tabella} where Immagine=?`, [file],
+    let sql = ""
+    console.log(tabella + ";" + file);
+    if (tabella != "voltotrovato")
+        sql = `SELECT * from ${tabella} where Immagine=?`
+    else
+        sql = `SELECT * from voltotrovato join dispositivo on voltotrovato.IdDispositivo=dispositivo.Id  where Immagine=?`
+    db.query(sql, [file],
         (err, result) => {
             if (err) {
                 res.json({

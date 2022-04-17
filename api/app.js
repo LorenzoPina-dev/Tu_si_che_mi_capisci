@@ -37,7 +37,7 @@ app.use("/:key/voltoRegistrato", controllaUtente, facesRegistrataRouter);
 app.use("/:key/dispositivi", controllaUtente, devicesRouter);
 app.use("/:key/skill", controllaUtente, skillsRouter);
 app.use("/:key/utente", controllaUtente, usersRouter);
-app.use("/:key/img", controllaUtente, ImgRouter);
+app.use("/:key/immagine", controllaUtente, ImgRouter);
 app.use("/:key/obiettivi", controllaUtente, obiettiviRouter);
 app.use("/", indexRouter);
 // catch 404 and forward to error handler
@@ -63,6 +63,7 @@ function controllaUtente(req, res, next) {
         (err, result) => {
             if (err) throw err;
             req.Utente = result[0];
+            req.ApiKey = req.params.key;
             next();
         }
     );
