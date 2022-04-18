@@ -16,8 +16,8 @@ def GetVoltiRegistrati():
     arr= y['result']['voltiRegistrati']
     return arr
 
-def SetEncodingVolto(record,punti):
-    x=requests.put('http://'+host+'/'+keyk+'/voltoRegistrato/addPunti', data={'id': record["Id"], 'punti': str(punti.tolist())})
+def SetEncodingVolto(Id,punti):
+    x=requests.put('http://'+host+'/'+keyk+'/voltoRegistrato/addPunti', data={'id': Id, 'punti': str(punti.tolist())})
 
 def GetImmagine(basename):
     req = urlopen('http://'+host+'/'+keyk+'/immagine/voltoregistrato?nomefile='+basename)
@@ -43,11 +43,22 @@ class SimpleFacerec:
                 #else:
                 img=GetImmagine(volto["Immagine"])
                 img_encoding = face_recognition.face_encodings(img)[0]
-                SetEncodingVolto(volto,img_encoding)
+                SetEncodingVolto(volto["Id"],img_encoding)
                 self.known_face_encodings.append(img_encoding)
                 self.known_face_names.append(volto["Id"])
             except Exception as e:
                 print("errore"+ format(e))
+        print("Encoding images loaded")
+        
+    def add_encoding_image(self,id,path_img):
+        try:
+            img=GetImmagine(path_img)
+            img_encoding = face_recognition.face_encodings(img)[0]
+            SetEncodingVolto(id,img_encoding)
+            self.known_face_encodings.append(img_encoding)
+            self.known_face_names.append(id)
+        except Exception as e:
+            print("errore"+ format(e))
         print("Encoding images loaded")
 
     def detect_known_faces(self, face_encoding):
