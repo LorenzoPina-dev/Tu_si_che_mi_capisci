@@ -25,7 +25,7 @@ public class GestioneUdp {
         private GestioneUdp()
         {
         try {
-            server = new DatagramSocket(12345);
+            server = new DatagramSocket(54321);
             } catch (SocketException ex) {
                 System.out.println("Impossibile aprire il server");
             }

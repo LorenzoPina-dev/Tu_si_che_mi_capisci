@@ -78,7 +78,19 @@ public class DatiCondivisi {
         public Messaggio Elabora(Messaggio m) throws InterruptedException, IOException
         {
             JSONObject mess = new JSONObject(m.Testo);
-            if (mess.has("Tipo"))
+            if(mess.has("NuovoVolto"))
+            {
+                JSONObject nuovo=mess.getJSONObject("NuovoVolto");
+                String file = "./addVolto.json";
+                BufferedWriter sw = new BufferedWriter(new FileWriter(file));
+                JSONObject ris=new JSONObject();
+                ris.append("Id", mess.getInt("Id"));
+                ris.append("Immagine", mess.getString("Immagine"));
+                sw.write(ris.toString());
+                sw.flush();
+                sw.close();
+            }
+            else if (mess.has("Tipo"))
             {
                 String tipo = mess.get("Tipo").toString();
                 if (tipo.toUpperCase().equals( "audio".toUpperCase())||tipo.toUpperCase().equals("video".toUpperCase()))
