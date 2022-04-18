@@ -42,6 +42,7 @@ class SimpleFacerec:
                     #img_encoding=np.asarray(volto["VettoreVolto"])
                 #else:
                 img=GetImmagine(volto["Immagine"])
+                img = cv2.cvtColor(img, cv2.COLOR_RGB2BGR)
                 img_encoding = face_recognition.face_encodings(img)[0]
                 SetEncodingVolto(volto["Id"],img_encoding)
                 self.known_face_encodings.append(img_encoding)
@@ -53,6 +54,7 @@ class SimpleFacerec:
     def add_encoding_image(self,id,path_img):
         try:
             img=GetImmagine(path_img)
+            img = cv2.cvtColor(img, cv2.COLOR_RGB2BGR)
             img_encoding = face_recognition.face_encodings(img)[0]
             SetEncodingVolto(id,img_encoding)
             self.known_face_encodings.append(img_encoding)
