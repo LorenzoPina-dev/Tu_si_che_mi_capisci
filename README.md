@@ -1,4 +1,5 @@
 # Tu_si_che_mi_capisci
+<<<<<<< HEAD
 codice sorgente Server remoto
 
 Formato pacchetto udp:
@@ -172,3 +173,6 @@ Serve ad assegnare l’obiettivo all’account loggato
 
 
 23)	sito\key\obiettivi\remove\id:Delete
+=======
+codice ia riconoscimento facciale
+>>>>>>> origin/IaRiconoscimentoFacciale
