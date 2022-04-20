@@ -30,12 +30,6 @@
     <Compile Update="addDispositivo.xaml.cs">
       <DependentUpon>%(Filename)</DependentUpon>
     </Compile>
-    <Compile Update="addPersona.xaml.cs">
-      <DependentUpon>%(Filename)</DependentUpon>
-    </Compile>
-    <Compile Update="addSkill.xaml.cs">
-      <DependentUpon>%(Filename)</DependentUpon>
-    </Compile>
     <Compile Update="App.xaml.cs">
       <DependentUpon>%(Filename)</DependentUpon>
     </Compile>
@@ -63,10 +57,10 @@
   </ItemGroup>
 
   <ItemGroup>
-    <EmbeddedResource Update="addPersona.xaml">
+    <EmbeddedResource Update="prova.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
-    <EmbeddedResource Update="prova.xaml">
+    <EmbeddedResource Update="SettingsPage.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
   </ItemGroup>

@@ -8,9 +8,9 @@
             BackgroundColor="#1C1C1C">
 
     <TabbedPage.Children>
-        <local:prova IconImageSource="IcoUtente"/>
-        <local:InfoUtentePage IconImageSource="IcoSkills"/>
-        <local:GraficiPage IconImageSource="IcoGrafici"/>
+        <local:addDispositivo IconImageSource="IcoSettings"/>
+        <local:addPersona IconImageSource="IcoSkills"/>
+        <local:addSkill IconImageSource="IcoGrafici"/>
         <local:InfoUtentePage IconImageSource="IcoUtente"/>
     </TabbedPage.Children>
 </TabbedPage>

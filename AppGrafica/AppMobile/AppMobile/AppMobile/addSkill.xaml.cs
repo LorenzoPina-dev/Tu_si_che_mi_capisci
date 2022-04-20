@@ -15,8 +15,6 @@ namespace AppMobile
         public addSkill()
         {
             InitializeComponent();
-
-            lista.ItemsSource = "Gay"; 
         }
         public void indietro(object sender, EventArgs args)
         {
