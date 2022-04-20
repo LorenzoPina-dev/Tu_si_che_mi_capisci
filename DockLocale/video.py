@@ -9,9 +9,6 @@ import time
 import base64
 from multiprocessing import Process, Pipe
 #"80.22.36.186"
-serverAddressPort= ("localhost", 54321)
-bufferSize= 4064
-UDPClientSocket = socket.socket(family=socket.AF_INET, type=socket.SOCK_DGRAM)
 frame_width = 680
 frame_height = 480
 keyk="a2444840-cb9a-479d-bd3f-a4fa4a2f23f8"
@@ -49,9 +46,9 @@ def GestisciCam(args):
                     b64_bytes = base64.b64encode(bts)
                     b64_string = b64_bytes.decode()
                     print(nome)
-                    j=json.dumps({"Tipo":"video","KeyUtente":keyk,"IdDispositivo":nome["Id"],"Dati":b64_string})
-                    bytesToSend= str.encode(j)
-                    UDPClientSocket.sendto(bytesToSend, serverAddressPort)
+                    dati=json.dumps({'Dati':b64_string,"IdDispositivo":nome["Id"],"KeyUtente":keyk}) 
+                    x = requests.get('http://localhost:12345/riconosciVolto',data=dati);
+                    print(x.text)
             i+=1
     video_capture.release()
 
