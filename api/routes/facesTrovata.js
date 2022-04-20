@@ -61,6 +61,7 @@ router.get("/", function(req, res) {
 var i = 0;
 router.post("/add", multipartMiddleware, function(req, res, next) {
     let query = req.body;
+    console.log(query);
     if (!req.files.immagine || !query.idDispositivo) {
         res.json({ success: false, testo: "mancano parametri o sono errati" });
         return;
