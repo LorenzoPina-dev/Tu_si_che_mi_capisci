@@ -59,9 +59,8 @@ for index,path in enumerate(ref.path):
                                         n_mfcc=13),
                     axis=0)
     df.loc[counter] = [mfccs]
-    print(df.head())
     counter=counter+1   
 
 # Check a few records to make sure its processed successfully
 print(len(df))
-df.head()
+print(df.head())
