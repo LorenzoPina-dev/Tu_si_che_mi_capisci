@@ -1,24 +1,26 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\Miky\\Documents\\Tu_si_che_mi_capisci\\AppGrafica\\AppMobile\\AppMobile\\AppMobile.Android\\AppMobile.Android.csproj": {}
+    "R:\\Documents\\App\\Tu_si_che_mi_capisci1\\AppGrafica\\AppMobile\\AppMobile\\AppMobile.Android\\AppMobile.Android.csproj": {}
   },
   "projects": {
-    "C:\\Users\\Miky\\Documents\\Tu_si_che_mi_capisci\\AppGrafica\\AppMobile\\AppMobile\\AppMobile.Android\\AppMobile.Android.csproj": {
+    "R:\\Documents\\App\\Tu_si_che_mi_capisci1\\AppGrafica\\AppMobile\\AppMobile\\AppMobile.Android\\AppMobile.Android.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\Miky\\Documents\\Tu_si_che_mi_capisci\\AppGrafica\\AppMobile\\AppMobile\\AppMobile.Android\\AppMobile.Android.csproj",
+        "projectUniqueName": "R:\\Documents\\App\\Tu_si_che_mi_capisci1\\AppGrafica\\AppMobile\\AppMobile\\AppMobile.Android\\AppMobile.Android.csproj",
         "projectName": "AppMobile.Android",
-        "projectPath": "C:\\Users\\Miky\\Documents\\Tu_si_che_mi_capisci\\AppGrafica\\AppMobile\\AppMobile\\AppMobile.Android\\AppMobile.Android.csproj",
-        "packagesPath": "C:\\Users\\Miky\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\Miky\\Documents\\Tu_si_che_mi_capisci\\AppGrafica\\AppMobile\\AppMobile\\AppMobile.Android\\obj\\",
+        "projectPath": "R:\\Documents\\App\\Tu_si_che_mi_capisci1\\AppGrafica\\AppMobile\\AppMobile\\AppMobile.Android\\AppMobile.Android.csproj",
+        "packagesPath": "C:\\Users\\pepe_michele\\.nuget\\packages\\",
+        "outputPath": "R:\\Documents\\App\\Tu_si_che_mi_capisci1\\AppGrafica\\AppMobile\\AppMobile\\AppMobile.Android\\obj\\",
         "projectStyle": "PackageReference",
         "skipContentFileWrite": true,
         "fallbackFolders": [
-          "C:\\Microsoft\\Xamarin\\NuGet\\"
+          "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages",
+          "C:\\Program Files (x86)\\Microsoft\\Xamarin\\NuGet\\"
         ],
         "configFilePaths": [
-          "C:\\Users\\Miky\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\pepe_michele\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Xamarin.Offline.config"
         ],
@@ -32,8 +34,8 @@
         "frameworks": {
           "monoandroid90": {
             "projectReferences": {
-              "C:\\Users\\Miky\\Documents\\Tu_si_che_mi_capisci\\AppGrafica\\AppMobile\\AppMobile\\AppMobile\\AppMobile.csproj": {
-                "projectPath": "C:\\Users\\Miky\\Documents\\Tu_si_che_mi_capisci\\AppGrafica\\AppMobile\\AppMobile\\AppMobile\\AppMobile.csproj"
+              "R:\\Documents\\App\\Tu_si_che_mi_capisci1\\AppGrafica\\AppMobile\\AppMobile\\AppMobile\\AppMobile.csproj": {
+                "projectPath": "R:\\Documents\\App\\Tu_si_che_mi_capisci1\\AppGrafica\\AppMobile\\AppMobile\\AppMobile\\AppMobile.csproj"
               }
             }
           }
@@ -54,20 +56,23 @@
         }
       }
     },
-    "C:\\Users\\Miky\\Documents\\Tu_si_che_mi_capisci\\AppGrafica\\AppMobile\\AppMobile\\AppMobile\\AppMobile.csproj": {
+    "R:\\Documents\\App\\Tu_si_che_mi_capisci1\\AppGrafica\\AppMobile\\AppMobile\\AppMobile\\AppMobile.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\Miky\\Documents\\Tu_si_che_mi_capisci\\AppGrafica\\AppMobile\\AppMobile\\AppMobile\\AppMobile.csproj",
+        "projectUniqueName": "R:\\Documents\\App\\Tu_si_che_mi_capisci1\\AppGrafica\\AppMobile\\AppMobile\\AppMobile\\AppMobile.csproj",
         "projectName": "AppMobile",
-        "projectPath": "C:\\Users\\Miky\\Documents\\Tu_si_che_mi_capisci\\AppGrafica\\AppMobile\\AppMobile\\AppMobile\\AppMobile.csproj",
-        "packagesPath": "C:\\Users\\Miky\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\Miky\\Documents\\Tu_si_che_mi_capisci\\AppGrafica\\AppMobile\\AppMobile\\AppMobile\\obj\\",
+        "projectPath": "R:\\Documents\\App\\Tu_si_che_mi_capisci1\\AppGrafica\\AppMobile\\AppMobile\\AppMobile\\AppMobile.csproj",
+        "packagesPath": "C:\\Users\\pepe_michele\\.nuget\\packages\\",
+        "outputPath": "R:\\Documents\\App\\Tu_si_che_mi_capisci1\\AppGrafica\\AppMobile\\AppMobile\\AppMobile\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
-          "C:\\Microsoft\\Xamarin\\NuGet\\"
+          "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages",
+          "C:\\Program Files (x86)\\Microsoft\\Xamarin\\NuGet\\",
+          "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
         ],
         "configFilePaths": [
-          "C:\\Users\\Miky\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\pepe_michele\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Xamarin.Offline.config"
         ],
@@ -135,7 +140,7 @@
           ],
           "assetTargetFallback": true,
           "warn": true,
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.102\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.400\\RuntimeIdentifierGraph.json"
         }
       }
     }

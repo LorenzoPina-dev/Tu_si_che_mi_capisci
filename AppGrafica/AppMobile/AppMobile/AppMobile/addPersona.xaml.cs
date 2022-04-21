@@ -18,17 +18,6 @@ namespace AppMobile
             InitializeComponent();
         }
 
-        public void indietro(object sender, EventArgs args)
-        {
-
-            App.Current.MainPage = new TabbedPage1();
-        }
-
-        public void aggiungi(object sender, EventArgs args)
-        {
-            //// TODO ////
-        }
-
         public void BtnPhoto(object sender, System.EventArgs e)
         {
             UploadPhoto();
@@ -51,7 +40,7 @@ namespace AppMobile
             byte[] imageArray = System.IO.File.ReadAllBytes(file.Path);
 
             //prova.Text = file.Path;
-            immagine.Source = file.Path; 
+            //immagine.Source = file.Path; 
             //Bitmap bitmap = BitmapFactory.DecodeByteArray(imageArray, 0, imageArray.Length);
             //thisImageView.SetImageBitmap(bitmap);
         }

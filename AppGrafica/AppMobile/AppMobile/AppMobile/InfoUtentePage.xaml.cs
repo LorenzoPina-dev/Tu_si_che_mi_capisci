@@ -35,7 +35,7 @@ namespace AppMobile
 
             });
 
-            // Convert file to byre array, to bitmap and set it to our ImageView
+            //Convert file to byre array, to bitmap and set it to our ImageView
 
             /*
             byte[] imageArray = System.IO.File.ReadAllBytes(file.Path);
