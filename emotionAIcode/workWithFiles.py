@@ -9,7 +9,8 @@ from keras.models import Sequential, Model, model_from_json
 from keras.layers import Dense, Embedding, LSTM
 from keras.layers import Input, Flatten, Dropout, Activation, BatchNormalization
 from keras.layers import Conv1D, MaxPooling1D, AveragePooling1D
-from keras.utils import np_utils, to_categorical
+from keras.utils import np_utils
+from keras.utils.np_utils import to_categorical
 from keras.callbacks import ModelCheckpoint
 
 # sklearn
@@ -34,7 +35,7 @@ import IPython.display as ipd  # To play sound in the notebooks
 
 #prendo i dati salvati degli audio
 #devo cambiare il path
-ref = pd.read_csv("/kaggle/input/data-path/Data_path.csv")
+ref = pd.read_csv("E:\marini alessio\gestioneProgetto\prova\Data_path.csv")
 ref.head()
 
 # Note this takes a couple of minutes (~10 mins) as we're iterating over 4 datasets 
