@@ -48,4 +48,4 @@ def memorizza_volto():
 def update_record():
     return jsonify({"success":False,"testo":"non ancora implementato"})
     
-app.run(debug=True, host="127.0.0.1", port=12345)
+app.run(debug=True, host="0.0.0.0", port=12345)
