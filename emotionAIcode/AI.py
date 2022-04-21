@@ -19,7 +19,7 @@ warnings.filterwarnings("ignore", category=DeprecationWarning)
 # UPLOADING ALL THE DATASET
 
 # files path
-SAVEE = "E:\marini alessio\gestioneProgetto\SAVEE\ALL"
+SAVEE = "E:/marini alessio/gestioneProgetto/SAVEE/ALL/"
 
 # print some files
 dir_list = os.listdir(SAVEE)
@@ -46,7 +46,7 @@ for i in dir_list:
     else:
         emotion.append('male_error')
     path.append(SAVEE + i)
-
+# print(path)
 SAVEE_df = pd.DataFrame(emotion, columns=['labels'])
 SAVEE_df['source'] = 'SAVEE'
 SAVEE_df = pd.concat([SAVEE_df, pd.DataFrame(path, columns=['path'])], axis=1)
@@ -179,7 +179,13 @@ for i in dir_list:
 CREMA_df = pd.DataFrame(emotion, columns=['labels'])
 CREMA_df['source'] = 'CREMA'
 CREMA_df = pd.concat([CREMA_df, pd.DataFrame(path, columns=['path'])], axis=1)
-print(CREMA_df.labels.value_counts())
+
+df = pd.concat([SAVEE_df, RAV_df, TESS_df, CREMA_df], axis = 0)
+print(df.labels.value_counts())
+df.head()
+df.to_csv("E:\marini alessio\gestioneProgetto\prova\Data_path.csv",index=False)
+
+# print(CREMA_df.labels.value_counts())
 
 # feature extraction
 
