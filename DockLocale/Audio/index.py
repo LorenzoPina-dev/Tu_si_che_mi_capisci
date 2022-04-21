@@ -6,10 +6,6 @@ import json
 from threading import Thread
 import time
  
-serverAddressPort= ("80.22.36.186", 12345)
-bufferSize= 4064
-UDPClientSocket = socket.socket(family=socket.AF_INET, type=socket.SOCK_DGRAM)
-keyk="a2444840-cb9a-479d-bd3f-a4fa4a2f23f8"
 FORMAT = pyaudio.paInt16
 CHANNELS = 1
 RATE = 44100
@@ -53,17 +49,3 @@ waveFile.setframerate(RATE)
 waveFile.writeframes(b''.join(Recordframes))
 waveFile.close()
 
-
-def GetDispositivi():
-    x = requests.get('http://80.22.36.186/'+keyk+'/dispositivi?tipo=1');
-    y = json.loads(x.text)
-    arr= y['result']['dispositivo']
-    return arr;
-
-def MandaServer(ByteArray):
-    arr =[];
-    for b in ByteArray:
-        arr.append(int(b))
-    j=json.dumps({"Tipo":"audio","KeyUtente":keyk,"Dati":arr})
-    bytesToSend= str.encode(j)
-    UDPClientSocket.sendto(bytesToSend, serverAddressPort)
