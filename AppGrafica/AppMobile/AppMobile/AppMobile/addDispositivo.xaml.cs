@@ -1,4 +1,5 @@
-﻿using System;
+﻿using proj;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -12,21 +13,29 @@ namespace AppMobile
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class addDispositivo : ContentPage
     {
+        Utente utente;
         public addDispositivo()
         {
+            utente = new Utente();
             InitializeComponent();
         }
 
-        public void indietro(object sender, EventArgs args)
+        public void Indietro(object sender, EventArgs args)
         {
-
-            App.Current.MainPage = new TabbedPage1();
+            App.Current.MainPage = new Impostazioni();
         }
 
-        public void aggiungi(object sender, EventArgs args)
+        public void Aggiungi(object sender, EventArgs args)
         {
-
-            //// TODO ////
+            string tipo = "";
+            string nome = Nome.Text;
+            string ip = Ip.Text;
+            if (Mic.IsChecked == true)
+                tipo = "mic";
+            else
+                tipo = "cam";
+            utente.AddDispositivo(nome, tipo, ip);
+            App.Current.MainPage = new Impostazioni();
         }
     }
 }

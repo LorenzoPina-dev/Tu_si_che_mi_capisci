@@ -29,14 +29,6 @@ namespace AppMobile
             }
         }
 
-        public IList<string> Permessi
-        {
-            get
-            {
-                return new List<string> { "Nome", "Nome", "Nome", "Nome", "Nome", "Nome", "Nome" };
-            }
-        }
-
         enum Emozione
         {
             Arrabbiato = 1,
@@ -106,7 +98,7 @@ namespace AppMobile
         public void FillDataLine(string emozione)
         {
             DataLine.Clear();
-            List<JObject> list = (List<JObject>)Utente.GetEmozioni(DateTime.Now.Subtract(TimeSpan.FromDays(15)).ToString("yyyy-MM-ddT"), int.Parse(emozione) + 1);
+            List<JObject> list = (List<JObject>)Utente.GetEmozioni(DateTime.Now.Subtract(TimeSpan.FromDays(30)).ToString("yyyy-MM-ddT"), int.Parse(emozione) + 1);
 
             list.Sort(delegate (JObject x, JObject y)
             {

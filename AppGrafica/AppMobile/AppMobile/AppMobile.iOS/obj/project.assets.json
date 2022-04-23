@@ -1413,27 +1413,24 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\pepe_michele\\.nuget\\packages\\": {},
-    "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages": {},
-    "C:\\Program Files (x86)\\Microsoft\\Xamarin\\NuGet\\": {}
+    "C:\\Users\\Miky\\.nuget\\packages\\": {},
+    "C:\\Microsoft\\Xamarin\\NuGet\\": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "R:\\Documents\\App\\Tu_si_che_mi_capisci1\\AppGrafica\\AppMobile\\AppMobile\\AppMobile.iOS\\AppMobile.iOS.csproj",
+      "projectUniqueName": "C:\\Users\\Miky\\Documents\\Tu_si_che_mi_capisci\\AppGrafica\\AppMobile\\AppMobile\\AppMobile.iOS\\AppMobile.iOS.csproj",
       "projectName": "AppMobile.iOS",
-      "projectPath": "R:\\Documents\\App\\Tu_si_che_mi_capisci1\\AppGrafica\\AppMobile\\AppMobile\\AppMobile.iOS\\AppMobile.iOS.csproj",
-      "packagesPath": "C:\\Users\\pepe_michele\\.nuget\\packages\\",
-      "outputPath": "R:\\Documents\\App\\Tu_si_che_mi_capisci1\\AppGrafica\\AppMobile\\AppMobile\\AppMobile.iOS\\obj\\",
+      "projectPath": "C:\\Users\\Miky\\Documents\\Tu_si_che_mi_capisci\\AppGrafica\\AppMobile\\AppMobile\\AppMobile.iOS\\AppMobile.iOS.csproj",
+      "packagesPath": "C:\\Users\\Miky\\.nuget\\packages\\",
+      "outputPath": "C:\\Users\\Miky\\Documents\\Tu_si_che_mi_capisci\\AppGrafica\\AppMobile\\AppMobile\\AppMobile.iOS\\obj\\",
       "projectStyle": "PackageReference",
       "skipContentFileWrite": true,
       "fallbackFolders": [
-        "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages",
-        "C:\\Program Files (x86)\\Microsoft\\Xamarin\\NuGet\\"
+        "C:\\Microsoft\\Xamarin\\NuGet\\"
       ],
       "configFilePaths": [
-        "C:\\Users\\pepe_michele\\AppData\\Roaming\\NuGet\\NuGet.Config",
-        "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
+        "C:\\Users\\Miky\\AppData\\Roaming\\NuGet\\NuGet.Config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Xamarin.Offline.config"
       ],
@@ -1447,8 +1444,8 @@
       "frameworks": {
         "xamarinios10": {
           "projectReferences": {
-            "R:\\Documents\\App\\Tu_si_che_mi_capisci1\\AppGrafica\\AppMobile\\AppMobile\\AppMobile\\AppMobile.csproj": {
-              "projectPath": "R:\\Documents\\App\\Tu_si_che_mi_capisci1\\AppGrafica\\AppMobile\\AppMobile\\AppMobile\\AppMobile.csproj"
+            "C:\\Users\\Miky\\Documents\\Tu_si_che_mi_capisci\\AppGrafica\\AppMobile\\AppMobile\\AppMobile\\AppMobile.csproj": {
+              "projectPath": "C:\\Users\\Miky\\Documents\\Tu_si_che_mi_capisci\\AppGrafica\\AppMobile\\AppMobile\\AppMobile\\AppMobile.csproj"
             }
           }
         }

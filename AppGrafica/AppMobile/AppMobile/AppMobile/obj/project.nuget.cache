@@ -1,19 +1,19 @@
 {
   "version": 2,
-  "dgSpecHash": "jbaavLcf6EvE9uQxWyWTqhtVVVm5a+Ei61xX661naOMydwIlHttKaJ7738/FPXEMzZuFI6tQr4tPfTK6w5JO5w==",
+  "dgSpecHash": "fEPRYhOpV5LjiFQSNBKf6TKjNpROHK0SRplBXR/Hs1+Oisjnz08hDuDf07vAzlqJ+gnty1Fphsif/vmRHxE63Q==",
   "success": true,
-  "projectFilePath": "R:\\Documents\\App\\Tu_si_che_mi_capisci1\\AppGrafica\\AppMobile\\AppMobile\\AppMobile\\AppMobile.csproj",
+  "projectFilePath": "C:\\Users\\Miky\\Documents\\Tu_si_che_mi_capisci\\AppGrafica\\AppMobile\\AppMobile\\AppMobile\\AppMobile.csproj",
   "expectedPackageFiles": [
-    "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder\\microsoft.netcore.platforms\\1.1.0\\microsoft.netcore.platforms.1.1.0.nupkg.sha512",
-    "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder\\netstandard.library\\2.0.3\\netstandard.library.2.0.3.nupkg.sha512",
-    "C:\\Users\\pepe_michele\\.nuget\\packages\\newtonsoft.json\\13.0.1\\newtonsoft.json.13.0.1.nupkg.sha512",
-    "C:\\Users\\pepe_michele\\.nuget\\packages\\syncfusion.licensing\\20.1.0.47\\syncfusion.licensing.20.1.0.47.nupkg.sha512",
-    "C:\\Users\\pepe_michele\\.nuget\\packages\\syncfusion.xamarin.core\\19.2.0.46\\syncfusion.xamarin.core.19.2.0.46.nupkg.sha512",
-    "C:\\Users\\pepe_michele\\.nuget\\packages\\syncfusion.xamarin.sfchart\\19.2.0.46\\syncfusion.xamarin.sfchart.19.2.0.46.nupkg.sha512",
-    "C:\\Users\\pepe_michele\\.nuget\\packages\\system.numerics.vectors\\4.5.0\\system.numerics.vectors.4.5.0.nupkg.sha512",
-    "C:\\Users\\pepe_michele\\.nuget\\packages\\xam.plugin.media\\5.0.1\\xam.plugin.media.5.0.1.nupkg.sha512",
-    "C:\\Users\\pepe_michele\\.nuget\\packages\\xamarin.essentials\\1.5.3.2\\xamarin.essentials.1.5.3.2.nupkg.sha512",
-    "C:\\Users\\pepe_michele\\.nuget\\packages\\xamarin.forms\\4.8.0.1451\\xamarin.forms.4.8.0.1451.nupkg.sha512"
+    "C:\\Users\\Miky\\.nuget\\packages\\microsoft.netcore.platforms\\1.1.0\\microsoft.netcore.platforms.1.1.0.nupkg.sha512",
+    "C:\\Users\\Miky\\.nuget\\packages\\netstandard.library\\2.0.3\\netstandard.library.2.0.3.nupkg.sha512",
+    "C:\\Users\\Miky\\.nuget\\packages\\newtonsoft.json\\13.0.1\\newtonsoft.json.13.0.1.nupkg.sha512",
+    "C:\\Users\\Miky\\.nuget\\packages\\syncfusion.licensing\\20.1.0.47\\syncfusion.licensing.20.1.0.47.nupkg.sha512",
+    "C:\\Users\\Miky\\.nuget\\packages\\syncfusion.xamarin.core\\19.2.0.46\\syncfusion.xamarin.core.19.2.0.46.nupkg.sha512",
+    "C:\\Users\\Miky\\.nuget\\packages\\syncfusion.xamarin.sfchart\\19.2.0.46\\syncfusion.xamarin.sfchart.19.2.0.46.nupkg.sha512",
+    "C:\\Users\\Miky\\.nuget\\packages\\system.numerics.vectors\\4.5.0\\system.numerics.vectors.4.5.0.nupkg.sha512",
+    "C:\\Users\\Miky\\.nuget\\packages\\xam.plugin.media\\5.0.1\\xam.plugin.media.5.0.1.nupkg.sha512",
+    "C:\\Microsoft\\Xamarin\\NuGet\\xamarin.essentials\\1.5.3.2\\xamarin.essentials.1.5.3.2.nupkg.sha512",
+    "C:\\Microsoft\\Xamarin\\NuGet\\xamarin.forms\\4.8.0.1451\\xamarin.forms.4.8.0.1451.nupkg.sha512"
   ],
   "logs": []
 }

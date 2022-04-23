@@ -177,9 +177,9 @@ namespace proj
         }
 
         //da rivedere
-        public object HttpRequestGetVoltiRegistrati(string key, string start, string numero, string data) //prendi volti registrati
+        public object HttpRequestGetVoltiRegistrati(string key) //prendi volti registrati
         {
-            string url = "http://" + host + "/" + key + "/voltoRegistrato/?start=" + start + "&numero=" + numero + "&data=" + data;
+            string url = "http://" + host + "/" + key + "/voltoRegistrato";
             var response = wb.DownloadData(url);
             string result = System.Text.Encoding.UTF8.GetString(response);
             JObject obj = json.Parse(result);
@@ -199,14 +199,13 @@ namespace proj
             return ris;
         }
 
-        public string HttpRequestAddDispositivo(string key, string nome, string tipo, string ip, string acceso) //aggiungi dispositivo
+        public string HttpRequestAddDispositivo(string key, string nome, string tipo, string ip) //aggiungi dispositivo
         {
             data = new NameValueCollection();
             string url = "http://" + host + "/" + key + "/dispositivi/add";
             data["nome"] = nome;
             data["tipo"] = tipo;
             data["ip"] = ip;
-            data["acceso"] = acceso;
             var response = wb.UploadValues(url, "POST", data);
             string result = System.Text.Encoding.UTF8.GetString(response); //ottengo una risposta
             JObject obj = json.Parse(result);
@@ -250,10 +249,10 @@ namespace proj
         }
 
         //da rivedere
-        public object HttpRequestGetSkills(string key, string start, string numero, string dataInizio) //prendi dispositivi
+        public object HttpRequestGetSkills(string key) //prendi dispositivi
         {
             data = new NameValueCollection();
-            string url = "http://" + host + "/" + key + "/skill/?start=" + start + "&numero=" + numero + "&data=" + dataInizio;
+            string url = "http://" + host + "/" + key + "/skill";
             var response = wb.DownloadData(url);
             string result = System.Text.Encoding.UTF8.GetString(response);
             JObject obj = json.Parse(result);
@@ -273,7 +272,7 @@ namespace proj
             return ris;
         }
 
-        private object GetImage(string key, string tabella, string nome)
+        public object GetImage(string key, string tabella, string nome)
         {
             WebClient wb = new WebClient();
             string url = "http://" + host + "/" + key + "/immagine/" + tabella + "?nomefile=" + nome;
@@ -286,7 +285,7 @@ namespace proj
                 return ris;
             }
             catch (Exception ){
-                File.WriteAllBytes("./img.png", response);
+                File.WriteAllBytes("C:\\Users\\Miky\\Documents\\Tu_si_che_mi_capisci\\AppGrafica\\AppMobile\\AppMobile\\AppMobile.Android\\Resources\\drawable\\" + nome, response);
                 return 0;
             }
         }

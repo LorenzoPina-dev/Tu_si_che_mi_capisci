@@ -15,7 +15,7 @@ namespace AppMobile
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class GraficiPage : ContentPage
     {
-        ViewModel vm = new ViewModel();
+        //ViewModel vm = new ViewModel();
         public GraficiPage()
         {
             InitializeComponent();
@@ -25,7 +25,7 @@ namespace AppMobile
         public void EmChange(object sender, EventArgs e)
         {
             var picker = sender as Picker;
-            vm.FillDataLine(picker.SelectedIndex.ToString());
+            //vm.FillDataLine(picker.SelectedIndex.ToString());
         }
     }
 }

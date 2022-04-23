@@ -19,7 +19,6 @@ namespace AppMobile
 
         public void impostazioniPagina(object sender, EventArgs args)
         {
-
             App.Current.MainPage = new InfoUtentePage(); 
         }
     }

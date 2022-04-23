@@ -78,7 +78,7 @@ namespace proj
             return ris;
         }
 
-        public object GetVoltiTrovati(string key, string max)
+        public object GetVoltiTrovati(string max)
         {
             object obj = "";
             httpRequests getVoltiTrovati = new httpRequests();
@@ -86,22 +86,22 @@ namespace proj
             return obj;
         }
 
-        public object AddVoltoRegistrato(string key, string img, string nome)
+        public object AddVoltoRegistrato(string img, string nome)
         {
             object ris = "";
             httpRequests addVoltoRegistrato = new httpRequests();
             ris = addVoltoRegistrato.HttpRequestAddVoltoRegistrato(key, img, nome);
             return ris;
         }
-        public object GetVoltiRegistrati(string key, string start, string numero, string data)
+        public object GetVoltiRegistrati()
         {
             object obj = "";
             httpRequests getVoltiRegistrati = new httpRequests();
-            obj = getVoltiRegistrati.HttpRequestGetVoltiRegistrati(key, start, numero, data);
+            obj = getVoltiRegistrati.HttpRequestGetVoltiRegistrati(key);
             return obj;
         }
 
-        public string DeleteVoltoRegistrato(string key, string id)
+        public string DeleteVoltoRegistrato(string id)
         {
             string ris = "";
             httpRequests delVoltoReg = new httpRequests();
@@ -109,15 +109,15 @@ namespace proj
             return ris;
         }
 
-        public string AddDispositivo(string key, string nome, string tipo, string ip, string acceso)
+        public string AddDispositivo(string nome, string tipo, string ip)
         {
             string ris = "";
             httpRequests addDispositivo = new httpRequests();
-            ris = addDispositivo.HttpRequestAddDispositivo(key, nome, tipo, ip, acceso);
+            ris = addDispositivo.HttpRequestAddDispositivo(key, nome, tipo, ip);
             return ris;
         }
 
-        public object GetDispositivi(string key, string max)
+        public object GetDispositivi(string max)
         {
             object obj = "";
             httpRequests getDispositivi = new httpRequests();
@@ -125,7 +125,7 @@ namespace proj
             return obj;
         }
 
-        public string DeleteDispositivo(string key, string id)
+        public string DeleteDispositivo(string id)
         {
             string ris = "";
             httpRequests delDispositvo = new httpRequests();
@@ -133,7 +133,7 @@ namespace proj
             return ris;
         }
 
-        public string AddSkill(string key, string nome, string descrizione, string azione, string idEmozione)
+        public string AddSkill(string nome, string descrizione, string azione, string idEmozione)
         {
             string ris = "";
             httpRequests addSkill = new httpRequests();
@@ -141,27 +141,34 @@ namespace proj
             return ris;
         }
 
-        public object GetSkills(string key, string start, string numero, string data)
+        public object GetSkills()
         {
             object obj = "";
             httpRequests getSkill = new httpRequests();
-            obj = getSkill.HttpRequestGetSkills(key, start, numero, data);
+            obj = getSkill.HttpRequestGetSkills(key);
             return obj;
         }
 
-        public string DeleteSkill(string key, string id)
+        public string DeleteSkill(string id)
         {
             string ris = "";
             httpRequests delSkill = new httpRequests();
             ris = delSkill.HttpRequestDeleteSkill(key, id);
             return ris;
         }
-        public string AddEmozione(string key, string tipo, string dataRil, string idDisp)
+        public string AddEmozione(string tipo, string dataRil, string idDisp)
         {
             string ris = "";
             httpRequests addEmozione = new httpRequests();
             ris = addEmozione.HttpRequestAddEmozione(key, tipo, dataRil, idDisp);
             return ris;
+        }
+
+        public void GetImage(string tabella, string nome)
+        {
+            httpRequests getImage = new httpRequests();
+            getImage.GetImage(key, tabella, nome);
+            return;
         }
 
 

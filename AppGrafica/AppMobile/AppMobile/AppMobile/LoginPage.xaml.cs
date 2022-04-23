@@ -31,11 +31,12 @@ namespace AppMobile
         public void BtnAccedi(object sender, EventArgs args)
         {
             
-            string username = Username.Text, password = Password.Text;
+            /*string username = Username.Text, password = Password.Text;
             if (username != null && password != null) //se sono vuoti non controllo
             {
                 string ris = utente.Login(username, password);
-                if (ris.Contains("-"))
+                Utente.key = ris;
+                if (ris.Contains("-")) //success
                 {
                     App.Current.MainPage = new TabbedPage1();
                 }
@@ -43,16 +44,9 @@ namespace AppMobile
                     error.Text = ris;
             }
             else
-                error.Text = "compilare tutti i campi!";            
+                error.Text = "compilare tutti i campi!";*/
             // bisogna per forza compilare i campi, altrimenti crasha chiamando solo la finestrta
-
-        }
-
-        public void testingProd(object sender, EventArgs args) {
-            // apre una nuova finestra senza fare cose strane, poi lo tolgo
-            // SOLO PER TESTARE
-
-            App.Current.MainPage = new PaginaUntente(); 
+            App.Current.MainPage = new TabbedPage1();
         }
     }
 }

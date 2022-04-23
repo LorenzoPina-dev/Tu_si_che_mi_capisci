@@ -1,0 +1,55 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" xmlns:local="clr-namespace:AppMobile"
+             x:Class="AppMobile.SkillPage">
+
+    <!-- <ContentPage.BindingContext>
+        <local:ViewModel></local:ViewModel>
+    </ContentPage.BindingContext> -->
+
+    <Frame Grid.Row="0" BackgroundColor="#505050" HorizontalOptions="Center" WidthRequest="530" HeightRequest="20">
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="80" />
+                <RowDefinition Height="630" />
+            </Grid.RowDefinitions>
+
+            <Frame Margin="0, 0,0,0" CornerRadius="30" Grid.Row="0" Grid.Column="0" BackgroundColor="#1C1C1C">
+                <Label Margin="50, 0, 0, 0" Text="Aggiungi skill" TextColor="White" FontSize="25"></Label>
+            </Frame>
+            <Image Source="Logo.png" Margin="200, 0, 0, 0" Grid.Row="0"></Image>
+
+            <Frame Grid.Row="1" BackgroundColor="#1C1C1C" Padding="10,20" HorizontalOptions="Center" WidthRequest="530" HeightRequest="20" CornerRadius="30">
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="50" />
+                        <RowDefinition Height="50" />
+                        <RowDefinition Height="70" />
+                        <RowDefinition Height="70" />
+                        <RowDefinition Height="150" />
+                        <RowDefinition Height="70" />
+                        <RowDefinition Height="70" />
+                    </Grid.RowDefinitions>
+
+                    <Picker x:Name="picker" SelectedIndexChanged="EmChange" HorizontalTextAlignment="Center" BackgroundColor="#3B3B3B" TitleColor="White" Grid.Row="0" Margin="50, 0, 40,0" Title="Emozioni" ItemsSource="{Binding Emozioni}"></Picker>
+                    <Label Grid.Row="2" FontSize="25" TextColor="White" HeightRequest="100" Text="Nome:" HorizontalTextAlignment="Start" Margin="0, 20, 0, 0"></Label>
+                    <Frame Padding="10" CornerRadius="20" Grid.Row="2" Margin="100, 0, 0, 0" BackgroundColor="#3B3B3B">
+                        <Entry x:Name="Nome" Margin="0, 0, 0, 0" TextColor="White"></Entry>
+                    </Frame>
+
+                    <Label Grid.Row="4" FontSize="25" TextColor="White" HeightRequest="100" Text="Descrizione:" HorizontalTextAlignment="Start" Margin="0, 20, 0, 0"></Label>
+                    <Frame Padding="10" CornerRadius="20" Grid.Row="4" Margin="160, 0, 0, 0" BackgroundColor="#3B3B3B">
+                        <Entry x:Name="Descrizione" Margin="0, 0, 0, 0" TextColor="White"></Entry>
+                    </Frame>
+
+                    <Button Clicked="Rimuovi" BackgroundColor="#8489FF" CornerRadius="20" HeightRequest="50" WidthRequest="100" FontSize="20" Grid.Row="6" Text="Rimuovi" Margin="200, 0, 0, 0" />
+
+                    <Button Clicked="Aggiungi" BackgroundColor="#8489FF" CornerRadius="20" HeightRequest="50" WidthRequest="100" FontSize="20" Grid.Row="6" Text="Aggiungi" Margin="10, 0, 200, 0" />
+
+
+                </Grid>
+
+            </Frame>
+        </Grid>
+    </Frame>
+</ContentPage>

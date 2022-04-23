@@ -3,10 +3,10 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" xmlns:local="clr-namespace:AppMobile"
              x:Class="AppMobile.SettingsPage"
              BackgroundColor="#505050">
-
+    <!-- 
     <ContentPage.BindingContext>
         <local:ViewModel></local:ViewModel>
-    </ContentPage.BindingContext>
+    </ContentPage.BindingContext> -->
 
     <Frame Grid.Row="0" BackgroundColor="#505050" HorizontalOptions="Center" WidthRequest="530" HeightRequest="20" CornerRadius="30">
         <Grid>
@@ -35,19 +35,19 @@
                     </Grid.RowDefinitions>
 
                     <!-- permessi -->
-                    <Picker SelectedIndexChanged="ChangePermesso" HorizontalTextAlignment="Center" BackgroundColor="#3B3B3B" TitleColor="White" Grid.Row="1" Margin="40, 0, 60,0" Title="permessi" ItemsSource="{Binding Permessi}"></Picker>
-                    <Image Source="Logo.png" Margin="0, 0, 250, 0" Grid.Row="2"></Image>
-                    <Label Margin="100, 20, 0, 0" Grid.Row="2" Text="Nome" TextColor="White" FontSize="25"></Label>
-                    <Button Text="Rimuovi" Grid.Row="2" Margin="200, 0, 0, 0"></Button>
-                    <Button Text="Aggiungi" Grid.Row="3" Margin="40, 0, 60, 0"></Button>
+                    <Picker x:Name="permessi" SelectedIndexChanged="ChangePermesso" HorizontalTextAlignment="Center" BackgroundColor="#3B3B3B" TitleColor="White" Grid.Row="1" Margin="40, 0, 60,0" Title="permessi"></Picker>
+                    <Image x:Name="img" Source="Logo.png" Margin="0, 0, 250, 0" Grid.Row="2"></Image>
+                    <Label x:Name="nome" Margin="100, 20, 0, 0" Grid.Row="2" Text="Nome" TextColor="White" FontSize="25"></Label>
+                    <Button Text="Rimuovi" Clicked="RemovePerm" Grid.Row="2" Margin="200, 0, 0, 0"></Button>
+                    <Button Text="Aggiungi" Clicked="AddPerm" Grid.Row="3" Margin="40, 0, 60, 0"></Button>
 
                     <!-- dispositivi -->
-                    <Picker SelectedIndexChanged="ChangePermesso" HorizontalTextAlignment="Center" BackgroundColor="#3B3B3B" TitleColor="White" Grid.Row="5" Margin="40, 0, 60,0" Title="Impostazioni" ItemsSource="{Binding Dispositivi}"></Picker>
+                    <Picker x:Name="disp" SelectedIndexChanged="ChangeDisp" HorizontalTextAlignment="Center" BackgroundColor="#3B3B3B" TitleColor="White" Grid.Row="5" Margin="40, 0, 60,0" Title="Dispositivi"></Picker>
                     <Label Margin="30, 20, 0, 0" Grid.Row="6" Text="Nome" TextColor="White" FontSize="25"></Label>
                     <Image Source="Logo.png" Margin="0, 0, 40, 0" Grid.Row="6"></Image>
                     <Label Margin="220, 20, 0, 0" Grid.Row="6" Text="Attivo" TextColor="White" FontSize="25"></Label>
-                    <Button Text="Rimuovi" Grid.Row="7" Margin="200, 0, 0, 0"></Button>
-                    <Button Text="Aggiungi" Grid.Row="7" Margin="10, 0, 200, 0"></Button>
+                    <Button Text="Rimuovi" Clicked="RemoveDisp" Grid.Row="7" Margin="200, 0, 0, 0"></Button>
+                    <Button Text="Aggiungi" Clicked="AddDisp" Grid.Row="7" Margin="10, 0, 200, 0"></Button>
                 </Grid>
             </Frame>
         </Grid>

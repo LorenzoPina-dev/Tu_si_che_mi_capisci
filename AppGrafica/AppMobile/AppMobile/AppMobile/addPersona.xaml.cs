@@ -1,4 +1,5 @@
 ﻿using Plugin.Media;
+using proj;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -13,8 +14,10 @@ namespace AppMobile
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class addPersona : ContentPage
     {
+        Utente utente;
         public addPersona()
         {
+            utente = new Utente();
             InitializeComponent();
         }
 
@@ -34,15 +37,21 @@ namespace AppMobile
 
             });
 
-            // Convert file to byre array, to bitmap and set it to our ImageView
-
-            
             byte[] imageArray = System.IO.File.ReadAllBytes(file.Path);
 
-            //prova.Text = file.Path;
-            //immagine.Source = file.Path; 
-            //Bitmap bitmap = BitmapFactory.DecodeByteArray(imageArray, 0, imageArray.Length);
-            //thisImageView.SetImageBitmap(bitmap);
+            string path = file.Path;
+            img.Source = file.Path; 
         }
+
+        public void Indietro(object sender, System.EventArgs e)
+        {
+            App.Current.MainPage = new TabbedPage1();
+        }
+
+        public void Aggiungi(object sender, System.EventArgs e)
+        {
+            utente.AddVoltoRegistrato(img.Source.ToString(), Nome.Text.ToString());
+        }
+
     }
 }
