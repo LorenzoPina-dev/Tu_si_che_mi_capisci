@@ -25,6 +25,8 @@ def GetImmagine(basename):
     img = cv2.imdecode(arr, -1) # 'Load it as it is'
     return img
 
+
+
 class SimpleFacerec:
     def __init__(self):
         self.known_face_encodings = []

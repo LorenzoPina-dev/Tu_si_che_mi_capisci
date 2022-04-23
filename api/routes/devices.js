@@ -49,12 +49,13 @@ router.post("/add", function(req, res, next) {
         parametri = [query.nome, query.tipo, query.ip, query.acceso, req.Utente.Id];
     } else {
         sql =
-            "INSERT into dispositivo (Nome,Tipo,Ip,IdUtente) VALUES (?,?,?,?,?)";
+            "INSERT into dispositivo (Nome,Tipo,Ip,IdUtente) VALUES (?,?,?,?)";
         parametri = [query.nome, query.tipo, query.ip, req.Utente.Id];
     }
     db.query(sql, parametri,
         (err, result) => {
             if (err) {
+		console.log(err);
                 res.json({
                     success: false,
                     result: { testo: "Errore" }
@@ -74,7 +75,7 @@ router.delete("/remove/:id", function(req, res, next) {
         return;
     }
     db.query(
-        "Select IdUtente FrOM dispositivo WHERE Id=?", [req.params.Id],
+        "Select IdUtente FrOM dispositivo WHERE Id=?", [req.params.id],
         (err, result) => {
             if (err) {
                 res.json({
@@ -85,7 +86,7 @@ router.delete("/remove/:id", function(req, res, next) {
             }
             if (result[0].IdUtente == req.Utente.Id) {
                 db.query(
-                    "DELETE FrOM dispositivo WHERE Id=?", [req.params.Id],
+                    "DELETE FrOM dispositivo WHERE Id=?", [req.params.id],
                     (err, result) => {
                         if (err) {
                             res.json({

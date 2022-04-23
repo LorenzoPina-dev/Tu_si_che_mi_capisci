@@ -1,3 +1,4 @@
+
 var express = require("express");
 var router = express.Router();
 const fs = require("fs");
@@ -47,7 +48,7 @@ router.get("/", function(req, res) {
 var i = 0;
 router.post("/add", multipartMiddleware, function(req, res, next) {
     let query = req.body;
-    if (!query.nome || !query.immagine) {
+    if (!query.nome || !req.files.immagine) {
         res.json({ success: false, testo: "mancano parametri o sono errati" });
         return;
     }
@@ -57,10 +58,12 @@ router.post("/add", multipartMiddleware, function(req, res, next) {
         "INSERT into voltoregistrato (Nome,Immagine,IdUtente) VALUES (?,?,?)", [query.nome, immagine, req.Utente.Id],
         (err, result) => {
             if (err) {
-                res.json({
+                console.log(err);
+		res.json({
                     success: false,
                     result: { testo: "Errore" }
                 });
+		console.log(err);
                 return;
             }
             res.json({
@@ -71,12 +74,13 @@ router.post("/add", multipartMiddleware, function(req, res, next) {
     );
 });
 router.delete("/remove/:id", function(req, res, next) {
+	console.log(req);
     if (!req.params.id) {
         res.json({ success: false, testo: "mancano parametri o sono errati" });
         return;
     }
     db.query(
-        "Select IdUtente,Immagine FrOM voltoregistrato WHERE Id=?", [req.params.Id],
+        "Select IdUtente,Immagine FrOM voltoregistrato WHERE Id=?", [req.params.id],
         (err, result) => {
             if (err) {
                 res.json({
@@ -88,7 +92,7 @@ router.delete("/remove/:id", function(req, res, next) {
             fs.unlinkSync(filePath + "/" + result.Immagine);
             if (result[0].IdUtente == req.Utente.Id) {
                 db.query(
-                    "DELETE FrOM voltoregistrato WHERE Id=?", [req.params.Id],
+                    "DELETE FrOM voltoregistrato WHERE Id=?", [req.params.id],
                     (err, result) => {
                         if (err) {
                             res.json({

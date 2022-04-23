@@ -1,15 +1,18 @@
+
 var express = require("express");
 var router = express.Router();
 const fs = require("fs");
 var sha256 = require("js-sha256").sha256;
 var db = require("./../util/db");
 var nodemailer = require("nodemailer");
+var smtpTransport = require('nodemailer-smtp-transport');
 let emailRegexp = /^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/;
-var transporter = nodemailer.createTransport({
-    host: "smtp.gmail.com",
-    secureConnection: true,
-    port: 587,
-    requiresAuth: true,
+var transporter = nodemailer.createTransport(
+{
+        host: "smtp.gmail.com",
+        secureConnection: true,
+        port: 587,
+        requiresAuth: true,
     auth: {
         user: process.env.MAILUSER,
         pass: process.env.MAILPASS,
@@ -27,7 +30,7 @@ router.post("/", multipartMiddleware, function(req, res, next) {
 });*/
 router.post("/login", (req, res) => {
     query = req.body;
-    console.log(query);
+console.log(query);
     if (!query.username || !query.password) {
         res.json({ success: false, result: { testo: "mancano parametri o sono errati" } });
         return;
@@ -107,8 +110,8 @@ router.get("/resetPassword", (req, res) => {
                 });
                 return;
             }
-            sendMail(res, mail, mail, "codice reset password", "il codice per il reset è: " + codice);
-            res.json({ success: true, result: { testo: "invio codice" } });
+    	sendMail(res, mail, mail, "codice reset password", "il codice per il reset è: " + codice);
+    	res.json({ success: true, result: { testo: "invio codice" } });
 
         }
     );
@@ -117,8 +120,8 @@ router.get("/resetPassword", (req, res) => {
 });
 router.put("/cambiaPassword", (req, res) => {
     let query = req.body;
-    console.log(query);
-    if (!query.password || !query.password2 || !query.codice) {
+console.log(query);
+   if (!query.password || !query.password2 || !query.codice) {
         res.json({
             success: false,
             result: { testo: "mancano parametri o sono errati" },
@@ -133,7 +136,7 @@ router.put("/cambiaPassword", (req, res) => {
         "Select Mail from reset WHERE CodiceReset=? and now()-Data<'70000'", [query.codice],
         (err, result) => {
             if (err) {
-                console.log(err);
+		console.log(err);
                 res.json({
                     success: false,
                     result: { testo: "Errore" },
@@ -173,7 +176,7 @@ const sendMail = (res, username, mailTo, subject, body) => {
         from: process.env.MAILUSER,
         to: `${username} ${mailTo}`,
         subject: subject,
-        text: body
+       	text:body
     };
     try {
         transporter.sendMail(mailOptions, function(error, info) {

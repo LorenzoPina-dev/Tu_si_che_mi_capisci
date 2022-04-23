@@ -60,7 +60,7 @@ router.delete("/remove/:id", function(req, res, next) {
         res.json({ success: false, testo: "mancano parametri o sono errati" });
         return;
     }
-    db.query("Select IdUtente FrOM skill WHERE Id=?", [req.params.Id], (err, result) => {
+    db.query("Select IdUtente FrOM skill WHERE Id=?", [req.params.id], (err, result) => {
         if (err) {
             res.json({
                 success: false,
@@ -70,7 +70,7 @@ router.delete("/remove/:id", function(req, res, next) {
         }
         if (result[0].IdUtente == req.Utente.Id) {
             db.query(
-                "DELETE FrOM skill WHERE Id=?", [req.params.Id],
+                "DELETE FrOM skill WHERE Id=?", [req.params.id],
                 (err, result) => {
                     if (err) {
                         res.json({

@@ -37,7 +37,8 @@ router.get("/:tabella", (req, res) => {
                 "../uploads/" + tabella + "/" + file
             );
             console.log(filePath);
-            if (result.length > 0 && tabella == "utente" ? result[0].Id : result[0].IdUtente == req.Utente.Id && fs.existsSync(filePath)) {
+	     console.log(result);
+            if (result.length > 0 && (tabella == "utente" ? result[0].Id : result[0].IdUtente) == req.Utente.Id && fs.existsSync(filePath)) {
                 res.sendFile(filePath);
             } else
                 res.status(404).json({ success: false, result: { testo: "file non trovato" } });
