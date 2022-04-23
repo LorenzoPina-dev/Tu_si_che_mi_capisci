@@ -8,9 +8,10 @@
             BackgroundColor="#1C1C1C">
 
     <TabbedPage.Children>
-        <local:addDispositivo IconImageSource="IcoSettings"/>
+        <local:addDispositivo IconImageSource="IcoSettings"/> 
+        <!-- Fatta la pagina impostazioni, classe "Impostazioni"-->
         <local:addPersona IconImageSource="IcoSkills"/>
         <local:addSkill IconImageSource="IcoGrafici"/>
-        <local:InfoUtentePage IconImageSource="IcoUtente"/>
+        <local:InfoUtentePage IconImageSource="IcoUtente"/> <!-- "PaginaUtente.xaml"-->
     </TabbedPage.Children>
 </TabbedPage>

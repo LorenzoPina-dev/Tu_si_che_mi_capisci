@@ -1,0 +1,52 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="AppMobile.PaginaUntente">
+    <Frame Grid.Row="0" BackgroundColor="#505050" HorizontalOptions="Center" WidthRequest="530" HeightRequest="20">
+
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="80" />
+                <RowDefinition Height="630" />
+            </Grid.RowDefinitions>
+
+            <Frame Margin="0, 0,0,0" CornerRadius="30" Grid.Row="0" Grid.Column="0" BackgroundColor="#1C1C1C">
+                <Label Margin="0, 0, 0, 0" Text="Pagina Utente" TextColor="White" FontSize="25"></Label>
+            </Frame>
+            <Image Source="Logo.png" Margin="290, 0, 0, 0" Grid.Row="0"></Image>
+
+            <Frame Grid.Row="1" BackgroundColor="#1C1C1C" Padding="10,20" HorizontalOptions="Center" WidthRequest="530" HeightRequest="20" CornerRadius="30">
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="70" />
+                        <RowDefinition Height="100" />
+                        <RowDefinition Height="70" />
+                        <RowDefinition Height="70" />
+                        <RowDefinition Height="70" />
+                        <RowDefinition Height="70" />
+                        <RowDefinition Height="70" />
+                        <RowDefinition Height="70" />
+                    </Grid.RowDefinitions>
+
+                    <Label Text="Username" Grid.Row="0" Margin="100,0,0,0" FontSize="24" />
+                    <ImageButton Source="IcoSettings.png" Grid.Row="0" Margin="280,0,0,0" BackgroundColor="#1C1C1C"  CornerRadius="30" Clicked="impostazioniPagina"/> <!-- Tasto delle impostazioni -->
+                    <!--<Image Source="logo.png" Grid.Row="0" Margin="0,0,0,0" />-->
+
+                    <Frame Grid.Row="1" CornerRadius="30"  BackgroundColor="#363433"> <!-- Obiettivo-->
+                        <Grid>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="33" />
+                                <RowDefinition Height="33" />
+                            </Grid.RowDefinitions>
+                            <Label Text="Ti piace il cazzo" Grid.Row="0"/>
+                            <Label Text="+70exp" Grid.Row="0" Margin="250,0,0,0"/>
+                            <ProgressBar Progress="0.3" ProgressColor="#FFFFFF" Grid.Row="1"/> <!-- prende valori da 0.0 a 1.0-->
+                        </Grid>
+                    </Frame>
+
+                </Grid>
+
+            </Frame>
+        </Grid>
+    </Frame>
+</ContentPage>

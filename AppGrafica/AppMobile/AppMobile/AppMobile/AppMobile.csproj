@@ -45,6 +45,9 @@
     <Compile Update="LoginPage.xaml.cs">
       <DependentUpon>%(Filename)</DependentUpon>
     </Compile>
+    <Compile Update="PaginaUtente.xaml.cs">
+      <DependentUpon>PaginaUtente.xaml</DependentUpon>
+    </Compile>
     <Compile Update="ResetPwdPage.xaml.cs">
       <DependentUpon>%(Filename)</DependentUpon>
     </Compile>
@@ -57,6 +60,12 @@
   </ItemGroup>
 
   <ItemGroup>
+    <EmbeddedResource Update="Impostazioni.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Update="PaginaUtente.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
     <EmbeddedResource Update="prova.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
