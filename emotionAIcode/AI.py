@@ -65,7 +65,7 @@ SAVEE_df = pd.concat([SAVEE_df, pd.DataFrame(path, columns=['path'])], axis=1)
 # ipd.Audio(fname)
 
 # upload RAVDESS dataset
-RAV = "E:/marini alessio/gestioneProgetto/RAVE/"
+RAV = "E:\marini alessio\gestioneProgetto\RAVE\\"
 dir_list = os.listdir(RAV)
 dir_list.sort()
 
@@ -99,7 +99,7 @@ RAV_df = RAV_df.drop(['gender', 'emotion'], axis=1)
 # print(RAV_df.labels.value_counts())
 
 # upload TESS dataset
-TESS = "E:/marini alessio/gestioneProgetto/TESS/"
+TESS = "E:\marini alessio\gestioneProgetto\TESS\\"
 dir_list = os.listdir(TESS)
 dir_list.sort()
 path = []
@@ -132,7 +132,7 @@ TESS_df = pd.concat([TESS_df, pd.DataFrame(path, columns=['path'])], axis=1)
 # print(TESS_df.labels.value_counts())
 
 # upload CREMA dataset
-CREMA = "E:/marini alessio/gestioneProgetto/CREMA/"
+CREMA = "E:\marini alessio\gestioneProgetto\CREMA\\"
 dir_list = os.listdir(CREMA)
 dir_list.sort()
 gender = []
@@ -183,7 +183,7 @@ CREMA_df = pd.concat([CREMA_df, pd.DataFrame(path, columns=['path'])], axis=1)
 df = pd.concat([SAVEE_df, RAV_df, TESS_df, CREMA_df], axis = 0)
 print(df.labels.value_counts())
 df.head()
-df.to_csv("E:/marini alessio/gestioneProgetto/prova/Data_path.csv",index=False)
+df.to_csv("E:\marini alessio\gestioneProgetto\prova\Data_path.csv",index=False)
 
 # print(CREMA_df.labels.value_counts())
 
