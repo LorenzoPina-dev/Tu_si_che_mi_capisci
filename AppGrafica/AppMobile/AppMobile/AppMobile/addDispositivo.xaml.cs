@@ -22,7 +22,7 @@ namespace AppMobile
 
         public void Indietro(object sender, EventArgs args)
         {
-            App.Current.MainPage = new Impostazioni();
+            App.Current.MainPage = new SettingsPage();
         }
 
         public void Aggiungi(object sender, EventArgs args)
@@ -31,11 +31,17 @@ namespace AppMobile
             string nome = Nome.Text;
             string ip = Ip.Text;
             if (Mic.IsChecked == true)
-                tipo = "mic";
+                tipo = "1";
             else
-                tipo = "cam";
+                tipo = "0";
             utente.AddDispositivo(nome, tipo, ip);
-            App.Current.MainPage = new Impostazioni();
+            App.Current.MainPage = new SettingsPage();
+        }
+
+        public void ChangeMic(object sender, EventArgs args)
+        {
+            Cam.IsChecked = false;
+            Mic.IsChecked = true;
         }
     }
 }

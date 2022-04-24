@@ -151,4 +151,10 @@
   <ItemGroup>
     <BundleResource Include="Resources\file.png" />
   </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\mic.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\cam.png" />
+  </ItemGroup>
 </Project>

@@ -86,11 +86,11 @@ namespace proj
             return obj;
         }
 
-        public object AddVoltoRegistrato(string img, string nome)
+        public string AddVoltoRegistrato(string img, string nome)
         {
-            object ris = "";
+            string ris = "";
             httpRequests addVoltoRegistrato = new httpRequests();
-            ris = addVoltoRegistrato.HttpRequestAddVoltoRegistrato(key, img, nome);
+            ris = addVoltoRegistrato.HttpRequestAddVoltoRegistratoAsync(key, img, nome).Result;
             return ris;
         }
         public object GetVoltiRegistrati()
@@ -117,11 +117,11 @@ namespace proj
             return ris;
         }
 
-        public object GetDispositivi(string max)
+        public object GetDispositivi()
         {
             object obj = "";
             httpRequests getDispositivi = new httpRequests();
-            obj = getDispositivi.HttpRequestGetDispositivi(key, max);
+            obj = getDispositivi.HttpRequestGetDispositivi(key);
             return obj;
         }
 
@@ -141,11 +141,11 @@ namespace proj
             return ris;
         }
 
-        public object GetSkills()
+        public object GetSkills(string idEmozione)
         {
             object obj = "";
             httpRequests getSkill = new httpRequests();
-            obj = getSkill.HttpRequestGetSkills(key);
+            obj = getSkill.HttpRequestGetSkills(key, idEmozione);
             return obj;
         }
 
@@ -164,13 +164,12 @@ namespace proj
             return ris;
         }
 
-        public void GetImage(string tabella, string nome)
+        public byte[] GetImage(string tabella, string nome)
         {
+            byte[] path;
             httpRequests getImage = new httpRequests();
-            getImage.GetImage(key, tabella, nome);
-            return;
+            path = (byte[])getImage.GetImage(key, tabella, nome);
+            return path;
         }
-
-
     }
 }

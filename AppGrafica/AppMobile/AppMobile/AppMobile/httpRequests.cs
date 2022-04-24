@@ -163,14 +163,22 @@ namespace proj
             object ris = json.GetObjArray(obj, "voltiTrovati");
             return ris;
         }
-        public string HttpRequestAddVoltoRegistrato(string key, string img, string nome) //aggiungi volto registrato
+        public async Task<string> HttpRequestAddVoltoRegistratoAsync(string key, string img, string nome) //aggiungi volto registrato
         {
             data = new NameValueCollection();
             string url = "http://" + host + "/" + key + "/voltoRegistrato/add";
-            data["immagine"] = img;
-            data["nome"] = nome;
-            var response = wb.UploadValues(url, "POST", data);
-            string result = System.Text.Encoding.UTF8.GetString(response); //ottengo una risposta
+            HttpClient httpClient = new HttpClient();
+            MultipartFormDataContent form = new MultipartFormDataContent();
+            FileStream fs = File.OpenRead(img);
+            StreamContent streamContent = new StreamContent(fs);
+             ByteArrayContent fileContent = new ByteArrayContent(await streamContent.ReadAsByteArrayAsync());
+            fileContent.Headers.ContentType = MediaTypeHeaderValue.Parse("multipart/form-data");
+            // "file" parameter name should be the same as the server side input parameter name
+            form.Add(fileContent, "immagine", Path.GetFileName(img));
+            form.Add(new StringContent(nome), "nome");
+            HttpResponseMessage response = await httpClient.PutAsync(url, form);
+
+            string result = System.Text.Encoding.UTF8.GetString(await response.Content.ReadAsByteArrayAsync());
             JObject obj = json.Parse(result);
             string ris = json.GetText(obj);
             return ris;
@@ -214,22 +222,21 @@ namespace proj
         }
 
         
-        public object HttpRequestGetDispositivi(string key, string max) //prendi dispositivi
+        public object HttpRequestGetDispositivi(string key) //prendi dispositivi
         {
             data = new NameValueCollection();
-            string url = "http://" + host + "/" + key + "/dispositivi/?max=" + max;
+            string url = "http://" + host + "/" + key + "/dispositivi";
             var response = wb.DownloadData(url);
             string result = System.Text.Encoding.UTF8.GetString(response);
             JObject obj = json.Parse(result);
-            object ris = json.GetObjArray(obj, "dispositivi");
+            object ris = json.GetObjArray(obj, "dispositivo");
             return ris;
         }
 
         public string HttpRequestDeleteDispositivo(string key, string id) //elimina dispositivo
         {
             data = new NameValueCollection();
-            string url = "http://" + host + "/" + key + "/dispositivi/remove";
-            data["id"] = id;
+            string url = "http://" + host + "/" + key + "/dispositivi/remove/" + id;
             var response = wb.UploadValues(url, "DELETE", data);
             string result = System.Text.Encoding.UTF8.GetString(response); //ottengo una risposta
             JObject obj = json.Parse(result);
@@ -249,10 +256,10 @@ namespace proj
         }
 
         //da rivedere
-        public object HttpRequestGetSkills(string key) //prendi dispositivi
+        public object HttpRequestGetSkills(string key, string idEmozione) //prendi dispositivi
         {
             data = new NameValueCollection();
-            string url = "http://" + host + "/" + key + "/skill";
+            string url = "http://" + host + "/" + key + "/skill?idEmozione=" + idEmozione;
             var response = wb.DownloadData(url);
             string result = System.Text.Encoding.UTF8.GetString(response);
             JObject obj = json.Parse(result);
@@ -285,8 +292,7 @@ namespace proj
                 return ris;
             }
             catch (Exception ){
-                File.WriteAllBytes("C:\\Users\\Miky\\Documents\\Tu_si_che_mi_capisci\\AppGrafica\\AppMobile\\AppMobile\\AppMobile.Android\\Resources\\drawable\\" + nome, response);
-                return 0;
+                return response;
             }
         }
     }

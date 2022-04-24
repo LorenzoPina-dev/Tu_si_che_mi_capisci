@@ -30,8 +30,8 @@ namespace AppMobile
         }
         public void BtnAccedi(object sender, EventArgs args)
         {
-            
-            /*string username = Username.Text, password = Password.Text;
+
+            string username = Username.Text, password = Password.Text;
             if (username != null && password != null) //se sono vuoti non controllo
             {
                 string ris = utente.Login(username, password);
@@ -44,9 +44,7 @@ namespace AppMobile
                     error.Text = ris;
             }
             else
-                error.Text = "compilare tutti i campi!";*/
-            // bisogna per forza compilare i campi, altrimenti crasha chiamando solo la finestrta
-            App.Current.MainPage = new TabbedPage1();
+                error.Text = "compilare tutti i campi!";
         }
     }
 }

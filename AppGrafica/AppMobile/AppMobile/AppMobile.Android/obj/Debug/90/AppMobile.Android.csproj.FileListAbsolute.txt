@@ -1740,8 +1740,6 @@ C:\Users\Miky\Documents\Tu_si_che_mi_capisci\AppGrafica\AppMobile\AppMobile\AppM
 C:\Users\Miky\Documents\Tu_si_che_mi_capisci\AppGrafica\AppMobile\AppMobile\AppMobile.Android\obj\Debug\90\res\drawable\icoskills.png
 C:\Users\Miky\Documents\Tu_si_che_mi_capisci\AppGrafica\AppMobile\AppMobile\AppMobile.Android\obj\Debug\90\res\drawable\icosettings.png
 C:\Users\Miky\Documents\Tu_si_che_mi_capisci\AppGrafica\AppMobile\AppMobile\AppMobile.Android\obj\Debug\90\res\drawable\file.png
-C:\Users\Miky\Documents\Tu_si_che_mi_capisci\AppGrafica\AppMobile\AppMobile\AppMobile.Android\obj\Debug\90\res\drawable\pepe.jpg
-C:\Users\Miky\Documents\Tu_si_che_mi_capisci\AppGrafica\AppMobile\AppMobile\AppMobile.Android\obj\Debug\90\res\drawable\lorenzo.jpg
 C:\Users\Miky\Documents\Tu_si_che_mi_capisci\AppGrafica\AppMobile\AppMobile\AppMobile.Android\obj\Debug\90\uploadflags.txt
 C:\Users\Miky\Documents\Tu_si_che_mi_capisci\AppGrafica\AppMobile\AppMobile\AppMobile.Android\obj\Debug\90\resolvedassemblies.hash
 C:\Users\Miky\Documents\Tu_si_che_mi_capisci\AppGrafica\AppMobile\AppMobile\AppMobile.Android\obj\Debug\90\android\assets\AppMobile.Android.dll
@@ -2242,3 +2240,5 @@ C:\Users\Miky\Documents\Tu_si_che_mi_capisci\AppGrafica\AppMobile\AppMobile\AppM
 C:\Users\Miky\Documents\Tu_si_che_mi_capisci\AppGrafica\AppMobile\AppMobile\AppMobile.Android\obj\Debug\90\stamp\_GenerateJavaStubs.stamp
 C:\Users\Miky\Documents\Tu_si_che_mi_capisci\AppGrafica\AppMobile\AppMobile\AppMobile.Android\obj\Debug\90\stamp\_GeneratePackageManagerJava.stamp
 C:\Users\Miky\Documents\Tu_si_che_mi_capisci\AppGrafica\AppMobile\AppMobile\AppMobile.Android\obj\Debug\90\stamp\_ResolveLibraryProjectImports.stamp
+C:\Users\Miky\Documents\Tu_si_che_mi_capisci\AppGrafica\AppMobile\AppMobile\AppMobile.Android\obj\Debug\90\res\drawable\mic.png
+C:\Users\Miky\Documents\Tu_si_che_mi_capisci\AppGrafica\AppMobile\AppMobile\AppMobile.Android\obj\Debug\90\res\drawable\cam.png

@@ -15,6 +15,7 @@ namespace AppMobile
     public partial class addPersona : ContentPage
     {
         Utente utente;
+        string path = "";
         public addPersona()
         {
             utente = new Utente();
@@ -39,7 +40,7 @@ namespace AppMobile
 
             byte[] imageArray = System.IO.File.ReadAllBytes(file.Path);
 
-            string path = file.Path;
+            path = file.Path;
             img.Source = file.Path; 
         }
 
@@ -50,7 +51,8 @@ namespace AppMobile
 
         public void Aggiungi(object sender, System.EventArgs e)
         {
-            utente.AddVoltoRegistrato(img.Source.ToString(), Nome.Text.ToString());
+            utente.AddVoltoRegistrato(path, Nome.Text.ToString());
+            App.Current.MainPage = new SettingsPage();
         }
 
     }

@@ -39,14 +39,14 @@
 
                     <Label Grid.Row="4" FontSize="25" TextColor="White" HeightRequest="100" Text="Tipo:" HorizontalTextAlignment="Start" Margin="0, 20, 0, 0"></Label>
                     <Frame Padding="10" CornerRadius="20" Grid.Row="4" Margin="100, 0, 0, 0" BackgroundColor="#3B3B3B">
-                        <CheckBox IsChecked="true" x:Name="Mic" Grid.Row="4"  />
+                        <RadioButton x:Name="Mic" Grid.Row="4"  />
                     </Frame>
-                    <Label Grid.Row="4" FontSize="25" TextColor="White" HeightRequest="100" Text="Mic:" Margin="150, 15, 0, 0"></Label>
+                    <Label Grid.Row="4" FontSize="25" TextColor="White" HeightRequest="100" Text="Mic" Margin="150, 15, 0, 0"></Label>
 
                     <Frame Padding="10" CornerRadius="20" Grid.Row="5" Margin="100, 0, 0, 0" BackgroundColor="#3B3B3B">
-                        <CheckBox IsChecked="true" x:Name="Cam" Grid.Row="5"  />
+                        <RadioButton x:Name="Cam" IsChecked="true" Grid.Row="5"  />
                     </Frame>
-                    <Label Grid.Row="5" FontSize="25" TextColor="White" HeightRequest="100" Text="Cam:" Margin="150, 15, 0, 0"></Label>
+                    <Label Grid.Row="5" FontSize="25" TextColor="White" HeightRequest="100" Text="Cam" Margin="150, 15, 0, 0"></Label>
 
                     <Button Clicked="Aggiungi" BackgroundColor="#8489FF" CornerRadius="20" HeightRequest="50" WidthRequest="100" FontSize="20" Grid.Row="7" Text="Conferma" Margin="200, 0, 0, 0" />
 

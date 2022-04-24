@@ -9,7 +9,7 @@
 
     <TabbedPage.Children>
         <local:SettingsPage IconImageSource="IcoSettings"/> 
-        <local:addPersona IconImageSource="IcoSkills"/>
+        <local:SkillPage IconImageSource="IcoSkills"/>
         <local:SkillPage IconImageSource="IcoGrafici"/>
         <local:InfoUtentePage IconImageSource="IcoUtente"/>
     </TabbedPage.Children>

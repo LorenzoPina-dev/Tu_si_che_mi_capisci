@@ -13,7 +13,7 @@ namespace proj
             //string result = utente.Signin(user, password, password2, mail);
             //Console.WriteLine(result);
 
-            string key = utente.Login("gianni", "1234");
+            string key = utente.Login("admin", "123");
             Console.WriteLine(key);
 
             //string codice = utente.ForgotPwd(mail);
@@ -74,6 +74,8 @@ namespace proj
             //string dataRil = "2022-03-24", oraRil = "08:29", idDisp = "2", idVolto = "4"; 
             //string ris = utente.AddVoltoTrovato(key, img, dataRil, oraRil, idDisp, idVolto);
             //Console.WriteLine(ris);
+
+            utente.AddSkill("skill1", "skill arrabbiato1", "accendi muscia", "1");
         }
     }
 }
