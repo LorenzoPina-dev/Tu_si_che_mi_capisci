@@ -1,6 +1,7 @@
 # Importing required libraries 
 # Keras
 import keras
+from keras import optimizers
 from keras import regularizers
 from keras.preprocessing import sequence
 from keras.preprocessing.text import Tokenizer
@@ -35,7 +36,7 @@ import IPython.display as ipd  # To play sound in the notebooks
 
 #prendo i dati salvati degli audio
 #devo cambiare il path
-ref = pd.read_csv("E:\marini alessio\gestioneProgetto\prova\Data_path.csv")
+ref = pd.read_csv("D:\scuola\gestioneProgetto/test/testFiles/Data_path.csv")
 ref.head()
 
 # Note this takes a couple of minutes (~10 mins) as we're iterating over 4 datasets 
@@ -148,70 +149,12 @@ model.add(Activation('relu'))
 model.add(Flatten())
 model.add(Dense(14)) # Target class number
 model.add(Activation('softmax'))
-# opt = keras.optimizers.SGD(lr=0.0001, momentum=0.0, decay=0.0, nesterov=False)
-# opt = keras.optimizers.Adam(lr=0.0001)
-opt = keras.optimizers.rmsprop(lr=0.00001, decay=1e-6)
+# opt = keras.optimizers.SGD(learning_rate=0.0001, momentum=0.0, decay=0.0, nesterov=False)
+# opt = keras.optimizers.Adam(learning_rate=0.0001)
+optim = tf.keras.optimizers.RMSprop(learning_rate=0.0001)
+model.compile(loss='categorical_crossentropy', optimizer=optim, metrics = ['acc'])
 model.summary()
-#questo dovrebbe essere l'output
-# _________________________________________________________________
-# Layer (type)                 Output Shape              Param #   
-# =================================================================
-# conv1d_1 (Conv1D)            (None, 216, 256)          2304      
-# _________________________________________________________________
-# activation_1 (Activation)    (None, 216, 256)          0         
-# _________________________________________________________________
-# conv1d_2 (Conv1D)            (None, 216, 256)          524544    
-# _________________________________________________________________
-# batch_normalization_1 (Batch (None, 216, 256)          1024      
-# _________________________________________________________________
-# activation_2 (Activation)    (None, 216, 256)          0         
-# _________________________________________________________________
-# dropout_1 (Dropout)          (None, 216, 256)          0         
-# _________________________________________________________________
-# max_pooling1d_1 (MaxPooling1 (None, 27, 256)           0         
-# _________________________________________________________________
-# conv1d_3 (Conv1D)            (None, 27, 128)           262272    
-# _________________________________________________________________
-# activation_3 (Activation)    (None, 27, 128)           0         
-# _________________________________________________________________
-# conv1d_4 (Conv1D)            (None, 27, 128)           131200    
-# _________________________________________________________________
-# activation_4 (Activation)    (None, 27, 128)           0         
-# _________________________________________________________________
-# conv1d_5 (Conv1D)            (None, 27, 128)           131200    
-# _________________________________________________________________
-# activation_5 (Activation)    (None, 27, 128)           0         
-# _________________________________________________________________
-# conv1d_6 (Conv1D)            (None, 27, 128)           131200    
-# _________________________________________________________________
-# batch_normalization_2 (Batch (None, 27, 128)           512       
-# _________________________________________________________________
-# activation_6 (Activation)    (None, 27, 128)           0         
-# _________________________________________________________________
-# dropout_2 (Dropout)          (None, 27, 128)           0         
-# _________________________________________________________________
-# max_pooling1d_2 (MaxPooling1 (None, 3, 128)            0         
-# _________________________________________________________________
-# conv1d_7 (Conv1D)            (None, 3, 64)             65600     
-# _________________________________________________________________
-# activation_7 (Activation)    (None, 3, 64)             0         
-# _________________________________________________________________
-# conv1d_8 (Conv1D)            (None, 3, 64)             32832     
-# _________________________________________________________________
-# activation_8 (Activation)    (None, 3, 64)             0         
-# _________________________________________________________________
-# flatten_1 (Flatten)          (None, 192)               0         
-# _________________________________________________________________
-# dense_1 (Dense)              (None, 14)                2702      
-# _________________________________________________________________
-# activation_9 (Activation)    (None, 14)                0         
-# =================================================================
-# Total params: 1,285,390
-# Trainable params: 1,284,622
-# Non-trainable params: 768
-# _________________________________________________________________
-
-model.compile(loss='categorical_crossentropy', optimizer=opt,metrics=['accuracy'])
+# model.compile(loss='categorical_crossentropy', optimizer=opt,metrics=['accuracy'])
 model_history=model.fit(X_train, y_train, batch_size=16, epochs=100, validation_data=(X_test, y_test))
 #show the model
 plt.plot(model_history.history['loss'])
@@ -250,8 +193,8 @@ loaded_model.load_weights("saved_models/Emotion_Model.h5")
 print("Loaded model from disk")
  
 # Keras optimiser
-opt = keras.optimizers.rmsprop(lr=0.00001, decay=1e-6)
-loaded_model.compile(loss='categorical_crossentropy', optimizer=opt, metrics=['accuracy'])
+optim = tf.keras.optimizers.RMSprop(learning_rate=0.0001)
+loaded_model.compile(loss='categorical_crossentropy', optimizer=optim, metrics = ['acc'])
 score = loaded_model.evaluate(X_test, y_test, verbose=0)
 print("%s: %.2f%%" % (loaded_model.metrics_names[1], score[1]*100))
 

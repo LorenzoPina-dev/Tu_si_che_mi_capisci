@@ -13,62 +13,65 @@ import librosa
 import librosa.display
 import IPython.display as ipd  # To play sound in the notebook
 import pyaudio
+import tensorflow as tf
 
 
 # ignore warnings 
 if not sys.warnoptions:
     warnings.simplefilter("ignore")
 
-CHUNK = 1024 
-FORMAT = pyaudio.paInt16 
-CHANNELS = 1 
-RATE = 44100 
-RECORD_SECONDS = 4
-WAVE_OUTPUT_FILENAME = "D:/scuola/gestioneProgetto/test audio/testing.wav"
+# CHUNK = 1024 
+# FORMAT = pyaudio.paInt16 
+# CHANNELS = 1 
+# RATE = 44100 
+# RECORD_SECONDS = 4
+# WAVE_OUTPUT_FILENAME = "D:/scuola/gestioneProgetto/test audio/testing.wav"
 
-p = pyaudio.PyAudio()
+# p = pyaudio.PyAudio()
 
-stream = p.open(format=FORMAT,
-                channels=CHANNELS,
-                rate=RATE,
-                input=True,
-                frames_per_buffer=CHUNK) #buffer
+# stream = p.open(format=FORMAT,
+#                 channels=CHANNELS,
+#                 rate=RATE,
+#                 input=True,
+#                 frames_per_buffer=CHUNK) #buffer
 
-frames = []
-print("* recording")
-for i in range(0, int(RATE / CHUNK * RECORD_SECONDS)):
-    data = stream.read(CHUNK)
-    frames.append(data) # 2 bytes(16 bits) per channel
+# frames = []
+# print("* recording")
+# for i in range(0, int(RATE / CHUNK * RECORD_SECONDS)):
+#     data = stream.read(CHUNK)
+#     frames.append(data) # 2 bytes(16 bits) per channel
 
-print("* done recording")
+# print("* done recording")
 
-stream.close()
+# stream.close()
 
-wf = wave.open(WAVE_OUTPUT_FILENAME, 'wb')
-wf.setnchannels(CHANNELS)
-wf.setsampwidth(p.get_sample_size(FORMAT))
-wf.setframerate(RATE)
-wf.writeframes(b''.join(frames))
-wf.close()
+# wf = wave.open(WAVE_OUTPUT_FILENAME, 'wb')
+# wf.setnchannels(CHANNELS)
+# wf.setsampwidth(p.get_sample_size(FORMAT))
+# wf.setframerate(RATE)
+# wf.writeframes(b''.join(frames))
+# wf.close()
 
+data, sampling_rate = librosa.load('D:\scuola\gestioneProgetto/test/audioPerTest/recordedFile.wav')
+ipd.Audio('D:\scuola\gestioneProgetto/test/audioPerTest/recordedFile.wav')
 
 # loading json and model architecture 
-json_file = open('/gestioneProgetto/audioModel/model_json.json', 'r')
+json_file = open('D:\scuola\gestioneProgetto/test/model_json.json', 'r')
 loaded_model_json = json_file.read()
 json_file.close()
 loaded_model = model_from_json(loaded_model_json)
 
 # load weights into new model
-loaded_model.load_weights("/gestioneProgetto/emotionModel/Emotion_Model.h5")
+loaded_model.load_weights("D:\scuola\gestioneProgetto/test\saved_models/Emotion_Model.h5")
 print("Loaded model from disk")
 
 # the optimiser
-opt = keras.optimizers.rmsprop(lr=0.00001, decay=1e-6)
-loaded_model.compile(loss='categorical_crossentropy', optimizer=opt, metrics=['accuracy'])
+optim = tf.keras.optimizers.RMSprop(learning_rate=0.0001)
+loaded_model.compile(loss='categorical_crossentropy', optimizer=optim, metrics=['accuracy'])
 
 # Lets transform the dataset so we can apply the predictions
 #qui devo mettere il file wav che registro 
-X, sample_rate = librosa.load('/kaggle/input/happy-audio/Liza-happy-v3.wav'
+X, sample_rate = librosa.load('D:\scuola\gestioneProgetto/test/audioPerTest/recordedFile.wav'
                               ,res_type='kaiser_fast'
                               ,duration=2.5
                               ,sr=44100
@@ -78,7 +81,7 @@ X, sample_rate = librosa.load('/kaggle/input/happy-audio/Liza-happy-v3.wav'
 sample_rate = np.array(sample_rate)
 mfccs = np.mean(librosa.feature.mfcc(y=X, sr=sample_rate, n_mfcc=13),axis=0)
 newdf = pd.DataFrame(data=mfccs).T
-newdf
+print(newdf)
 
 # Apply predictions
 newdf= np.expand_dims(newdf, axis=2)
@@ -89,7 +92,7 @@ newpred = loaded_model.predict(newdf,
 print(newpred)
 
 
-filename = '/kaggle/input/labels/labels'
+filename = 'D:\scuola\gestioneProgetto/test/labels'
 infile = open(filename,'rb')
 lb = pickle.load(infile)
 infile.close()
