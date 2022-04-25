@@ -3,6 +3,7 @@ from __future__ import print_function
 from pygrabber.dshow_graph import FilterGraph
 from multiprocessing import Process, Pipe
 from video import GestioneCam
+from audio import GestioneMic
 import speech_recognition as s_r
 import json
 import socket
@@ -20,7 +21,11 @@ if __name__ == '__main__':
     UDPServerSocket = socket.socket(family=socket.AF_INET, type=socket.SOCK_DGRAM)
     UDPServerSocket.bind((localIP, localPort))
     parent_conn, child_conn = Pipe()
-    p = Process(target=GestioneCam, args=(child_conn,))
+    p = Process(target=GestioneMic, args=(child_conn,))
+    p.start()
+    
+    parent_conn2, child_conn2 = Pipe()
+    p = Process(target=GestioneCam, args=(child_conn2,))
     p.start()
  
     while(True):
@@ -35,5 +40,7 @@ if __name__ == '__main__':
             UDPServerSocket.sendto(str.encode(str(json.dumps({'dispositivi':s_r.Microphone.list_microphone_names()}))),bytesAddressPair[1])
         else:
             parent_conn.send(message)
+            parent_conn2.send(message)
     p.join()
     parent_conn.close()
+    parent_conn2.close()

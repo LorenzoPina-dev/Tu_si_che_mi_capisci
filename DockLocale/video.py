@@ -42,12 +42,9 @@ def gestisci_cam(args):
                     ROI = gray[y-25:y+h+25, x-25:x+w+25]
                     reduced = cv.resize(ROI, dsize=(100, 100), interpolation=cv.INTER_CUBIC)
                     cv.imshow("Reduced", reduced);
-                    _, bts = cv.imencode('.jpeg', reduced)
-                    print(len(bts))
-                    b64_bytes = base64.b64encode(bts)
-                    b64_string = b64_bytes.decode()
+                    cv.imwrite("temp.jpg", reduced)
                     print(nome)
-                    Server.invia_risultati(b64_string,keyk,nome["Id"])
+                    Server.invia_risultati("temp.jpg",keyk,nome["Id"])
             i+=1
     video_capture.release()
 
@@ -56,7 +53,7 @@ def gestisci_dispositivi(args):
     t=args[1]
     termina={}
     while termina_main==False:
-        arr=Server.get_dispositivi(keyk)
+        arr=Server.get_dispositivi(keyk,"0")
         for video in arr:
             if (video["Id"] in t)==False:
                 print(t)

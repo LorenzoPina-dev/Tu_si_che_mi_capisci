@@ -9,17 +9,21 @@ import base64
 from multiprocessing import Process, Pipe
 
 class Server:
-    def get_dispositivi(keyk):
-        x = requests.get('http://80.22.36.186/'+keyk+'/dispositivi?tipo=0');
+    def get_dispositivi(keyk,tipo):
+        x = requests.get('http://80.22.36.186/'+keyk+'/dispositivi?tipo='+tipo);
         y = json.loads(x.text)
         arr= y['result']['dispositivo']
         return arr
 
-    def invia_risultati(dati,user_key,id_dispositivo):
-        dati=json.dumps({'Dati':dati,"IdDispositivo":id_dispositivo,"KeyUtente":user_key}) 
-        x = requests.get('http://80.22.36.186:12345/riconosciVolto',data=dati);
+    def invia_risultati(img,user_key,id_dispositivo):
+        dati={'IdDispositivo':id_dispositivo,'KeyUtente':user_key} 
+        x = requests.post('http://localhost:12345/riconosciVolto',files = {'immagine': (img, open(img, 'rb'), 'image/jpg', {'Expires': '0'})},data=dati);
         print(x.text)
         
+    def invia_risultati_audio(img,user_key,id_dispositivo):
+        dati={'IdDispositivo':id_dispositivo,'KeyUtente':user_key}
+        x = requests.post('http://localhost:12345/riconosciEmozione',files = {'immagine': (img, open(img, 'rb'), 'audio/mpeg', {'Expires': '0'})},data=dati);
+        print(x.text)
         
 def gestisci_key(args):
     try:
