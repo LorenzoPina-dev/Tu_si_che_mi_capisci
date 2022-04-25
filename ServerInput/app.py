@@ -6,6 +6,7 @@ from imageio import imread
 import json
 from flask import Flask, request, jsonify
 from simple_facerec import SimpleFacerec
+from simple_emotionrec import SimpleEmozionrec
 import cv2
 import io
 import face_recognition
@@ -18,13 +19,20 @@ def inviaVoltoTrovato(name, keyk, img,idDispositivo,face_encodings):
     x=requests.post('http://80.22.36.186/'+keyk+'/voltoTrovato/add', data={'idDispositivo': idDispositivo, 'idVolto': name,'vettVolto':face_encodings}, files=files)
     print(x.text)
 
+def inviaEmozioneTrovato(IdEmozione, keyk,idDispositivo):
+    x=requests.post('http://80.22.36.186/'+keyk+'/emozioni/add', data={'tipo': IdEmozione, 'idDispositivo': idDispositivo})
+    print(x.text)
+
 sfr = SimpleFacerec()
 sfr.load_encoding_images()
-@app.route('/riconosciVolto', methods=['GET'])
+emo=SimpleEmozionrec()
+@app.route('/riconosciVolto', methods=['POST'])
 def riconosci_volto():
-    richiesta=json.loads(request.data)
-    dati=richiesta['Dati']
-    cv2_img = cv2.cvtColor(imread(io.BytesIO(base64.b64decode(dati))), cv2.COLOR_RGB2BGR)
+    print(format(request.form))
+    richiesta=request.form
+    if request.files.get('immagine') is None:
+        return jsonify({"success":false})
+    cv2_img = cv2.cvtColor(imread(request.files['immagine']), cv2.COLOR_RGB2BGR)
     print("ci siamo")
     face_locations = face_recognition.face_locations(cv2_img)
     face_encoding = face_recognition.face_encodings(cv2_img, face_locations)[0]
@@ -38,14 +46,26 @@ def riconosci_volto():
         return jsonify({"success":False,"testo":"nessun volto trovato"})
     else:
         return jsonify({"success":True,"nome":name})
-
 @app.route('/memorizzaVolto', methods=['POST'])
 def memorizza_volto():
-    sfr.add_encoding_image(request.args.get('Id'),request.args.get('path'))
+    sfr.add_encoding_image(request.form.get('Id'),request.form.get('path'))
     return jsonify({"success":True,"testo":"inserimento avvenuto con successo"})
 
-@app.route('/riconosciEmozione', methods=['GET'])
-def update_record():
-    return jsonify({"success":False,"testo":"non ancora implementato"})
+@app.route('/riconosciEmozione', methods=['POST'])
+def riconosci_emozione():
+    print(format(request.form))
+    richiesta=request.form
+    
+    if request.files.get('immagine') is None:
+        return jsonify({"success":false})
+    f=request.files['immagine']
+    f.save("temp.wav")
+    indice=emo.detect_emotion( "temp.wav")
+    print(indice)
+    inviaEmozioneTrovato(indice,richiesta['KeyUtente'], richiesta['IdDispositivo'])
+    if indice==-1:
+        return jsonify({"success":False,"testo":"nessun volto trovato"})
+    else:
+        return jsonify({"success":True,"idEmozione":indice})
     
 app.run(debug=True, host="0.0.0.0", port=12345)
