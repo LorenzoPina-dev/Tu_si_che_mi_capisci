@@ -47,14 +47,14 @@ namespace proj
             return result;
         }
 
-        public string ChangeInfo(string key, string user, string pass, string mail, string img)
+        public string ChangeInfo(string user, string pass, string mail, string img)
         {
             httpRequests resetPsw = new httpRequests();
             string ris = resetPsw.HttpRequestChangeInfoAsync(key, user, pass, mail, img).Result;
             return ris;
         }
 
-        public object GetInfo(string key)
+        public object GetInfo()
         {
             object obj = "";
             httpRequests getInfo = new httpRequests();

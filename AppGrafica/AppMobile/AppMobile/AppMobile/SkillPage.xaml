@@ -25,8 +25,8 @@
                         <RowDefinition Height="50" />
                         <RowDefinition Height="50" />
                         <RowDefinition Height="70" />
-                        <RowDefinition Height="70" />
                         <RowDefinition Height="150" />
+                        <RowDefinition Height="70" />
                         <RowDefinition Height="70" />
                         <RowDefinition Height="70" />
                     </Grid.RowDefinitions>
@@ -39,9 +39,14 @@
                         <Entry x:Name="Nome" Margin="0, 0, 0, 0" TextColor="White"></Entry>
                     </Frame>
 
-                    <Label Grid.Row="4" FontSize="25" TextColor="White" HeightRequest="100" Text="Descrizione:" HorizontalTextAlignment="Start" Margin="0, 20, 0, 0"></Label>
-                    <Frame Padding="10" CornerRadius="20" Grid.Row="4" Margin="160, 0, 0, 0" BackgroundColor="#3B3B3B">
+                    <Label Grid.Row="3" FontSize="25" TextColor="White" HeightRequest="100" Text="Descrizione:" HorizontalTextAlignment="Start" Margin="0, 20, 0, 0"></Label>
+                    <Frame Padding="10" CornerRadius="20" Grid.Row="3" Margin="160, 0, 0, 0" BackgroundColor="#3B3B3B">
                         <Entry x:Name="Descrizione" Margin="0, 0, 0, 0" TextColor="White"></Entry>
+                    </Frame>
+
+                    <Label Grid.Row="4" FontSize="25" TextColor="White" HeightRequest="100" Text="Azione:" HorizontalTextAlignment="Start" Margin="0, 20, 0, 0"></Label>
+                    <Frame Padding="10" CornerRadius="20" Grid.Row="4" Margin="160, 0, 0, 0" BackgroundColor="#3B3B3B">
+                        <Entry x:Name="Azione" Margin="0, 0, 0, 0" TextColor="White"></Entry>
                     </Frame>
 
                     <Button Clicked="Rimuovi" BackgroundColor="#8489FF" CornerRadius="20" HeightRequest="50" WidthRequest="100" FontSize="20" Grid.Row="6" Text="Rimuovi" Margin="200, 0, 0, 0" />

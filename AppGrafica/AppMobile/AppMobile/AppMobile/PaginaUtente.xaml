@@ -38,7 +38,7 @@
                                 <RowDefinition Height="33" />
                                 <RowDefinition Height="33" />
                             </Grid.RowDefinitions>
-                            <Label Text="Ti piace il cazzo" Grid.Row="0"/>
+                            <Label Text="esempio" Grid.Row="0"/>
                             <Label Text="+70exp" Grid.Row="0" Margin="250,0,0,0"/>
                             <ProgressBar Progress="0.3" ProgressColor="#FFFFFF" Grid.Row="1"/> <!-- prende valori da 0.0 a 1.0-->
                         </Grid>

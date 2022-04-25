@@ -84,7 +84,8 @@ namespace proj
             // "file" parameter name should be the same as the server side input parameter name
             form.Add(fileContent, "immagine", Path.GetFileName(img));
             form.Add(new StringContent(user), "username");
-            form.Add(new StringContent(pass), "password");
+            if(pass != "")
+                form.Add(new StringContent(pass), "password");
             form.Add(new StringContent(mail), "mail");
             HttpResponseMessage response = await httpClient.PutAsync(url, form);
 
@@ -99,25 +100,20 @@ namespace proj
             string url = "http://" + host + "/" + key + "/utente"; 
             var response = wb.DownloadData(url);
             string result = System.Text.Encoding.UTF8.GetString(response);
-            JObject obj = JObject.Parse(result);
-            object objRis = json.GetInfo(obj); //chiedo info
-            string ris = "";
-            if (objRis.GetType() == typeof(string)) //l'utente non c'è quindi mi ritorna una stringa
+            object ris = "";
+            /*if (objRis.GetType() == typeof(string)) //l'utente non c'è quindi mi ritorna una stringa
             {
                 ris = json.GetText(obj);
                 return ris; //ritorno la stringa
             }
             else //l'utente è presente
-            {
-                string[] array = (string[])objRis; //vettore con info
-                object obj3 = GetImage(key, "utente", array[2]);
-                if(obj3.GetType() == typeof(string)) //errore
-                {
-                    JObject obj4 = JObject.Parse(result);
-                    array[4] = json.GetText(obj4);
-                }
-                return array;
-            }
+            {*/
+                /*string[] array = (string[])objRis; //vettore con info
+                object obj3 = GetImage(key, "utente", array[2]);*/
+                JObject obj2 = json.Parse(result);
+                JObject obj3 = (JObject)obj2["result"]["utente"];
+                return obj3;
+            //}
         }
 
         public string HttpRequestAddEmozione(string key, string tipo, string dataRil, string idDisp) //aggiungi volto registrato
@@ -247,10 +243,14 @@ namespace proj
         public string HttpRequestAddSkill(string key, string nome, string descrizione, string azione, string idEmozione) //aggiungi skill
         {
             data = new NameValueCollection();
-            string url = "http://" + host + "/" + key + "/skill/add/?nome=" + nome + "&descrizione=" + descrizione + "&azione=" + azione + "&idEmozione=" + idEmozione;
-            var response = wb.DownloadData(url);
-            string result = System.Text.Encoding.UTF8.GetString(response);
-            JObject obj = JObject.Parse(result);
+            string url = "http://" + host + "/" + key + "/skill/add";
+            data["nome"] = nome;
+            data["descrizione"] = descrizione;
+            data["azione"] = azione;
+            data["idEmozione"] = idEmozione;
+            var response = wb.UploadValues(url, "POST", data);
+            string result = System.Text.Encoding.UTF8.GetString(response); //ottengo una risposta
+            JObject obj = json.Parse(result);
             string ris = json.GetText(obj);
             return ris;
         }
@@ -270,8 +270,7 @@ namespace proj
         public string HttpRequestDeleteSkill(string key, string id) //elimina dispositivo
         {
             data = new NameValueCollection();
-            string url = "http://" + host + "/" + key + "/skill/remove";
-            data["id"] = id;
+            string url = "http://" + host + "/" + key + "/skill/remove/" + id;
             var response = wb.UploadValues(url, "DELETE", data);
             string result = System.Text.Encoding.UTF8.GetString(response); //ottengo una risposta
             JObject obj = json.Parse(result);

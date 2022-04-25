@@ -30,6 +30,7 @@ namespace AppMobile
             string azione = Azione.Text.ToString();
             int idEmozione = int.Parse(picker.SelectedIndex.ToString()) + 1;
             utente.AddSkill(nome, descrizione, azione, idEmozione.ToString());
+            App.Current.MainPage = new TabbedPage1();
         }
     }
 }

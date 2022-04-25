@@ -28,19 +28,23 @@ namespace AppMobile
 
         public void Rimuovi(object sender, EventArgs e)
         {
-            /*for(int i = 0; i < list.Count; i++)
-           {
-               if(list[i]["Id"].ToString() == picker.SelectedItem.ToString())
+            string id = "";
+            for(int i = 0; i < list.Count; i++)
+            {
+               if(list[i]["Nome"].ToString() == pickerSkill.SelectedItem.ToString())
                {
                    id = list[i]["Id"].ToString();
                    utente.DeleteSkill(id);
-                   App.Current.MainPage = new SkillPage();
+                   App.Current.MainPage = new TabbedPage1();
                }
-           }*/
+            }
         }
 
         public void EmChange(object sender, EventArgs e)
         {
+            Nome.Text = "";
+            Descrizione.Text = "";
+            Azione.Text = "";
             pickerSkill.Items.Clear();
             var picker = sender as Picker;
             list = (List<JObject>)utente.GetSkills((picker.SelectedIndex + 1).ToString());
@@ -55,12 +59,13 @@ namespace AppMobile
             var picker = sender as Picker;
             for (int i = 0; i < list.Count; i++)
             {
-                if(pickerSkill.Items.Count <= 0)
+                if(picker.Items.Count == list.Count)
                 {
                     if (list[i]["Nome"].ToString() == picker.SelectedItem.ToString())
                     {
                         Nome.Text = list[i]["Nome"].ToString();
                         Descrizione.Text = list[i]["Descrizione"].ToString();
+                        Azione.Text = list[i]["Azione"].ToString();
                     }
                 }
                 
