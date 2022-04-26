@@ -17,12 +17,12 @@ class Server:
 
     def invia_risultati(img,user_key,id_dispositivo):
         dati={'IdDispositivo':id_dispositivo,'KeyUtente':user_key} 
-        x = requests.post('http://localhost:12345/riconosciVolto',files = {'immagine': (img, open(img, 'rb'), 'image/jpg', {'Expires': '0'})},data=dati);
+        x = requests.post('http://80.22.36.186:12345/riconosciVolto',files = {'immagine': (img, open(img, 'rb'), 'image/jpg', {'Expires': '0'})},data=dati);
         print(x.text)
         
     def invia_risultati_audio(img,user_key,id_dispositivo):
         dati={'IdDispositivo':id_dispositivo,'KeyUtente':user_key}
-        x = requests.post('http://localhost:12345/riconosciEmozione',files = {'immagine': (img, open(img, 'rb'), 'audio/mpeg', {'Expires': '0'})},data=dati);
+        x = requests.post('http://80.22.36.186:12345/riconosciEmozione',files = {'immagine': (img, open(img, 'rb'), 'audio/mpeg', {'Expires': '0'})},data=dati);
         print(x.text)
         
 def gestisci_key(args):

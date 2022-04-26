@@ -25,15 +25,13 @@ audio = pyaudio.PyAudio()
     
 def gestisci_mic(args):
     nome=args[0]
-    termina=args[1]
-    print("partito")
+    terminaaudio=args[1]
     ip=nome["Ip"]
     try:
         if "http" not in ip:
             ip=int(ip)
     except:
         print("non valido")
-    print(ip)
         
     stream = audio.open(format=FORMAT, channels=CHANNELS,
                     rate=RATE, input=True,input_device_index = ip,
@@ -41,11 +39,12 @@ def gestisci_mic(args):
     print ("recording started")
     i=0
     
-    while termina[nome["Id"]]==False:
+    while terminaaudio[nome["Id"]]==False:
         Recordframes = []
+        #try:
         for i in range(0, int(RATE / CHUNK * RECORD_SECONDS)):
-            data = stream.read(CHUNK)
-            Recordframes.append(data)
+                data = stream.read(CHUNK,exception_on_overflow = False)
+                Recordframes.append(data)
         print ("recording stopped")
         #print(Recordframes)
         
@@ -57,35 +56,40 @@ def gestisci_mic(args):
         waveFile.close()
 
         Server.invia_risultati_audio("temp.wav",keyk,nome["Id"])
+        #except:
+       #     print("err")
     stream.stop_stream()
     stream.close()
     audio.terminate()
 
 def gestisci_dispositivi(args):
     termina_main=args[0]
-    t=args[1]
-    termina={}
+    taudio=args[1]
+    terminaaudio={}
     while termina_main==False:
         arr=Server.get_dispositivi(keyk,"1")
         for video in arr:
-            if (video["Id"] in t)==False:
-                print(t)
-                print(video)
-                termina[video["Id"]]=False
-                t[video["Id"]]=Thread(target=gestisci_mic, args=([video,termina],))
-                t[video["Id"]].start()
+            print("list")
+            print(taudio)
+            if video["Id"] not in taudio:
+                print("avvio: "+str(video))
+                terminaaudio[video["Id"]]=False
+                taudio[video["Id"]]=Thread(target=gestisci_mic, args=([video,terminaaudio],))
+                taudio[video["Id"]].start()
+            
+            print(taudio)
             time.sleep(20)
             
 def GestioneMic(conn):
-    t={}
+    taudio={}
     termina_main=False
     tGest=Thread(target=gestisci_key, args=([termina_main,conn],))
     tGest.start()
-    tGest=Thread(target=gestisci_dispositivi, args=([termina_main,t],))
+    tGest=Thread(target=gestisci_dispositivi, args=([termina_main,taudio],))
     tGest.start()
                 
     cv.destroyAllWindows()
-
+"""
 parent_conn, child_conn = Pipe()
 GestioneMic(child_conn)
-
+"""

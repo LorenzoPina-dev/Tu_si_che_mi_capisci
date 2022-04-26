@@ -20,13 +20,11 @@ face_cascade = cv.CascadeClassifier('haarcascade_frontalface_default.xml')
 def gestisci_cam(args):
     nome=args[0]
     termina=args[1]
-    print("partito")
     ip=nome["Ip"]
     if "http" not in ip:
         ip=int(ip)
-    print(ip)
+    print("partito: "+str(ip))
     video_capture = cv.VideoCapture(ip)
-    print(video_capture.getBackendName())
     video_capture.set(cv.CAP_PROP_FRAME_WIDTH, frame_width)
     video_capture.set(cv.CAP_PROP_FRAME_HEIGHT, frame_height)
     size = (int(video_capture.get(cv.CAP_PROP_FRAME_WIDTH)), int(video_capture.get(cv.CAP_PROP_FRAME_HEIGHT)))
@@ -43,7 +41,6 @@ def gestisci_cam(args):
                     reduced = cv.resize(ROI, dsize=(100, 100), interpolation=cv.INTER_CUBIC)
                     cv.imshow("Reduced", reduced);
                     cv.imwrite("temp.jpg", reduced)
-                    print(nome)
                     Server.invia_risultati("temp.jpg",keyk,nome["Id"])
             i+=1
     video_capture.release()
@@ -56,8 +53,6 @@ def gestisci_dispositivi(args):
         arr=Server.get_dispositivi(keyk,"0")
         for video in arr:
             if (video["Id"] in t)==False:
-                print(t)
-                print(video)
                 termina[video["Id"]]=False
                 t[video["Id"]]=Thread(target=gestisci_cam, args=([video,termina],))
                 t[video["Id"]].start()
