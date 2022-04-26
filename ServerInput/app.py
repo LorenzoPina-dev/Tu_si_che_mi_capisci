@@ -31,7 +31,7 @@ def riconosci_volto():
     print(format(request.form))
     richiesta=request.form
     if request.files.get('immagine') is None:
-        return jsonify({"success":false})
+        return jsonify({"success":False})
     cv2_img = cv2.cvtColor(imread(request.files['immagine']), cv2.COLOR_RGB2BGR)
     print("ci siamo")
     face_locations = face_recognition.face_locations(cv2_img)
@@ -57,7 +57,7 @@ def riconosci_emozione():
     richiesta=request.form
     
     if request.files.get('immagine') is None:
-        return jsonify({"success":false})
+        return jsonify({"success":False})
     f=request.files['immagine']
     f.save("temp.wav")
     indice=emo.detect_emotion( "temp.wav")
