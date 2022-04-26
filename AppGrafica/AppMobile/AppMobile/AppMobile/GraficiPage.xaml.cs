@@ -25,6 +25,7 @@ namespace AppMobile
         public void EmChange(object sender, EventArgs e)
         {
             var picker = sender as Picker;
+            vm.FillDataPie();
             vm.FillDataLine(picker.SelectedIndex.ToString());
         }
     }

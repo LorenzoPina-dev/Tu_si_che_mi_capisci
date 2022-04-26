@@ -6,6 +6,7 @@ using System.IO;
 using System.Net.Http;
 using System.Net.Http.Headers;
 using System.Threading.Tasks;
+using Xamarin.Essentials;
 
 namespace proj
 {
@@ -71,18 +72,16 @@ namespace proj
             return ris;
         }
 
-        public async Task<string> HttpRequestChangeInfoAsync(string key, string user, string pass, string mail, string img) //cambio info utente
+        public async Task<string> HttpRequestChangeInfoAsync(string key, string user, string pass, string mail, FileBase file) //cambio info utente
         {
             data = new NameValueCollection();
             string url = "http://" + host + "/" + key + "/utente/cambiaInfo";
             HttpClient httpClient = new HttpClient();
             MultipartFormDataContent form = new MultipartFormDataContent();
-            FileStream fs = File.OpenRead(img);
-            StreamContent streamContent = new StreamContent(fs);
-            ByteArrayContent fileContent = new ByteArrayContent(await streamContent.ReadAsByteArrayAsync());
-            fileContent.Headers.ContentType = MediaTypeHeaderValue.Parse("multipart/form-data");
-            // "file" parameter name should be the same as the server side input parameter name
-            form.Add(fileContent, "immagine", Path.GetFileName(img));
+            
+
+            form.Add(new StreamContent(await file.OpenReadAsync()), "immagine", file.FullPath);
+
             form.Add(new StringContent(user), "username");
             if(pass != "")
                 form.Add(new StringContent(pass), "password");
@@ -159,20 +158,18 @@ namespace proj
             object ris = json.GetObjArray(obj, "voltiTrovati");
             return ris;
         }
-        public async Task<string> HttpRequestAddVoltoRegistratoAsync(string key, string img, string nome) //aggiungi volto registrato
+        public async Task<string> HttpRequestAddVoltoRegistratoAsync(string key, FileBase file, string nome) //aggiungi volto registrato
         {
             data = new NameValueCollection();
             string url = "http://" + host + "/" + key + "/voltoRegistrato/add";
             HttpClient httpClient = new HttpClient();
             MultipartFormDataContent form = new MultipartFormDataContent();
-            FileStream fs = File.OpenRead(img);
-            StreamContent streamContent = new StreamContent(fs);
-             ByteArrayContent fileContent = new ByteArrayContent(await streamContent.ReadAsByteArrayAsync());
-            fileContent.Headers.ContentType = MediaTypeHeaderValue.Parse("multipart/form-data");
-            // "file" parameter name should be the same as the server side input parameter name
-            form.Add(fileContent, "immagine", Path.GetFileName(img));
+
+
+            form.Add(new StreamContent(await file.OpenReadAsync()), "immagine", file.FullPath);
+
             form.Add(new StringContent(nome), "nome");
-            HttpResponseMessage response = await httpClient.PutAsync(url, form);
+            HttpResponseMessage response = await httpClient.PostAsync(url, form);
 
             string result = System.Text.Encoding.UTF8.GetString(await response.Content.ReadAsByteArrayAsync());
             JObject obj = json.Parse(result);

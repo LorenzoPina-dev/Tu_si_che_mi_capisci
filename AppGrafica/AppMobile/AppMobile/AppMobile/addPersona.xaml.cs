@@ -5,7 +5,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-
+using Xamarin.Essentials;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
@@ -16,13 +16,25 @@ namespace AppMobile
     {
         Utente utente;
         string path = "";
+        FileBase file;
         public addPersona()
         {
             utente = new Utente();
             InitializeComponent();
         }
 
-        public void BtnPhoto(object sender, System.EventArgs e)
+        async void BtnPhotoAsync(object sender, System.EventArgs e)
+        {
+            //UploadPhoto();
+            file = await MediaPicker.PickPhotoAsync();
+
+            if (file == null)
+                return;
+            else
+                img.Source = file.FullPath;
+        }
+
+        /*public void BtnPhoto(object sender, System.EventArgs e)
         {
             UploadPhoto();
         }
@@ -42,7 +54,7 @@ namespace AppMobile
 
             path = file.Path;
             img.Source = file.Path; 
-        }
+        }*/
 
         public void Indietro(object sender, System.EventArgs e)
         {
@@ -51,7 +63,7 @@ namespace AppMobile
 
         public void Aggiungi(object sender, System.EventArgs e)
         {
-            utente.AddVoltoRegistrato(path, Nome.Text.ToString());
+            utente.AddVoltoRegistrato(file, Nome.Text.ToString());
             App.Current.MainPage = new SettingsPage();
         }
 

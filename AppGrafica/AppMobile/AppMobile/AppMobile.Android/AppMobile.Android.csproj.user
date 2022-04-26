@@ -4,5 +4,6 @@
     <SelectedDevice>Samsung SM-A505FN</SelectedDevice>
     <DefaultDevice>pixel_2_pie_9_0_-_api_28</DefaultDevice>
     <ActiveDebugProfile>Emulatore Android</ActiveDebugProfile>
+    <AndroidDesignerPreferredTheme>MainTheme</AndroidDesignerPreferredTheme>
   </PropertyGroup>
 </Project>

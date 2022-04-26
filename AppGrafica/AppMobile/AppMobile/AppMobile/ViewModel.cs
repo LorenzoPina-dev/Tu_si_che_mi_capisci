@@ -57,7 +57,7 @@ namespace AppMobile
             FillDataLine("1");
         }
 
-        private void FillDataPie()
+        public void FillDataPie()
         {
             List<JObject> list = (List<JObject>)Utente.GetEmozioni();
 
@@ -69,29 +69,33 @@ namespace AppMobile
             });
 
             int count = 0;
-            for(int i = 0; i < list.Count - 1; i++)
+            Model model2 = new Model();
+            if (list.Count > 0)
             {
-                if (int.Parse((string)list[i]["IdEmozione"]) != int.Parse((string)list[i + 1]["IdEmozione"]))
+                for (int i = 0; i < list.Count - 1; i++)
                 {
-                    count++;
-                    Model model = new Model()
+                    if (int.Parse((string)list[i]["IdEmozione"]) != int.Parse((string)list[i + 1]["IdEmozione"]))
                     {
-                        xValue = Enum.GetName(typeof(Emozione), int.Parse((string)list[i]["IdEmozione"])), //prendo il valore dell'enum
-                        yValue = count
-                    };
-                    DataPie.Add(model);
-                    count = 0;
+                        count++;
+                        Model model = new Model()
+                        {
+                            xValue = Enum.GetName(typeof(Emozione), int.Parse((string)list[i]["IdEmozione"])), //prendo il valore dell'enum
+                            yValue = count
+                        };
+                        DataPie.Add(model);
+                        count = 0;
+                    }
+                    else
+                        count++;
                 }
-                else
-                    count++; 
-            }
 
-            count++;
-            Model model2 = new Model()
-            {
-                xValue = Enum.GetName(typeof(Emozione), int.Parse((string)list[list.Count - 1]["IdEmozione"])), //prendo il valore dell'enum
-                yValue = count
-            };
+                count++;
+                model2 = new Model()
+                {
+                    xValue = Enum.GetName(typeof(Emozione), int.Parse((string)list[list.Count - 1]["IdEmozione"])), //prendo il valore dell'enum
+                    yValue = count
+                };
+            }
             DataPie.Add(model2);
         }
 
@@ -108,32 +112,35 @@ namespace AppMobile
             });
 
             int count = 0;
-            for (int i = 0; i < list.Count - 1; i++)
+
+            Model model2 = new Model();
+            if(list.Count > 0)
             {
-                if ((string)list[i]["DataRilevazione"].ToString().Substring(0, 10) != (string)list[i + 1]["DataRilevazione"].ToString().Substring(0, 10))
+                for (int i = 0; i < list.Count - 1; i++)
                 {
-                    count++;
-                    Model model = new Model()
+                    if ((string)list[i]["DataRilevazione"].ToString().Substring(0, 10) != (string)list[i + 1]["DataRilevazione"].ToString().Substring(0, 10))
                     {
-                        xValue = list[i]["DataRilevazione"].ToString().Substring(0, 10), //prendo il valore dell'enum
-                        yValue = count
-                    };
-                    DataLine.Add(model);
-                    count = 0;
+                        count++;
+                        Model model = new Model()
+                        {
+                            xValue = list[i]["DataRilevazione"].ToString().Substring(0, 10), //prendo il valore dell'enum
+                            yValue = count
+                        };
+                        DataLine.Add(model);
+                        count = 0;
+                    }
+                    else
+                        count++;
                 }
-                else
-                    count++;
+
+                count++;
+                model2 = new Model()
+                {
+                    xValue = list[list.Count - 1]["DataRilevazione"].ToString().Substring(0, 10), //prendo il valore dell'enum
+                    yValue = count
+                };
             }
-
-            count++;
-            Model model2 = new Model()
-            {
-                xValue = list[list.Count - 1]["DataRilevazione"].ToString().Substring(0, 10), //prendo il valore dell'enum
-                yValue = count
-            };
             DataLine.Add(model2);
-
-
         }
     }
 }

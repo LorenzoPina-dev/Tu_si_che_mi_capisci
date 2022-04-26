@@ -1,4 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
+
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="AppMobile.InfoUtentePage"
@@ -45,7 +46,7 @@
 
                     <Label Margin="0, 20, 0,0" Grid.Row="3" FontSize="25" TextColor="White" WidthRequest="150" HeightRequest="100" Text="Foto profilo:" HorizontalTextAlignment="Start"></Label>
                     <Image x:Name="img" Aspect="Fill" Margin="170, 0, 0, 0" Grid.Row="3" Source="Logo.png"></Image>
-                    <Button Grid.Row="4" Text="Scegli immagine" Margin="200, 0, 0, 0" Clicked="BtnPhoto" BackgroundColor="#8489FF" CornerRadius="30"/>
+                    <Button Grid.Row="4" Text="Scegli immagine" Margin="200, 0, 0, 0" Clicked="BtnPhotoAsync" BackgroundColor="#8489FF" CornerRadius="30"/>
 
                     <Button Clicked="Indietro" BackgroundColor="#8489FF" CornerRadius="20" HeightRequest="50" WidthRequest="100" FontSize="20" Grid.Row="5" Text="Annulla" Margin="200, 20, 0, 0" />
 

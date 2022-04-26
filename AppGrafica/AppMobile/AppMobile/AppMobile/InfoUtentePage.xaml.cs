@@ -1,16 +1,11 @@
-﻿
+﻿using Xamarin.Essentials;
 using Newtonsoft.Json.Linq;
 using Plugin.Media;
 using proj;
-using System;
-using System.Collections.Generic;
 using System.IO;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 using Xamarin.Forms;
-using Xamarin.Forms.Xaml;
+using System.Net.Http;
 
 namespace AppMobile
 {
@@ -19,6 +14,7 @@ namespace AppMobile
         Utente utente;
         string path = "";
         JObject ris;
+        FileBase file;
         //ImageView thisImageView;
         public InfoUtentePage()
         {
@@ -28,12 +24,18 @@ namespace AppMobile
             Request();
         }
 
-        public void BtnPhoto(object sender, System.EventArgs e)
+        async void BtnPhotoAsync(object sender, System.EventArgs e)
         {
-            UploadPhoto();
+            //UploadPhoto();
+            file = await MediaPicker.PickPhotoAsync();
+
+            if (file == null)
+                return;
+            else
+                img.Source = file.FullPath;
         }
 
-        async void UploadPhoto()
+        /*async void UploadPhoto()
         {
             await CrossMedia.Current.Initialize();
 
@@ -48,7 +50,7 @@ namespace AppMobile
 
             path = file.Path;
             img.Source = file.Path;
-        }
+        }*/
 
         public void Indietro(object sender, System.EventArgs e)
         {
@@ -64,7 +66,7 @@ namespace AppMobile
                 password = Pass.Text.ToString();
             else
                 password = "";
-            utente.ChangeInfo(user, password, email, img.Source.ToString());
+            utente.ChangeInfo(user, password, email, file);
             App.Current.MainPage = new TabbedPage1();
         }
 

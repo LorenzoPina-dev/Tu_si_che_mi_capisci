@@ -1,13 +1,15 @@
 {
   "version": 2,
-  "dgSpecHash": "RT6VEfkZnhjFdR0BzNnpeF+AYVI6OqZpAPPAqT+4NOe4jJmLOqg5plEfICbTtRQOftUqcMJCr433yK0mkndS7g==",
+  "dgSpecHash": "1bVfHoOo4UlmCYg2CRwF8vmdz2GBiDZNsK7OdDLBKnTegD+UPWUCqnTPl+Y15j+sj5C91GnVTOt3gDBO8nXd5w==",
   "success": true,
   "projectFilePath": "C:\\Users\\Miky\\Documents\\Tu_si_che_mi_capisci\\AppGrafica\\AppMobile\\AppMobile\\AppMobile.Android\\AppMobile.Android.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\Miky\\.nuget\\packages\\newtonsoft.json\\13.0.1\\newtonsoft.json.13.0.1.nupkg.sha512",
+    "C:\\Users\\Miky\\.nuget\\packages\\plugin.permissions\\6.0.1\\plugin.permissions.6.0.1.nupkg.sha512",
     "C:\\Users\\Miky\\.nuget\\packages\\syncfusion.licensing\\20.1.0.47\\syncfusion.licensing.20.1.0.47.nupkg.sha512",
     "C:\\Users\\Miky\\.nuget\\packages\\syncfusion.xamarin.core\\19.2.0.46\\syncfusion.xamarin.core.19.2.0.46.nupkg.sha512",
     "C:\\Users\\Miky\\.nuget\\packages\\syncfusion.xamarin.sfchart\\19.2.0.46\\syncfusion.xamarin.sfchart.19.2.0.46.nupkg.sha512",
+    "C:\\Users\\Miky\\.nuget\\packages\\system.numerics.vectors\\4.5.0\\system.numerics.vectors.4.5.0.nupkg.sha512",
     "C:\\Users\\Miky\\.nuget\\packages\\xam.plugin.media\\5.0.1\\xam.plugin.media.5.0.1.nupkg.sha512",
     "C:\\Users\\Miky\\.nuget\\packages\\xamarin.android.arch.core.common\\1.1.1.3\\xamarin.android.arch.core.common.1.1.1.3.nupkg.sha512",
     "C:\\Users\\Miky\\.nuget\\packages\\xamarin.android.arch.core.runtime\\1.1.1.3\\xamarin.android.arch.core.runtime.1.1.1.3.nupkg.sha512",
@@ -46,8 +48,8 @@
     "C:\\Users\\Miky\\.nuget\\packages\\xamarin.android.support.vector.drawable\\28.0.0.3\\xamarin.android.support.vector.drawable.28.0.0.3.nupkg.sha512",
     "C:\\Users\\Miky\\.nuget\\packages\\xamarin.android.support.versionedparcelable\\28.0.0.3\\xamarin.android.support.versionedparcelable.28.0.0.3.nupkg.sha512",
     "C:\\Users\\Miky\\.nuget\\packages\\xamarin.android.support.viewpager\\28.0.0.3\\xamarin.android.support.viewpager.28.0.0.3.nupkg.sha512",
-    "C:\\Microsoft\\Xamarin\\NuGet\\xamarin.essentials\\1.5.3.2\\xamarin.essentials.1.5.3.2.nupkg.sha512",
-    "C:\\Microsoft\\Xamarin\\NuGet\\xamarin.forms\\4.8.0.1451\\xamarin.forms.4.8.0.1451.nupkg.sha512"
+    "C:\\Users\\Miky\\.nuget\\packages\\xamarin.essentials\\1.6.0\\xamarin.essentials.1.6.0.nupkg.sha512",
+    "C:\\Users\\Miky\\.nuget\\packages\\xamarin.forms\\4.8.0.1560\\xamarin.forms.4.8.0.1560.nupkg.sha512"
   ],
   "logs": []
 }

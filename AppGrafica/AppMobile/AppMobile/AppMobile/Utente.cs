@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using Xamarin.Essentials;
 
 namespace proj
 {
@@ -47,11 +48,11 @@ namespace proj
             return result;
         }
 
-        public string ChangeInfo(string user, string pass, string mail, string img)
+        public string ChangeInfo(string user, string pass, string mail, FileBase file)
         {
             httpRequests resetPsw = new httpRequests();
-            string ris = resetPsw.HttpRequestChangeInfoAsync(key, user, pass, mail, img).Result;
-            return ris;
+            var ris = resetPsw.HttpRequestChangeInfoAsync(key, user, pass, mail, file).ContinueWith((b) => { if (b.Result.Length > 0) { Console.WriteLine("OK"); } else { Console.WriteLine("Fail"); } }); ;
+            return ris.ToString();
         }
 
         public object GetInfo()
@@ -86,12 +87,11 @@ namespace proj
             return obj;
         }
 
-        public string AddVoltoRegistrato(string img, string nome)
+        public string AddVoltoRegistrato(FileBase file, string nome)
         {
-            string ris = "";
             httpRequests addVoltoRegistrato = new httpRequests();
-            ris = addVoltoRegistrato.HttpRequestAddVoltoRegistratoAsync(key, img, nome).Result;
-            return ris;
+            var ris = addVoltoRegistrato.HttpRequestAddVoltoRegistratoAsync(key, file, nome).ContinueWith((b) => { if (b.Result.Length > 0) { Console.WriteLine("OK"); } else { Console.WriteLine("Fail"); } }); ; ;
+            return ris.ToString();
         }
         public object GetVoltiRegistrati()
         {
