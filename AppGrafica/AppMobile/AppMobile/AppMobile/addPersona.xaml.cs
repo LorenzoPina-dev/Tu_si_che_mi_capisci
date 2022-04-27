@@ -63,9 +63,14 @@ namespace AppMobile
 
         public void Aggiungi(object sender, System.EventArgs e)
         {
-            utente.AddVoltoRegistrato(file, Nome.Text.ToString());
-            App.Current.MainPage = new SettingsPage();
+            string nome = Nome.Text.ToString();
+            if (file != null && nome != "")
+            {
+                utente.AddVoltoRegistrato(file, Nome.Text.ToString());
+                App.Current.MainPage = new TabbedPage1();
+            }
+            else
+                error.Text = "compilare tutti i campi";
         }
-
     }
 }

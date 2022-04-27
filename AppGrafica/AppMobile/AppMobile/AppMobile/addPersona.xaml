@@ -23,11 +23,12 @@
                         <RowDefinition Height="70" />
                         <RowDefinition Height="70" />
                         <RowDefinition Height="50" />
+                        <RowDefinition Height="70" />
                     </Grid.RowDefinitions>
 
                     <Label Grid.Row="0" FontSize="25" TextColor="White" HeightRequest="100" Text="Nome:" HorizontalTextAlignment="Start" Margin="0, 20, 0, 0"></Label>
                     <Frame Padding="10" CornerRadius="20" Grid.Row="0" Margin="100, 0, 0, 0" BackgroundColor="#3B3B3B">
-                        <Entry x:Name="Nome" Margin="0, 0, 0, 0" TextColor="White"></Entry>
+                        <Entry x:Name="Nome" Text="" Margin="0, 0, 0, 0" TextColor="White"></Entry>
                     </Frame>
                     
                     <Label Margin="0, 20, 0,0" Grid.Row="1" FontSize="25" TextColor="White" WidthRequest="150" HeightRequest="100" Text="Foto profilo:" HorizontalTextAlignment="Start"></Label>
@@ -37,6 +38,7 @@
                     <Button Text="Annulla" Clicked="Indietro" Grid.Row="4" Margin="200, 0, 0, 0" HeightRequest="10" BackgroundColor="#8489FF" CornerRadius="30"></Button>
                     <Button Text="Aggiungi" Clicked="Aggiungi" Grid.Row="4" Margin="0, 0, 200, 0" BackgroundColor="#8489FF" CornerRadius="30"></Button>
 
+                    <Label HorizontalTextAlignment="Center" TextColor="Red" Grid.Row="5" x:Name="error"></Label>
                 </Grid>
 
             </Frame>

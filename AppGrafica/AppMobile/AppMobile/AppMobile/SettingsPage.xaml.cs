@@ -90,29 +90,39 @@ namespace AppMobile
         public void RemoveDisp(object sender, EventArgs e)
         {
             string id = "";
-            for(int i = 0; i < list2.Count; i++)
+            if (disp.SelectedIndex != -1)
             {
-                if(list2[i]["Nome"].ToString() == disp.SelectedItem.ToString())
+                for (int i = 0; i < list2.Count; i++)
                 {
-                    id = list2[i]["Id"].ToString();
-                    utente.DeleteDispositivo(id);
-                    App.Current.MainPage = new SettingsPage();
+                    if (list2[i]["Nome"].ToString() == disp.SelectedItem.ToString())
+                    {
+                        id = list2[i]["Id"].ToString();
+                        utente.DeleteDispositivo(id);
+                        App.Current.MainPage = new SettingsPage();
+                    }
                 }
             }
+            else
+                errorDisp.Text = "Selezionare un dispositivo per rimuoverlo";
         }
 
         public void RemovePerm(object sender, EventArgs e)
         {
             string id = "";
-            for (int i = 0; i < list.Count; i++)
+            if(permessi.SelectedIndex != -1)
             {
-                if (list[i]["Nome"].ToString() == permessi.SelectedItem.ToString())
+                for (int i = 0; i < list.Count; i++)
                 {
-                    id = list[i]["Id"].ToString();
-                    utente.DeleteVoltoRegistrato(id);
-                    App.Current.MainPage = new SettingsPage();
+                    if (list[i]["Nome"].ToString() == permessi.SelectedItem.ToString())
+                    {
+                        id = list[i]["Id"].ToString();
+                        utente.DeleteVoltoRegistrato(id);
+                        App.Current.MainPage = new SettingsPage();
+                    }
                 }
             }
+            else
+                errorPerm.Text = "Selezionare un permesso per rimuoverlo";
         }
     }
 }

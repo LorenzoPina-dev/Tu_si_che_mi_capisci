@@ -25,12 +25,19 @@ namespace AppMobile
 
         public void Aggiungi(object sender, EventArgs args)
         {
-            string nome = Nome.Text.ToString();
+            string nome = Nome.Text;
             string descrizione = Descrizione.Text.ToString();
             string azione = Azione.Text.ToString();
             int idEmozione = int.Parse(picker.SelectedIndex.ToString()) + 1;
-            utente.AddSkill(nome, descrizione, azione, idEmozione.ToString());
-            App.Current.MainPage = new TabbedPage1();
+
+            if (nome != "" && descrizione != "" && azione != "" && picker.SelectedIndex != -1)
+            {
+                utente.AddSkill(nome, descrizione, azione, idEmozione.ToString());
+                App.Current.MainPage = new TabbedPage1();
+            }
+            else
+                error.Text = "compilare tutti i campi";
+            
         }
     }
 }

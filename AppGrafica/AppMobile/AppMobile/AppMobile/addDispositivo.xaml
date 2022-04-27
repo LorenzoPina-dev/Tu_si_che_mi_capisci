@@ -29,12 +29,12 @@
 
                     <Label Grid.Row="0" FontSize="25" TextColor="White" HeightRequest="100" Text="Nome:" HorizontalTextAlignment="Start" Margin="0, 20, 0, 0"></Label>
                     <Frame Padding="10" CornerRadius="20" Grid.Row="0" Margin="100, 0, 0, 0" BackgroundColor="#3B3B3B">
-                        <Entry x:Name="Nome" Margin="0, 0, 0, 0" TextColor="White"></Entry>
+                        <Entry x:Name="Nome" Text="" Margin="0, 0, 0, 0" TextColor="White"></Entry>
                     </Frame>
 
                     <Label Grid.Row="2" FontSize="25" TextColor="White" HeightRequest="100" Text="Ip:" HorizontalTextAlignment="Start" Margin="0, 20, 0, 0"></Label>
                     <Frame Padding="10" CornerRadius="20" Grid.Row="2" Margin="100, 0, 0, 0" BackgroundColor="#3B3B3B">
-                        <Entry x:Name="Ip" Margin="0, 0, 0, 0" TextColor="White"></Entry>
+                        <Entry x:Name="Ip" Text="" Margin="0, 0, 0, 0" TextColor="White"></Entry>
                     </Frame>
 
                     <Label Grid.Row="4" FontSize="25" TextColor="White" HeightRequest="100" Text="Tipo:" HorizontalTextAlignment="Start" Margin="0, 20, 0, 0"></Label>
@@ -52,7 +52,7 @@
 
                     <Button Clicked="Indietro" BackgroundColor="#8489FF" CornerRadius="20" HeightRequest="50" WidthRequest="100" FontSize="20" Grid.Row="7" Text="Annulla" Margin="10, 0, 200, 0" />
 
-
+                    <Label HorizontalTextAlignment="Center" TextColor="Red" Grid.Row="5" x:Name="error"></Label>
                 </Grid>
 
             </Frame>

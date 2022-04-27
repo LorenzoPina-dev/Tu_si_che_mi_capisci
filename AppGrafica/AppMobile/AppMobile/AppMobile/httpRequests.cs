@@ -191,8 +191,7 @@ namespace proj
         public string HttpRequestDeleteVoltoRegistrato(string key, string id) //cancella volto registrato
         {
             data = new NameValueCollection();
-            string url = "http://" + host + "/" + key + "/voltoRegistrato/remove";
-            data["id"] = id;
+            string url = "http://" + host + "/" + key + "/voltoRegistrato/remove/" + id;
             var response = wb.UploadValues(url, "DELETE", data);
             string result = System.Text.Encoding.UTF8.GetString(response); //ottengo una risposta
             JObject obj = json.Parse(result);

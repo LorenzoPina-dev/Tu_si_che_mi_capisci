@@ -35,8 +35,8 @@ namespace proj
 
         public string GetText(JObject obj)
         {
-            string ris = "";
-            ris = obj["result"]["testo"].ToString();
+            string ris = "ok";
+            ris += obj["result"]["testo"].ToString();
             return ris;
         }
 

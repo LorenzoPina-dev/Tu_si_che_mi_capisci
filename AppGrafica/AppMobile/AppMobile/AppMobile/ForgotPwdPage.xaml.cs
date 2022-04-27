@@ -30,7 +30,7 @@ namespace AppMobile
             if (mail != null)
             {
                 string ris = utente.ForgotPwd(mail);
-                if (ris == "ok")
+                if (ris.Contains("ok"))
                 {
                     App.Current.MainPage = new ResetPwdPage();
                 }

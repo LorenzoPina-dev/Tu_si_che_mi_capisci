@@ -29,7 +29,7 @@ namespace AppMobile
             if (codice != null && password != null && password2 != null) //se sono vuoti non controllo
             {
                 string ris = utente.ResetPwd(codice, password, password2);
-                if (ris == "ok")
+                if (ris.Contains("ok"))
                     App.Current.MainPage = new LoginPage();
                 else
                     error.Text = ris;

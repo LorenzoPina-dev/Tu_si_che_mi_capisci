@@ -34,10 +34,10 @@ namespace proj
             return result;
         }
 
-        public string ForgotPwd(string cookie)
+        public string ForgotPwd(string mail)
         {
             httpRequests forgotPsw = new httpRequests();
-            string result = forgotPsw.HttpRequestForgotPwd(cookie);
+            string result = forgotPsw.HttpRequestForgotPwd(mail);
             return result;
         }
 

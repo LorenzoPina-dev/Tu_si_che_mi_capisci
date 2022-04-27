@@ -22,20 +22,26 @@ namespace AppMobile
 
         public void Indietro(object sender, EventArgs args)
         {
-            App.Current.MainPage = new SettingsPage();
+            App.Current.MainPage = new TabbedPage1();
         }
 
         public void Aggiungi(object sender, EventArgs args)
         {
             string tipo = "";
-            string nome = Nome.Text;
-            string ip = Ip.Text;
+            string nome = Nome.Text.ToString();
+            string ip = Ip.Text.ToString();
             if (Mic.IsChecked == true)
                 tipo = "1";
             else
                 tipo = "0";
-            utente.AddDispositivo(nome, tipo, ip);
-            App.Current.MainPage = new SettingsPage();
+            if (nome != "" && ip != "")
+            {
+                utente.AddDispositivo(nome, tipo, ip);
+                App.Current.MainPage = new TabbedPage1();
+            }
+            else
+                error.Text = "compilare tutti i campi";
+            
         }
 
         public void ChangeMic(object sender, EventArgs args)

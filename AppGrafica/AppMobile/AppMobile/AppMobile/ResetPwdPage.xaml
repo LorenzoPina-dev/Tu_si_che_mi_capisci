@@ -34,7 +34,7 @@
             </Frame>
             <Label Grid.Row="3" Grid.Column="0" FontSize="20" TextColor="White" WidthRequest="150" HeightRequest="100" Text="Password:" HorizontalTextAlignment="Start"></Label>
             <Frame Padding="3" CornerRadius="20" Grid.Row="4" Grid.Column="0" Grid.ColumnSpan="2" BackgroundColor="#3B3B3B">
-                <Entry x:Name="Password" TextColor="White"></Entry>
+                <Entry x:Name="Password" IsPassword="true" TextColor="White"></Entry>
             </Frame>
             <Label Grid.Row="5" Grid.Column="0" Grid.ColumnSpan="2" FontSize="20" TextColor="White" WidthRequest="150" HeightRequest="100" Text="Conferma password:" HorizontalTextAlignment="Start"></Label>
             <Frame Padding="3" CornerRadius="20" Grid.Row="6" Grid.Column="0" Grid.ColumnSpan="2" BackgroundColor="#3B3B3B">
@@ -50,7 +50,7 @@
                 HorizontalOptions="Center"
                 Clicked="BackLogin"
             />
-            <Label HorizontalTextAlignment="Center" TextColor="Red" Grid.Row="11" Grid.Column="0" Grid.ColumnSpan="2" x:Name="error"></Label>
+            <Label HorizontalTextAlignment="Center" TextColor="Red" Grid.Row="9" Grid.Column="0" Grid.ColumnSpan="2" x:Name="error"></Label>
         </Grid>
 
     </Frame>
