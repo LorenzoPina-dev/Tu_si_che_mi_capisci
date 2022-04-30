@@ -52,9 +52,12 @@ namespace AppMobile
         {
             DataPie = new ObservableCollection<Model>();
             DataLine = new ObservableCollection<Model>();
-
             FillDataPie();
-            FillDataLine("1");
+        }
+
+        public ViewModel(string idEmozione)
+        {
+            FillDataLine(idEmozione);
         }
 
         public void FillDataPie()
@@ -101,7 +104,6 @@ namespace AppMobile
 
         public void FillDataLine(string emozione)
         {
-            DataLine.Clear();
             List<JObject> list = (List<JObject>)Utente.GetEmozioni(DateTime.Now.Subtract(TimeSpan.FromDays(30)).ToString("yyyy-MM-ddT"), int.Parse(emozione) + 1);
 
             list.Sort(delegate (JObject x, JObject y)

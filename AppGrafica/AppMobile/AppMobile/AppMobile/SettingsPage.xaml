@@ -3,10 +3,10 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" xmlns:local="clr-namespace:AppMobile"
              x:Class="AppMobile.SettingsPage"
              BackgroundColor="#505050">
-    <!-- 
+
     <ContentPage.BindingContext>
         <local:ViewModel></local:ViewModel>
-    </ContentPage.BindingContext> -->
+    </ContentPage.BindingContext>
 
     <Frame Grid.Row="0" BackgroundColor="#505050" HorizontalOptions="Center" WidthRequest="530" HeightRequest="20" CornerRadius="30">
         <Grid>
