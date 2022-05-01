@@ -45,10 +45,12 @@ class SimpleFacerec:
                 #else:
                 img=GetImmagine(volto["Immagine"])
                 img = cv2.cvtColor(img, cv2.COLOR_RGB2BGR)
-                img_encoding = face_recognition.face_encodings(img)[0]
-                SetEncodingVolto(volto["Id"],img_encoding)
-                self.known_face_encodings.append(img_encoding)
-                self.known_face_names.append(volto["Id"])
+                img_encodings = face_recognition.face_encodings(img)
+                if len(img_encodings)>0:
+                    img_encoding=img_encodings[0]
+                    SetEncodingVolto(volto["Id"],img_encoding)
+                    self.known_face_encodings.append(img_encoding)
+                    self.known_face_names.append(volto["Id"])
             except Exception as e:
                 print("errore"+ format(e))
         print("Encoding images loaded")
@@ -57,10 +59,12 @@ class SimpleFacerec:
         try:
             img=GetImmagine(path_img)
             img = cv2.cvtColor(img, cv2.COLOR_RGB2BGR)
-            img_encoding = face_recognition.face_encodings(img)[0]
-            SetEncodingVolto(id,img_encoding)
-            self.known_face_encodings.append(img_encoding)
-            self.known_face_names.append(id)
+            img_encodings = face_recognition.face_encodings(img)
+            if len(img_encodings)>0:
+                img_encoding=img_encodings[0]
+                SetEncodingVolto(id,img_encoding)
+                self.known_face_encodings.append(img_encoding)
+                self.known_face_names.append(id)
         except Exception as e:
             print("errore"+ format(e))
         print("Encoding images loaded")

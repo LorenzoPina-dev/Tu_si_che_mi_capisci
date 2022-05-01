@@ -34,14 +34,16 @@ def riconosci_volto():
         return jsonify({"success":False})
     cv2_img = cv2.cvtColor(imread(request.files['immagine']), cv2.COLOR_RGB2BGR)
     print("ci siamo")
-    face_locations = face_recognition.face_locations(cv2_img)
-    face_encoding = face_recognition.face_encodings(cv2_img, face_locations)[0]
-    name =sfr.detect_known_faces(face_encoding)
-    print("nome volto trovato="+str(name))
-    cv2.imwrite("temp.jpg", cv2_img)
-    inviaVoltoTrovato(name, richiesta['KeyUtente'],"temp.jpg", richiesta['IdDispositivo'],face_encoding)
-    os.remove("temp.jpg")
-    
+    img_encodings = face_recognition.face_encodings(cv2_img)
+    name=-1
+    if len(img_encodings)>0:
+        face_encoding=img_encodings[0]
+        name =sfr.detect_known_faces(face_encoding)
+        print("nome volto trovato="+str(name))
+        cv2.imwrite("temp.jpg", cv2_img)
+        inviaVoltoTrovato(name, richiesta['KeyUtente'],"temp.jpg", richiesta['IdDispositivo'],face_encoding)
+        os.remove("temp.jpg")
+        
     if name==-1:
         return jsonify({"success":False,"testo":"nessun volto trovato"})
     else:
