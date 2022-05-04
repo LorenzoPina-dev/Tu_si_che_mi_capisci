@@ -132,7 +132,7 @@ def print_confusion_matrix(confusion_matrix, class_names, figsize = (10,7), font
     
 
 # lets pick up the meta-data that we got from our first part of the Kernel
-ref = pd.read_csv("/kaggle/input/data-path/Data_path.csv")
+ref = pd.read_csv("D:\scuola\gestioneProgetto/test/testFiles/Data_path.csv")
 ref.head()
 
 # Note this takes a couple of minutes (~16 mins) as we're iterating over 4 datasets, and with augmentation  
