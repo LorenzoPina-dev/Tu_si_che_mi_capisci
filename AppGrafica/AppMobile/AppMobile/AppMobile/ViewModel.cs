@@ -9,17 +9,8 @@ using System.Text;
 
 namespace AppMobile
 {
-    public class ViewModel : INotifyPropertyChanged 
+    public class ViewModel 
     {
-        public event PropertyChangedEventHandler PropertyChanged;
-
-        private void NotifyPropertyChanged([CallerMemberName] String propertyName = "")
-        {
-            if (PropertyChanged != null)
-            {
-                PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
-            }
-        }
 
         public IList<string> Emozioni
         {
@@ -42,22 +33,33 @@ namespace AppMobile
 
         public ObservableCollection<Model> DataPie { get; set; }
 
-        private ObservableCollection<Model> _DataLine;
-        public ObservableCollection<Model> DataLine 
-        {   get { return _DataLine; }
-            set { _DataLine = value; NotifyPropertyChanged("DataLine"); }
-        }
+        public ObservableCollection<Model> DataLineArr { get; set; }
+        public ObservableCollection<Model> DataLineFel { get; set; }
+        public ObservableCollection<Model> DataLineTriste { get; set; }
+        public ObservableCollection<Model> DataLineDisg { get; set; }
+        public ObservableCollection<Model> DataLineSpav { get; set; }
+        public ObservableCollection<Model> DataLineSorp { get; set; }
+        public ObservableCollection<Model> DataLineNeutro { get; set; }
+
 
         public ViewModel()
         {
             DataPie = new ObservableCollection<Model>();
-            DataLine = new ObservableCollection<Model>();
             FillDataPie();
-        }
-
-        public ViewModel(string idEmozione)
-        {
-            FillDataLine(idEmozione);
+            DataLineArr = new ObservableCollection<Model>();
+            FillDataLine("0", DataLineArr);
+            DataLineFel = new ObservableCollection<Model>();
+            FillDataLine("1", DataLineFel);
+            DataLineTriste = new ObservableCollection<Model>();
+            FillDataLine("2", DataLineTriste);
+            DataLineDisg = new ObservableCollection<Model>();
+            FillDataLine("3", DataLineDisg);
+            DataLineSpav = new ObservableCollection<Model>();
+            FillDataLine("4", DataLineSpav);
+            DataLineSorp = new ObservableCollection<Model>();
+            FillDataLine("5", DataLineSorp);
+            DataLineNeutro = new ObservableCollection<Model>();
+            FillDataLine("6", DataLineNeutro);
         }
 
         public void FillDataPie()
@@ -102,7 +104,7 @@ namespace AppMobile
             DataPie.Add(model2);
         }
 
-        public void FillDataLine(string emozione)
+        public void FillDataLine(string emozione, ObservableCollection<Model> Data)
         {
             List<JObject> list = (List<JObject>)Utente.GetEmozioni(DateTime.Now.Subtract(TimeSpan.FromDays(30)).ToString("yyyy-MM-ddT"), int.Parse(emozione) + 1);
 
@@ -128,7 +130,7 @@ namespace AppMobile
                             xValue = list[i]["DataRilevazione"].ToString().Substring(0, 10), //prendo il valore dell'enum
                             yValue = count
                         };
-                        DataLine.Add(model);
+                        Data.Add(model);
                         count = 0;
                     }
                     else
@@ -142,7 +144,7 @@ namespace AppMobile
                     yValue = count
                 };
             }
-            DataLine.Add(model2);
+            Data.Add(model2);
         }
     }
 }

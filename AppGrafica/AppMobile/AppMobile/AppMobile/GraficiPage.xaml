@@ -6,7 +6,8 @@
              xmlns:chart="clr-namespace:Syncfusion.SfChart.XForms;assembly=Syncfusion.SfChart.XForms">
 
     <ContentPage.BindingContext>
-        <local:ViewModel></local:ViewModel>
+        <local:ViewModel>
+        </local:ViewModel>
     </ContentPage.BindingContext>
 
     <RefreshView x:Name="myRefreshView" Refreshing="RefreshView_Refreshing">
@@ -58,9 +59,9 @@
 
                             </chart:SfChart>
 
-                            <Picker SelectedIndexChanged="EmChange" HorizontalTextAlignment="Center" BackgroundColor="#3B3B3B" TitleColor="White" Grid.Row="1" Margin="40, 0, 60,0" Title="Emozioni" ItemsSource="{Binding Emozioni}"></Picker>
-                            <!-- line chart -->
-                            <chart:SfChart Grid.Row="2"  Margin="-20, 0, 0, 0" ChartPadding="70" WidthRequest="4" x:Name="lineChart">
+                            <Picker SelectedIndexChanged="EmChange" HorizontalTextAlignment="Center" BackgroundColor="#3B3B3B" TitleColor="White" Grid.Row="1" Margin="40, 0, 60,0" Title="Neutro" ItemsSource="{Binding Emozioni}"></Picker>
+                            <!-- line chart arrabbiato-->
+                            <chart:SfChart Grid.Row="2"  Margin="-20, 0, 0, 0" ChartPadding="70" WidthRequest="4" x:Name="lineChartArr">
 
                                 <chart:SfChart.PrimaryAxis>
                                     <chart:CategoryAxis AutoScrollingDelta="7" AutoScrollingMode="Start"/>
@@ -70,9 +71,100 @@
                                     <chart:NumericalAxis Interval="1"/>
                                 </chart:SfChart.SecondaryAxis>
 
-                                <chart:LineSeries ItemsSource="{Binding DataLine}"  XBindingPath="xValue" YBindingPath="yValue" ListenPropertyChange="True" />
+                                <chart:LineSeries ItemsSource="{Binding DataLineArr}"  XBindingPath="xValue" YBindingPath="yValue" />
 
                             </chart:SfChart>
+
+                            <!-- line chart felice-->
+                            <chart:SfChart Grid.Row="2"  Margin="-20, 0, 0, 0" ChartPadding="70" WidthRequest="4" x:Name="lineChartFel">
+
+                                <chart:SfChart.PrimaryAxis>
+                                    <chart:CategoryAxis AutoScrollingDelta="7" AutoScrollingMode="Start"/>
+                                </chart:SfChart.PrimaryAxis>
+
+                                <chart:SfChart.SecondaryAxis>
+                                    <chart:NumericalAxis Interval="1"/>
+                                </chart:SfChart.SecondaryAxis>
+
+                                <chart:LineSeries ItemsSource="{Binding DataLineFel}"  XBindingPath="xValue" YBindingPath="yValue" />
+
+                            </chart:SfChart>
+
+                            <!-- line chart triste-->
+                            <chart:SfChart Grid.Row="2"  Margin="-20, 0, 0, 0" ChartPadding="70" WidthRequest="4" x:Name="lineChartTriste">
+
+                                <chart:SfChart.PrimaryAxis>
+                                    <chart:CategoryAxis AutoScrollingDelta="7" AutoScrollingMode="Start"/>
+                                </chart:SfChart.PrimaryAxis>
+
+                                <chart:SfChart.SecondaryAxis>
+                                    <chart:NumericalAxis Interval="1"/>
+                                </chart:SfChart.SecondaryAxis>
+
+                                <chart:LineSeries ItemsSource="{Binding DataLineTriste}"  XBindingPath="xValue" YBindingPath="yValue" />
+
+                            </chart:SfChart>
+
+                            <!-- line chart Disgustato-->
+                            <chart:SfChart Grid.Row="2"  Margin="-20, 0, 0, 0" ChartPadding="70" WidthRequest="4" x:Name="lineChartDisg">
+
+                                <chart:SfChart.PrimaryAxis>
+                                    <chart:CategoryAxis AutoScrollingDelta="7" AutoScrollingMode="Start"/>
+                                </chart:SfChart.PrimaryAxis>
+
+                                <chart:SfChart.SecondaryAxis>
+                                    <chart:NumericalAxis Interval="1"/>
+                                </chart:SfChart.SecondaryAxis>
+
+                                <chart:LineSeries ItemsSource="{Binding DataLineDisg}"  XBindingPath="xValue" YBindingPath="yValue" />
+
+                            </chart:SfChart>
+
+                            <!-- line chart Spaventato-->
+                            <chart:SfChart Grid.Row="2"  Margin="-20, 0, 0, 0" ChartPadding="70" WidthRequest="4" x:Name="lineChartSpav">
+
+                                <chart:SfChart.PrimaryAxis>
+                                    <chart:CategoryAxis AutoScrollingDelta="7" AutoScrollingMode="Start"/>
+                                </chart:SfChart.PrimaryAxis>
+
+                                <chart:SfChart.SecondaryAxis>
+                                    <chart:NumericalAxis Interval="1"/>
+                                </chart:SfChart.SecondaryAxis>
+
+                                <chart:LineSeries ItemsSource="{Binding DataLineSpav}"  XBindingPath="xValue" YBindingPath="yValue" />
+
+                            </chart:SfChart>
+
+                            <!-- line chart Sorpreso-->
+                            <chart:SfChart Grid.Row="2"  Margin="-20, 0, 0, 0" ChartPadding="70" WidthRequest="4" x:Name="lineChartSorpr">
+
+                                <chart:SfChart.PrimaryAxis>
+                                    <chart:CategoryAxis AutoScrollingDelta="7" AutoScrollingMode="Start"/>
+                                </chart:SfChart.PrimaryAxis>
+
+                                <chart:SfChart.SecondaryAxis>
+                                    <chart:NumericalAxis Interval="1"/>
+                                </chart:SfChart.SecondaryAxis>
+
+                                <chart:LineSeries ItemsSource="{Binding DataLineSorpr}"  XBindingPath="xValue" YBindingPath="yValue" />
+
+                            </chart:SfChart>
+
+                            <!-- line chart Neutro-->
+                            <chart:SfChart Grid.Row="2"  Margin="-20, 0, 0, 0" ChartPadding="70" WidthRequest="4" x:Name="lineChartNeutro">
+
+                                <chart:SfChart.PrimaryAxis>
+                                    <chart:CategoryAxis AutoScrollingDelta="7" AutoScrollingMode="Start"/>
+                                </chart:SfChart.PrimaryAxis>
+
+                                <chart:SfChart.SecondaryAxis>
+                                    <chart:NumericalAxis Interval="1"/>
+                                </chart:SfChart.SecondaryAxis>
+
+                                <chart:LineSeries ItemsSource="{Binding DataLineNeutro}"  XBindingPath="xValue" YBindingPath="yValue" />
+
+                            </chart:SfChart>
+
                         </Grid>
                     </Frame>
                 </Grid>
