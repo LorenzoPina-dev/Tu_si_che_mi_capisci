@@ -59,7 +59,7 @@
 
                             </chart:SfChart>
 
-                            <Picker SelectedIndexChanged="EmChange" HorizontalTextAlignment="Center" BackgroundColor="#3B3B3B" TitleColor="White" Grid.Row="1" Margin="40, 0, 60,0" Title="Neutro" ItemsSource="{Binding Emozioni}"></Picker>
+                            <Picker SelectedIndexChanged="EmChange" HorizontalTextAlignment="Center" BackgroundColor="#3B3B3B" TitleColor="White" Grid.Row="1" Margin="40, 0, 60,0" Title="Emozioni"  SelectedIndex="6" SelectedItem="Neutro" ItemsSource="{Binding Emozioni}"></Picker>
                             <!-- line chart arrabbiato-->
                             <chart:SfChart Grid.Row="2"  Margin="-20, 0, 0, 0" ChartPadding="70" WidthRequest="4" x:Name="lineChartArr">
 
@@ -146,7 +146,7 @@
                                     <chart:NumericalAxis Interval="1"/>
                                 </chart:SfChart.SecondaryAxis>
 
-                                <chart:LineSeries ItemsSource="{Binding DataLineSorpr}"  XBindingPath="xValue" YBindingPath="yValue" />
+                                <chart:LineSeries ItemsSource="{Binding DataLineSorp}"  XBindingPath="xValue" YBindingPath="yValue" />
 
                             </chart:SfChart>
 

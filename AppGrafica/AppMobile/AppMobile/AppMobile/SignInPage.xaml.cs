@@ -25,7 +25,7 @@ namespace AppMobile
             if (mail != null && username != null && password != null && password2 != null)
             {
                 string ris = utente.Signin(mail, username, password, password2);
-                if (ris == "ok")
+                if (!ris.Contains("errati") && !ris.Contains("errore"))
                     App.Current.MainPage = new LoginPage();
                 else
                     error.Text = ris;

@@ -20,7 +20,9 @@ namespace AppMobile
         }
         public void Indietro(object sender, EventArgs args)
         {
-            App.Current.MainPage = new TabbedPage1();
+            TabbedPage1 tabbedPage1 = new TabbedPage1();
+            tabbedPage1.CurrentPage = tabbedPage1.Children[1];
+            (App.Current as App).MainPage = tabbedPage1;
         }
 
         public void Aggiungi(object sender, EventArgs args)
@@ -33,7 +35,9 @@ namespace AppMobile
             if (nome != "" && descrizione != "" && azione != "" && picker.SelectedIndex != -1)
             {
                 utente.AddSkill(nome, descrizione, azione, idEmozione.ToString());
-                App.Current.MainPage = new TabbedPage1();
+                TabbedPage1 tabbedPage1 = new TabbedPage1();
+                tabbedPage1.CurrentPage = tabbedPage1.Children[1];
+                (App.Current as App).MainPage = tabbedPage1;
             }
             else
                 error.Text = "compilare tutti i campi";

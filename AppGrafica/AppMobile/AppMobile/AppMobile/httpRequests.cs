@@ -33,7 +33,7 @@ namespace proj
             return key;
         }
 
-        public string HttpRequestSignin(string username, string password, string password2, string mail) //registrazione
+        public string HttpRequestSignin(string mail, string username, string password, string password2) //registrazione
         {
             data = new NameValueCollection();
             string url = "http://" + host + "/register";

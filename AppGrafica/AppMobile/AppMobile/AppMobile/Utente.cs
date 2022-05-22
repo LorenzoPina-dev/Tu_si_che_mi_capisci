@@ -27,10 +27,10 @@ namespace proj
             return key;
         }
 
-        public string Signin(string username, string password, string mail, string img) 
+        public string Signin(string mail, string username, string password, string password2) 
         {
             httpRequests requestSignin = new httpRequests();
-            string result = requestSignin.HttpRequestSignin(username, password, mail, img);
+            string result = requestSignin.HttpRequestSignin(mail, username, password, password2);
             return result;
         }
 
@@ -51,7 +51,8 @@ namespace proj
         public string ChangeInfo(string user, string pass, string mail, FileBase file)
         {
             httpRequests resetPsw = new httpRequests();
-            var ris = resetPsw.HttpRequestChangeInfoAsync(key, user, pass, mail, file).ContinueWith((b) => { if (b.Result.Length > 0) { Console.WriteLine("OK"); } else { Console.WriteLine("Fail"); } }); ;
+            var ris = resetPsw.HttpRequestChangeInfoAsync(key, user, pass, mail, file);
+            ris.RunSynchronously();
             return ris.ToString();
         }
 

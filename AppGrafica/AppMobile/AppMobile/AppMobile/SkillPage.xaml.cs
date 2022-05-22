@@ -29,15 +29,22 @@ namespace AppMobile
         public void Rimuovi(object sender, EventArgs e)
         {
             string id = "";
-            for(int i = 0; i < list.Count; i++)
+            if (pickerSkill.SelectedIndex != -1)
             {
-               if(list[i]["Nome"].ToString() == pickerSkill.SelectedItem.ToString())
-               {
-                   id = list[i]["Id"].ToString();
-                   utente.DeleteSkill(id);
-                   App.Current.MainPage = new TabbedPage1();
-               }
+                for (int i = 0; i < list.Count; i++)
+                {
+                    if (list[i]["Nome"].ToString() == pickerSkill.SelectedItem.ToString())
+                    {
+                        id = list[i]["Id"].ToString();
+                        utente.DeleteSkill(id);
+                        TabbedPage1 tabbedPage1 = new TabbedPage1();
+                        tabbedPage1.CurrentPage = tabbedPage1.Children[1];
+                        (App.Current as App).MainPage = tabbedPage1;
+                    }
+                }
             }
+            else
+                errorSkill.Text = "Selezionare un'emozione per rimuoverla";
         }
 
         public void EmChange(object sender, EventArgs e)

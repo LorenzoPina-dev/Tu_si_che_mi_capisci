@@ -52,11 +52,6 @@ namespace AppMobile
             img.Source = file.Path;
         }*/
 
-        public void Indietro(object sender, System.EventArgs e)
-        {
-            App.Current.MainPage = new TabbedPage1();
-        }
-
         public void Salva(object sender, System.EventArgs e)
         {
             string password = "";
@@ -67,7 +62,6 @@ namespace AppMobile
             else
                 password = "";
             utente.ChangeInfo(user, password, email, file);
-            App.Current.MainPage = new TabbedPage1();
         }
 
         public void Request()

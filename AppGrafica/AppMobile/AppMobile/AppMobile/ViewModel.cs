@@ -110,9 +110,9 @@ namespace AppMobile
 
             list.Sort(delegate (JObject x, JObject y)
             {
-                string id1 = x["DataRilevazione"].ToString().Substring(0, 10);
-                string id2 = y["DataRilevazione"].ToString().Substring(0, 10);
-                return id2.CompareTo(id1);
+                string id1 = x["DataRilevazione"].ToString();
+                string id2 = y["DataRilevazione"].ToString();
+                return id1.CompareTo(id2);
             });
 
             int count = 0;
@@ -127,7 +127,7 @@ namespace AppMobile
                         count++;
                         Model model = new Model()
                         {
-                            xValue = list[i]["DataRilevazione"].ToString().Substring(0, 10), //prendo il valore dell'enum
+                            xValue = list[i]["DataRilevazione"].ToString().Substring(0, 2), 
                             yValue = count
                         };
                         Data.Add(model);
@@ -140,7 +140,7 @@ namespace AppMobile
                 count++;
                 model2 = new Model()
                 {
-                    xValue = list[list.Count - 1]["DataRilevazione"].ToString().Substring(0, 10), //prendo il valore dell'enum
+                    xValue = list[list.Count - 1]["DataRilevazione"].ToString().Substring(0, 2),
                     yValue = count
                 };
             }

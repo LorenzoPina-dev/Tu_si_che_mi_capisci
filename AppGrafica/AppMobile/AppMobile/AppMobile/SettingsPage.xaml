@@ -39,7 +39,7 @@
                     <Picker x:Name="permessi" SelectedIndexChanged="ChangePermesso" HorizontalTextAlignment="Center" BackgroundColor="#3B3B3B" TitleColor="White" Grid.Row="1" Margin="40, 0, 60,0" Title="permessi"></Picker>
                     <Image x:Name="imgPerm" Source="Logo.png" Margin="0, 0, 250, 0" Grid.Row="2"></Image>
                     <Label x:Name="nomePerm" Margin="100, 20, 0, 0" Grid.Row="2" Text="Nome" TextColor="White" FontSize="25"></Label>
-                    <Button Text="Rimuovi" BackgroundColor="#8489FF" CornerRadius="20" Clicked="RemovePerm" Grid.Row="2" Margin="200, 0, 0, 0"></Button>
+                    <Button Text="Rimuovi" BackgroundColor="#8489FF" CornerRadius="20" Clicked="RemovePerm" Grid.Row="2" Margin="240, 0, 0, 0"></Button>
                     <Button Text="Aggiungi" BackgroundColor="#8489FF" CornerRadius="20" Clicked="AddPerm" Grid.Row="3" Margin="40, 0, 60, 0"></Button>
 
                     <Label HorizontalTextAlignment="Center" TextColor="Red" Grid.Row="4" x:Name="errorPerm"></Label>

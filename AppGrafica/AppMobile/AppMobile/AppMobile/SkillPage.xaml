@@ -29,6 +29,7 @@
                         <RowDefinition Height="70" />
                         <RowDefinition Height="70" />
                         <RowDefinition Height="70" />
+                        <RowDefinition Height="50" />
                     </Grid.RowDefinitions>
 
                     <Picker x:Name="pickerEm" SelectedIndexChanged="EmChange" HorizontalTextAlignment="Center" BackgroundColor="#3B3B3B" TitleColor="White" Grid.Row="0" Margin="10, 0, 180,0" Title="Emozioni" ItemsSource="{Binding Emozioni}"></Picker>
@@ -53,6 +54,7 @@
 
                     <Button Clicked="Aggiungi" BackgroundColor="#8489FF" CornerRadius="20" HeightRequest="50" WidthRequest="100" FontSize="20" Grid.Row="6" Text="Aggiungi" Margin="10, 0, 200, 0" />
 
+                    <Label HorizontalTextAlignment="Center" TextColor="Red" Grid.Row="7" x:Name="errorSkill"></Label>
 
                 </Grid>
 

@@ -48,9 +48,7 @@
                     <Image x:Name="img" Aspect="Fill" Margin="170, 0, 0, 0" Grid.Row="3" Source="Logo.png"></Image>
                     <Button Grid.Row="4" Text="Scegli immagine" Margin="200, 0, 0, 0" Clicked="BtnPhotoAsync" BackgroundColor="#8489FF" CornerRadius="30"/>
 
-                    <Button Clicked="Indietro" BackgroundColor="#8489FF" CornerRadius="20" HeightRequest="50" WidthRequest="100" FontSize="20" Grid.Row="5" Text="Annulla" Margin="200, 20, 0, 0" />
-
-                    <Button Clicked="Salva" BackgroundColor="#8489FF" CornerRadius="20" HeightRequest="50" WidthRequest="100" FontSize="20" Grid.Row="5" Text="Salva" Margin="10, 20, 200, 0" />
+                    <Button Clicked="Salva" BackgroundColor="#8489FF" CornerRadius="20" HeightRequest="50" WidthRequest="100" FontSize="20" Grid.Row="5" Text="Salva" Margin="110, 20, 100, 0" />
 
 
                 </Grid>

@@ -98,7 +98,7 @@ namespace AppMobile
                     {
                         id = list2[i]["Id"].ToString();
                         utente.DeleteDispositivo(id);
-                        App.Current.MainPage = new SettingsPage();
+                        App.Current.MainPage = new TabbedPage1();
                     }
                 }
             }
@@ -117,7 +117,7 @@ namespace AppMobile
                     {
                         id = list[i]["Id"].ToString();
                         utente.DeleteVoltoRegistrato(id);
-                        App.Current.MainPage = new SettingsPage();
+                        App.Current.MainPage = new TabbedPage1();
                     }
                 }
             }
